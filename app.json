@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "ke.droidcon.reactnative",
+    "slug": "ke.droidcon.reactnative"
+  }
+}
