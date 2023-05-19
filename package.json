@@ -3,7 +3,12 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint --report-unused-disable-directives --ignore-path .gitignore --ext js,jsx,ts,tsx .",
+    "prettier:format": "prettier --write .",
+    "prettier:check": "prettier --check .",
+    "typecheck": "tsc --build",
+    "validate": "concurrently --kill-others-on-fail -g -p \"[{name}]\" -n \"lint,prettier,typecheck\" \"npm:lint\" \"npm:prettier:check\" \"npm:typecheck\""
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.17.11",
@@ -27,7 +32,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
-    "@babel/plugin-proposal-export-namespace-from": "^7.18.9"
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "@react-native-community/eslint-config": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "concurrently": "^8.0.1",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-organize-imports": "^3.2.2"
   },
   "resolutions": {
     "metro": "^0.73.7",
