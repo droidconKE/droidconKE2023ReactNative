@@ -3,6 +3,7 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import { Text } from 'react-native';
+import { typography } from '../../config/typography';
 
 type TextProps = {
   children: React.ReactNode;
@@ -17,13 +18,18 @@ const StyledText = (props: TextProps) => {
 
   const { colors } = useTheme();
 
+  const { primary } = typography;
+
   return (
     <Text
       style={[
         small && { fontSize: 12 },
         big && { fontSize: 24 },
-        bold && { fontWeight: 'bold' },
-        { color: colors.text },
+        bold && { fontFamily: primary.bold },
+        {
+          color: colors.text,
+          // fontFamily: primary.regular,
+        },
         style,
       ]}
       {...rest}

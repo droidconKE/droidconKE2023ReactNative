@@ -18,7 +18,7 @@ const main = () => {
         }}
       />
 
-      <StyledText bold>Welcome to the DroidCon2023!</StyledText>
+      <StyledText big>Welcome to the DroidCon2023!</StyledText>
 
       <Link href="/speakers">
         <StyledText>speakers</StyledText>
