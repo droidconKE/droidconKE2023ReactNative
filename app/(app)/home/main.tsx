@@ -2,7 +2,6 @@ import { Link, Stack } from 'expo-router';
 import React from 'react';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
-import { styles } from '../../../styles/common';
 
 const main = () => {
   return (
@@ -12,7 +11,7 @@ const main = () => {
           title: 'Home',
           headerTitleAlign: 'center',
           headerRight: () => (
-            <Link href="/feedback" style={styles.link}>
+            <Link href="/feedback">
               <StyledText>feedback</StyledText>
             </Link>
           ),
@@ -21,7 +20,7 @@ const main = () => {
 
       <StyledText bold>Welcome to the DroidCon2023!</StyledText>
 
-      <Link href="/speakers" style={styles.link}>
+      <Link href="/speakers">
         <StyledText>speakers</StyledText>
       </Link>
     </MainContainer>

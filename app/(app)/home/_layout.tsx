@@ -14,14 +14,16 @@ export default () => {
         tabBarActiveTintColor: '#ff6e4d',
         tabBarInactiveTintColor: colors.text,
         tabBarLabelStyle: {
-          fontSize: 14,
+          fontSize: 12,
         },
         tabBarIconStyle: {
-          marginTop: 6,
+          marginTop: 4,
+          marginBottom: 4,
         },
         tabBarStyle: {
           backgroundColor: colors.background,
-          borderTopWidth: 0,
+          borderTopWidth: 1,
+          borderTopColor: colors.border,
           elevation: 0,
         },
       }}
@@ -30,35 +32,35 @@ export default () => {
         name="main"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="home-sharp" size={26} color={focused ? '#000CEB' : color} />
+            <Ionicons name="home-sharp" size={24} color={focused ? colors.primary : color} />
           ),
           tabBarLabel: 'Home',
           headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.background,
-            elevation: 0,
           },
+          headerShadowVisible: false,
         }}
       />
       <Tabs.Screen
         name="feed"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="notifications-sharp" size={26} color={focused ? '#000CEB' : color} />
+            <Ionicons name="notifications-sharp" size={24} color={focused ? colors.primary : color} />
           ),
           tabBarLabel: 'Feed',
           headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.background,
-            elevation: 0,
           },
+          headerShadowVisible: false,
         }}
       />
       <Tabs.Screen
         name="sessions"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <AntDesign name="clockcircle" size={26} color={focused ? '#000CEB' : color} />
+            <AntDesign name="clockcircle" size={24} color={focused ? colors.primary : color} />
           ),
           tabBarLabel: 'Sessions',
           headerShown: false,
@@ -68,14 +70,14 @@ export default () => {
         name="about"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="settings" size={26} color={focused ? '#000CEB' : color} />
+            <Ionicons name="settings" size={24} color={focused ? colors.primary : color} />
           ),
           tabBarLabel: 'About',
           headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.background,
-            elevation: 0,
           },
+          headerShadowVisible: false,
         }}
       />
     </Tabs>

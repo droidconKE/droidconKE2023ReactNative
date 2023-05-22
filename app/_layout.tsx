@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Slot } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Appearance } from 'react-native';
-import { ThemeContext } from '../contexts/ThemeContext';
+import { theme_colors } from '../config/theme';
 
 export default () => {
-  const [theme, setTheme] = useState({ mode: 'light', system: true });
+  const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
 
   const updateTheme = (newTheme: any) => {
     let mode;
@@ -24,34 +24,34 @@ export default () => {
     setTheme(newTheme);
   };
 
-  // monitor system theme changes
-  if (theme.system) {
+  useEffect(() => {
+    // if the theme of the device changes, update the theme
     Appearance.addChangeListener(({ colorScheme }) => {
       updateTheme({ mode: colorScheme, system: true });
+      setTheme({ mode: colorScheme });
     });
-  }
+  }, []);
 
-  const MyLightTheme = {
+  const _lightTheme = {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: 'rgb(255, 255, 255)',
+      ...theme_colors.light,
     },
   };
 
-  const MyDarkTheme = {
+  const _darkTheme = {
     ...DarkTheme,
     colors: {
       ...DarkTheme.colors,
-      background: '#20201E',
+      // background: '#20201E',
+      ...theme_colors.dark,
     },
   };
 
   return (
-    <ThemeContext.Provider value={{ theme }}>
-      <ThemeProvider value={theme.mode === 'light' ? MyLightTheme : MyDarkTheme}>
-        <Slot />
-      </ThemeProvider>
-    </ThemeContext.Provider>
+    <ThemeProvider value={theme.mode === 'light' ? _lightTheme : _darkTheme}>
+      <Slot />
+    </ThemeProvider>
   );
 };

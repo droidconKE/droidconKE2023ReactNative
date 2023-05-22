@@ -3,7 +3,6 @@ import React from 'react';
 import { Text } from 'react-native';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
-import { styles } from '../../../styles/common';
 
 const feed = () => {
   return (
@@ -13,7 +12,7 @@ const feed = () => {
           title: 'Home',
           headerTitleAlign: 'center',
           headerRight: () => (
-            <Link href="/feedback" style={styles.link}>
+            <Link href="/feedback">
               <Text>feedback</Text>
             </Link>
           ),

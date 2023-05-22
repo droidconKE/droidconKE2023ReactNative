@@ -3,7 +3,6 @@ import { Stack, useRouter } from 'expo-router';
 import React from 'react';
 import StyledText from '../../../../components/common/StyledText';
 import MainContainer from '../../../../components/container/MainContainer';
-import { styles } from '../../../../styles/common';
 
 const _sessions = [
   {
@@ -38,7 +37,6 @@ const sessions = () => {
         <StyledText
           key={session.id}
           onPress={() => router.push({ pathname: `/home/sessions/${session.id}`, params: { id: session.id } })}
-          style={styles.link}
         >
           {session.title}
         </StyledText>

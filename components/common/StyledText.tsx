@@ -1,10 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useContext } from 'react';
+import { useTheme } from '@react-navigation/native';
+import React from 'react';
 import { Text } from 'react-native';
-
-import { colors } from '../../config/theme';
-import { ThemeContext } from '../../contexts/ThemeContext';
 
 type TextProps = {
   children: React.ReactNode;
@@ -16,8 +14,8 @@ type TextProps = {
 
 const StyledText = (props: TextProps) => {
   const { children, style, small, big, bold, ...rest } = props;
-  const { theme }: any = useContext(ThemeContext);
-  const activecolors = colors[theme.mode];
+
+  const { colors } = useTheme();
 
   return (
     <Text
@@ -25,7 +23,7 @@ const StyledText = (props: TextProps) => {
         small && { fontSize: 12 },
         big && { fontSize: 24 },
         bold && { fontWeight: 'bold' },
-        { color: activecolors.text },
+        { color: colors.text },
         style,
       ]}
       {...rest}

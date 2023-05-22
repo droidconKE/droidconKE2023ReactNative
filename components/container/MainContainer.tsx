@@ -1,10 +1,8 @@
+import { useTheme } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-import { colors } from '../../config/theme';
-import { ThemeContext } from '../../contexts/ThemeContext';
 
 type MainContainerProps = {
   children: React.ReactNode;
@@ -13,13 +11,13 @@ type MainContainerProps = {
 
 const MainContainer = (props: MainContainerProps) => {
   const { children, style } = props;
-  const { theme }: any = useContext(ThemeContext);
-  const activeColors = colors[theme.mode];
+
+  const { colors, dark } = useTheme();
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: activeColors.background }, style]} {...props}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.bg }, style]} {...props}>
       {children}
-      <StatusBar style={theme.mode === 'dark' ? 'light' : 'dark'} />
+      <StatusBar style={dark ? 'light' : 'dark'} />
     </SafeAreaView>
   );
 };

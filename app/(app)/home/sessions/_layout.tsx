@@ -15,6 +15,7 @@ export default () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
+          headerShadowVisible: false,
         }}
       />
       <Stack.Screen
@@ -24,7 +25,9 @@ export default () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerLeft: () => <AntDesign name="left" size={24} color={colors.text} onPress={() => router.back()} />,
+          headerLeft: () => (
+            <AntDesign name="left" size={24} color={colors.text} onPress={() => router.push('/home/sessions')} />
+          ),
         }}
       />
     </Stack>
