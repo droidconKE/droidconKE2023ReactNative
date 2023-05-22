@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Stack, useRouter } from 'expo-router';
 import React from 'react';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../../../styles/common';
+import StyledText from '../../../../components/common/StyledText';
+import MainContainer from '../../../../components/container/MainContainer';
+import { styles } from '../../../../styles/common';
 
 const _sessions = [
   {
@@ -25,25 +25,25 @@ const sessions = () => {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <MainContainer>
       <Stack.Screen
         options={{
           title: 'Sessions',
           headerTitleAlign: 'center',
         }}
       />
-      <Text>sessions</Text>
+      <StyledText>sessions</StyledText>
 
       {_sessions.map((session) => (
-        <Text
+        <StyledText
           key={session.id}
           onPress={() => router.push({ pathname: `/home/sessions/${session.id}`, params: { id: session.id } })}
           style={styles.link}
         >
           {session.title}
-        </Text>
+        </StyledText>
       ))}
-    </SafeAreaView>
+    </MainContainer>
   );
 };
 

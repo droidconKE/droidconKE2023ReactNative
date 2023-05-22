@@ -1,8 +1,8 @@
 import { Link, Stack } from 'expo-router';
 import React from 'react';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../styles/common';
+import StyledText from '../../components/common/StyledText';
+import MainContainer from '../../components/container/MainContainer';
+import { styles } from '../../styles/common';
 
 const _speakers = [
   {
@@ -17,21 +17,21 @@ const _speakers = [
 
 const speakers = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <MainContainer>
       <Stack.Screen
         options={{
           title: 'Speakers',
           headerTitleAlign: 'center',
         }}
       />
-      <Text>speakers</Text>
+      <StyledText>speakers</StyledText>
 
       {_speakers.map((speaker) => (
         <Link key={speaker.id} href={{ pathname: `${speaker.id}`, params: { id: speaker.id } }} style={styles.link}>
-          <Text>Go to {speaker.name}'s page</Text>
+          <StyledText>Go to {speaker.name}'s page</StyledText>
         </Link>
       ))}
-    </SafeAreaView>
+    </MainContainer>
   );
 };
 

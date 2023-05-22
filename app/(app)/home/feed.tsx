@@ -1,12 +1,13 @@
 import { Link, Stack } from 'expo-router';
 import React from 'react';
 import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '../../styles/common';
+import StyledText from '../../../components/common/StyledText';
+import MainContainer from '../../../components/container/MainContainer';
+import { styles } from '../../../styles/common';
 
-const main = () => {
+const feed = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <MainContainer>
       <Stack.Screen
         options={{
           title: 'Home',
@@ -18,13 +19,9 @@ const main = () => {
           ),
         }}
       />
-      <Text>main page</Text>
-
-      <Link href="/speakers" style={styles.link}>
-        <Text>speakers</Text>
-      </Link>
-    </SafeAreaView>
+      <StyledText>feed</StyledText>
+    </MainContainer>
   );
 };
 
-export default main;
+export default feed;

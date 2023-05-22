@@ -1,15 +1,18 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
 export default () => {
+  const { colors } = useTheme();
+
   return (
     <Tabs
       screenOptions={{
         tabBarShowLabel: true,
         tabBarActiveTintColor: '#ff6e4d',
-        tabBarInactiveTintColor: '#222',
+        tabBarInactiveTintColor: colors.text,
         tabBarLabelStyle: {
           fontSize: 14,
         },
@@ -17,7 +20,7 @@ export default () => {
           marginTop: 6,
         },
         tabBarStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: colors.background,
           borderTopWidth: 0,
           elevation: 0,
         },
@@ -30,7 +33,11 @@ export default () => {
             <Ionicons name="home-sharp" size={26} color={focused ? '#000CEB' : color} />
           ),
           tabBarLabel: 'Home',
-          // headerShown: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.background,
+            elevation: 0,
+          },
         }}
       />
       <Tabs.Screen
@@ -40,7 +47,11 @@ export default () => {
             <Ionicons name="notifications-sharp" size={26} color={focused ? '#000CEB' : color} />
           ),
           tabBarLabel: 'Feed',
-          // headerShown: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.background,
+            elevation: 0,
+          },
         }}
       />
       <Tabs.Screen
@@ -60,7 +71,11 @@ export default () => {
             <Ionicons name="settings" size={26} color={focused ? '#000CEB' : color} />
           ),
           tabBarLabel: 'About',
-          // headerShown: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.background,
+            elevation: 0,
+          },
         }}
       />
     </Tabs>
