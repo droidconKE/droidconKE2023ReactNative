@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
-import { Tabs } from 'expo-router';
+import { Link, Tabs } from 'expo-router';
 import React from 'react';
+import StyledText from '../../../components/common/StyledText';
 
 export default () => {
   const { colors } = useTheme();
@@ -54,6 +55,13 @@ export default () => {
             backgroundColor: colors.background,
           },
           headerShadowVisible: false,
+          title: 'Feed',
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <Link href="/feedback">
+              <StyledText>feedback</StyledText>
+            </Link>
+          ),
         }}
       />
       <Tabs.Screen
