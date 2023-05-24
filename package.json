@@ -11,8 +11,10 @@
     "validate": "concurrently --kill-others-on-fail -g -p \"[{name}]\" -n \"lint,prettier,typecheck\" \"npm:lint\" \"npm:prettier:check\" \"npm:typecheck\""
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4.4.6",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-navigation/native": "^6.1.6",
+    "@th3rdwave/react-navigation-bottom-sheet": "^0.2.4",
     "@types/react": "~18.0.27",
     "expo": "^48.0.7",
     "expo-constants": "~14.2.1",

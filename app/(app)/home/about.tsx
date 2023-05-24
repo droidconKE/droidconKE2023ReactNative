@@ -8,7 +8,7 @@ const about = () => {
     <MainContainer>
       <Stack.Screen
         options={{
-          title: 'Home',
+          title: 'About',
           headerTitleAlign: 'center',
           headerRight: () => (
             <Link href="/feedback">
