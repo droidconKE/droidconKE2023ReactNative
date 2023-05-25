@@ -1,8 +1,7 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { Text } from 'react-native';
+import { Text as NativeText } from 'react-native';
 import { typography } from '../../config/typography';
 
 type TextProps = {
@@ -23,31 +22,26 @@ type TextProps = {
  * @param style: any - custom style
  * @param children: React.ReactNode - text
  */
-const StyledText = (props: TextProps) => {
-  const { children, style, small, title, subtitle, bold, ...rest } = props;
+const StyledText = (props: TextProps & NativeText['props']) => {
+  const { style, small, title, subtitle, bold } = props;
 
   const { colors } = useTheme();
 
   const { primary } = typography;
 
-  return (
-    <Text
-      style={[
-        small && { fontSize: 12 },
-        title && { fontSize: 18, fontFamily: primary.bold },
-        subtitle && { fontSize: 16, fontFamily: primary.semiBold },
-        bold && { fontFamily: primary.bold },
-        {
-          color: colors.text,
-          // fontFamily: primary.regular,
-        },
-        style,
-      ]}
-      {...rest}
-    >
-      {children}
-    </Text>
-  );
+  const textStyle = [
+    small && { fontSize: 12 },
+    title && { fontSize: 18, fontFamily: primary.bold },
+    subtitle && { fontSize: 16, fontFamily: primary.semiBold },
+    bold && { fontFamily: primary.bold },
+    {
+      color: colors.text,
+      // fontFamily: primary.regular,
+    },
+    style,
+  ];
+
+  return <NativeText style={textStyle} {...props} />;
 };
 
 export default StyledText;

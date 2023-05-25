@@ -1,12 +1,13 @@
 import { useTheme } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import type { ViewStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 type MainContainerProps = {
   children: React.ReactNode;
-  style?: any;
+  style?: ViewStyle;
 };
 
 const MainContainer = (props: MainContainerProps) => {
