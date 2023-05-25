@@ -22,15 +22,14 @@ const BottomSheetContainer = (props: BottomSheetContainerProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    padding: 24,
   },
   main: {
     flex: 1,
-    justifyContent: 'center',
+    padding: 8,
+    // justifyContent: 'center',
     // maxWidth: 960,
     marginHorizontal: 'auto',
-    minHeight: 120,
+    minHeight: 150,
   },
 });
 

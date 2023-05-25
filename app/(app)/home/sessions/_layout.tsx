@@ -1,7 +1,10 @@
+/* eslint-disable react/no-unstable-nested-components */
 import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Stack, useRouter } from 'expo-router';
 import React from 'react';
+import HeaderActionRight from '../../../../components/headers/HeaderActionRight';
+import MainHeader from '../../../../components/headers/MainHeader';
 
 export default () => {
   const { colors } = useTheme();
@@ -16,6 +19,9 @@ export default () => {
             backgroundColor: colors.background,
           },
           headerShadowVisible: false,
+          headerTitleAlign: 'left',
+          headerTitle: () => <MainHeader />,
+          headerRight: () => <HeaderActionRight />,
         }}
       />
       <Stack.Screen

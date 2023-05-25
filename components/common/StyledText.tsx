@@ -9,12 +9,22 @@ type TextProps = {
   children: React.ReactNode;
   style?: any;
   small?: boolean;
-  big?: boolean;
+  title?: boolean;
   bold?: boolean;
+  subtitle?: boolean;
 };
 
+/**
+ * @returns Text component
+ * @param small: boolean - small font size 12px
+ * @param title: boolean - title font size 18px and bold
+ * @param subtitle: boolean - subtitle font size 16px and semi-bold
+ * @param bold: boolean - bold font
+ * @param style: any - custom style
+ * @param children: React.ReactNode - text
+ */
 const StyledText = (props: TextProps) => {
-  const { children, style, small, big, bold, ...rest } = props;
+  const { children, style, small, title, subtitle, bold, ...rest } = props;
 
   const { colors } = useTheme();
 
@@ -24,7 +34,8 @@ const StyledText = (props: TextProps) => {
     <Text
       style={[
         small && { fontSize: 12 },
-        big && { fontSize: 24 },
+        title && { fontSize: 18, fontFamily: primary.bold },
+        subtitle && { fontSize: 16, fontFamily: primary.semiBold },
         bold && { fontFamily: primary.bold },
         {
           color: colors.text,

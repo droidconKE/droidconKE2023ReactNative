@@ -35,4 +35,8 @@ export const typography = {
    * If not provided, use primary.
    */
   secondary: fonts.roboto,
+  /**
+   * logo font
+   */
+  logo: fonts.rubik,
 };
