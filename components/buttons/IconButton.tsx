@@ -5,7 +5,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 
 type Props = {
   onPress: () => void;
-  name: string;
+  name: keyof typeof MaterialIcons.glyphMap;
   isActive: boolean;
 };
 
