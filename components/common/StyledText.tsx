@@ -36,7 +36,6 @@ const StyledText = (props: TextProps & NativeText['props']) => {
     bold && { fontFamily: primary.bold },
     {
       color: colors.text,
-      // fontFamily: primary.regular,
     },
     style,
   ];
