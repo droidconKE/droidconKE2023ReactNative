@@ -8,7 +8,7 @@ import { Appearance } from 'react-native';
 import { theme_colors } from '../config/theme';
 import { customFontsToLoad } from '../config/typography';
 
-type themeType = {
+type Theme = {
   mode: ColorSchemeName;
   system: boolean;
 };
@@ -17,7 +17,7 @@ export default () => {
   const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
   const [isReady, setIsReady] = useState(false);
 
-  const updateTheme = (newTheme: themeType) => {
+  const updateTheme = (newTheme: Theme) => {
     let mode: ColorSchemeName;
     if (!newTheme) {
       mode = theme.mode === 'dark' ? 'light' : 'dark';
