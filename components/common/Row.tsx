@@ -1,13 +1,21 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, View as NativeView } from 'react-native';
 
 type RowProps = {
   children: React.ReactNode;
-  style?: object;
+  style?: StyleProp<ViewStyle>;
 };
 
-const Row = ({ children, style }: RowProps) => {
-  return <View style={[styles.row, style]}>{children}</View>;
+/**
+ * @param style: StyleProp<TextStyle> - custom style
+ * @param children: React.ReactNode - text
+ */
+
+const Row = (props: RowProps & NativeView['props']) => {
+  const { style } = props;
+  const viewStyle = [styles.row, style];
+  return <NativeView style={viewStyle} {...props} />;
 };
 
 export default Row;

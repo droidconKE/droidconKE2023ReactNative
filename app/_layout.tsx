@@ -1,19 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Slot, SplashScreen } from 'expo-router';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
+import type { ColorSchemeName } from 'react-native';
 import { Appearance } from 'react-native';
 import { theme_colors } from '../config/theme';
 import { customFontsToLoad } from '../config/typography';
+
+type Theme = {
+  mode: ColorSchemeName;
+  system: boolean;
+};
 
 export default () => {
   const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
   const [isReady, setIsReady] = useState(false);
 
-  const updateTheme = (newTheme: any) => {
-    let mode;
+  const updateTheme = (newTheme: Theme) => {
+    let mode: ColorSchemeName;
     if (!newTheme) {
       mode = theme.mode === 'dark' ? 'light' : 'dark';
       newTheme = { mode, system: false };

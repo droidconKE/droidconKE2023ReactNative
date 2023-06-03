@@ -1,10 +1,11 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
+import type { StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 
 type BottomSheetContainerProps = {
   children: React.ReactNode;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
 };
 
 const BottomSheetContainer = (props: BottomSheetContainerProps) => {

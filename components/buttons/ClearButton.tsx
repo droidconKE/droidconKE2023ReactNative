@@ -7,7 +7,7 @@ import StyledText from '../common/StyledText';
 type Props = {
   onPress: () => void;
   label: string;
-  iconName: string;
+  iconName: keyof typeof AntDesign.glyphMap;
 };
 
 const ClearButton = ({ onPress, label, iconName }: Props) => {
