@@ -6,3 +6,12 @@
  * - each image should have a border as seen in the designs
  * - write tests for the component
  */
+
+import React from 'react';
+import { View } from 'react-native';
+
+const SpeakersList = () => {
+  return <View />;
+};
+
+export default SpeakersList;

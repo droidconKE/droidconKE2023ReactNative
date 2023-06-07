@@ -4,3 +4,12 @@
  * - Clicking on the Okay button should close modal
  * - closing modal should navigate to home page
  */
+
+import React from 'react';
+import { View } from 'react-native';
+
+const FeedbackSentModal = () => {
+  return <View />;
+};
+
+export default FeedbackSentModal;

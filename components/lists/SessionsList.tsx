@@ -8,3 +8,12 @@
  * - to consider, - whether to use scrollview or flatlist? Explain in PR
  * - consider writing tests for this component
  */
+
+import React from 'react';
+import { View } from 'react-native';
+
+const SessionsList = () => {
+  return <View />;
+};
+
+export default SessionsList;
