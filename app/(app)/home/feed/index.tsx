@@ -4,6 +4,11 @@ import { View } from 'react-native';
 import StyledText from '../../../../components/common/StyledText';
 import MainContainer from '../../../../components/container/MainContainer';
 
+/**
+ * TODO: Feed page
+ * - should render the feed list
+ */
+
 export default function Page() {
   return (
     <MainContainer>

@@ -16,7 +16,7 @@ const MainContainer = (props: MainContainerProps) => {
   const { colors, dark } = useTheme();
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }, style]} {...props}>
+    <SafeAreaView testID="main-container" style={[styles.container, { backgroundColor: colors.bg }, style]} {...props}>
       {children}
       <StatusBar style={dark ? 'light' : 'dark'} />
     </SafeAreaView>

@@ -8,7 +8,8 @@
     "prettier:format": "prettier --write .",
     "prettier:check": "prettier --check .",
     "typecheck": "tsc --build",
-    "validate": "concurrently --kill-others-on-fail -g -p \"[{name}]\" -n \"lint,prettier,typecheck\" \"npm:lint\" \"npm:prettier:check\" \"npm:typecheck\""
+    "validate": "concurrently --kill-others-on-fail -g -p \"[{name}]\" -n \"lint,prettier,typecheck\" \"npm:lint\" \"npm:prettier:check\" \"npm:typecheck\"",
+    "test": "jest"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.6",
@@ -23,6 +24,8 @@
     "expo-router": "^1.2.0",
     "expo-splash-screen": "~0.18.1",
     "expo-status-bar": "~1.4.2",
+    "jest": "^29.2.1",
+    "jest-expo": "^48.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
@@ -39,6 +42,10 @@
     "@babel/core": "^7.19.3",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@react-native-community/eslint-config": "^3.2.0",
+    "@testing-library/jest-native": "^5.4.2",
+    "@testing-library/react-native": "^12.1.2",
+    "@types/jest": "^29.5.2",
+    "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "concurrently": "^8.0.1",
     "eslint": "^8.40.0",
@@ -56,5 +63,14 @@
   },
   "name": "ke.droidcon.reactnative",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "jest": {
+    "preset": "jest-expo",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setupFilesAfterEnv.ts"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ]
+  }
 }
