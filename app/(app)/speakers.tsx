@@ -1,3 +1,9 @@
+/**
+ * TODO: Speakers page
+ * - Should display a grid view of speakers
+ * - <SpeakerCard /> should be used to display each speaker
+ */
+
 import { Link, Stack } from 'expo-router';
 import React from 'react';
 import StyledText from '../../components/common/StyledText';

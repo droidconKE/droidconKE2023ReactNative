@@ -6,7 +6,7 @@ export const theme_colors = {
     accent: '#7070702C',
     textLight: '#707070',
     tint: '#00E2C3',
-    background: '#F5F5F5',
+    bg: '#F5F5F5',
   },
   dark: {
     primary: '#00E2C3',
@@ -15,6 +15,6 @@ export const theme_colors = {
     accent: '#7070702C',
     textLight: '#707070',
     tint: '#00E2C3',
-    background: '#20201E',
+    bg: '#20201E',
   },
 };

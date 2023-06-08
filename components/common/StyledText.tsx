@@ -1,7 +1,7 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import type { StyleProp, TextStyle } from 'react-native';
-import { Text as NativeText } from 'react-native';
+import { StyleSheet, Text as NativeText } from 'react-native';
 import { typography } from '../../config/typography';
 
 type TextProps = {
@@ -34,13 +34,10 @@ const StyledText = (props: TextProps & NativeText['props']) => {
     title && { fontSize: 18, fontFamily: primary.bold },
     subtitle && { fontSize: 16, fontFamily: primary.semiBold },
     bold && { fontFamily: primary.bold },
-    {
-      color: colors.text,
-    },
-    style,
-  ];
+    { color: colors.text },
+  ].filter(Boolean);
 
-  return <NativeText style={textStyle} {...props} />;
+  return <NativeText style={StyleSheet.compose(textStyle, style)} {...props} />;
 };
 
 export default StyledText;

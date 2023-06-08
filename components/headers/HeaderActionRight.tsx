@@ -9,7 +9,7 @@ const HeaderActionRight = () => {
   const router = useRouter();
 
   const openFilterModal = () => {
-    // TODO: open filter modal
+    // TODO: open filter modal functionality
   };
 
   return (

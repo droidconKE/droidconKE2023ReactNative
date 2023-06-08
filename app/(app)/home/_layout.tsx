@@ -41,7 +41,6 @@ export default () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerShadowVisible: false,
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
           headerRight: () => <HeaderRight />,
@@ -58,7 +57,6 @@ export default () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerShadowVisible: false,
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
           headerRight: () => <HeaderRight />,
@@ -85,7 +83,6 @@ export default () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerShadowVisible: false,
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
           headerRight: () => <HeaderRight />,

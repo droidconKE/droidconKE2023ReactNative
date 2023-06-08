@@ -27,7 +27,6 @@ export default ClearButton;
 
 const styles = StyleSheet.create({
   button: {
-    // backgroundColor: '#00e2c350',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

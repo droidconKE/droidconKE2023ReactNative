@@ -1,25 +1,33 @@
 import { useTheme } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import type { StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { initialWindowMetrics, SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type MainContainerProps = {
   children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+};
+
+const SafeAreaContainer = ({ children, ...rest }: MainContainerProps) => {
+  const { colors, dark } = useTheme();
+
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View style={[{ backgroundColor: colors.bg, paddingTop: insets.top }, styles.container]} {...rest}>
+      <ScrollView contentContainerStyle={styles.containerStyle} showsVerticalScrollIndicator={false}>
+        {children}
+      </ScrollView>
+      <StatusBar style={dark ? 'light' : 'dark'} />
+    </View>
+  );
 };
 
 const MainContainer = (props: MainContainerProps) => {
-  const { children, style } = props;
-
-  const { colors, dark } = useTheme();
-
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }, style]} {...props}>
-      {children}
-      <StatusBar style={dark ? 'light' : 'dark'} />
-    </SafeAreaView>
+    <SafeAreaProvider testID="main-container" initialMetrics={initialWindowMetrics}>
+      <SafeAreaContainer {...props} />
+    </SafeAreaProvider>
   );
 };
 
@@ -28,6 +36,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 12,
+  },
+  containerStyle: {
+    width: '100%',
+    alignItems: 'center',
   },
 });
 

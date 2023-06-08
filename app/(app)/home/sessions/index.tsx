@@ -4,6 +4,16 @@ import React from 'react';
 import StyledText from '../../../../components/common/StyledText';
 import MainContainer from '../../../../components/container/MainContainer';
 
+/**
+ * TODO: ALL Sessions page
+ * -  implement a List that displays all sessions
+ * - list should either be collapsible or not
+ * - Session card component should be either the small card that displays time, title, description, venue and a favorite icon button
+ * - session card can also be a full card as seen in the home page, with image and speaker avatars too
+ * - consider reusing the session card component from the home page
+ */
+
+// TODO: this is dummy data, replace with real data
 const _sessions = [
   {
     id: '1',

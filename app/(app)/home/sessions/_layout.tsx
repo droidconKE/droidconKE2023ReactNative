@@ -18,7 +18,6 @@ export default () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerShadowVisible: false,
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
           headerRight: () => <HeaderActionRight />,
