@@ -4,8 +4,9 @@ import React from 'react';
 import StyledText from '../../../../components/common/StyledText';
 import MainContainer from '../../../../components/container/MainContainer';
 
+// TODO: ALL Sessions page
+
 /**
- * TODO: ALL Sessions page
  * -  implement a List that displays all sessions
  * - list should either be collapsible or not
  * - Session card component should be either the small card that displays time, title, description, venue and a favorite icon button
@@ -34,7 +35,7 @@ const sessions = () => {
   const router = useRouter();
 
   return (
-    <MainContainer>
+    <MainContainer preset="scroll">
       <Stack.Screen
         options={{
           title: 'Sessions',
