@@ -1,14 +1,15 @@
 import React from 'react';
+import type { StyleProp, TextStyle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 
 type RowProps = {
   children: React.ReactNode;
-  style?: object;
+  style?: StyleProp<TextStyle>;
 };
 
 const Row = ({ children, style }: RowProps) => {
   return (
-    <View testID="row" style={[styles.row, style]}>
+    <View testID="row" style={StyleSheet.compose(styles.row, style)}>
       {children}
     </View>
   );

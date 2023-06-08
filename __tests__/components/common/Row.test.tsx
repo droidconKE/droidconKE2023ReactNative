@@ -9,9 +9,6 @@ describe('<Row />', () => {
 
   it('renders correctly', () => {
     render(<Row children={children} />);
-
-    screen.debug();
-
     expect(screen.getByTestId('row')).toBeTruthy();
   });
 });

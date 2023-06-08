@@ -8,9 +8,6 @@ describe('<MainContainer />', () => {
 
   it('renders correctly', () => {
     render(<MainContainer children={children} />);
-
-    screen.debug();
-
     expect(screen.getByTestId('main-container')).toBeTruthy();
   });
 });

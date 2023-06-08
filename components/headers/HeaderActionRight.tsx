@@ -5,15 +5,11 @@ import ClearButton from '../buttons/ClearButton';
 import IconButton from '../buttons/IconButton';
 import Row from '../common/Row';
 
-/**
- * TODO: add open modal function
- */
-
 const HeaderActionRight = () => {
   const router = useRouter();
 
   const openFilterModal = () => {
-    // TODO: open filter modal
+    // TODO: open filter modal functionality
   };
 
   return (

@@ -8,8 +8,9 @@
     "prettier:format": "prettier --write .",
     "prettier:check": "prettier --check .",
     "typecheck": "tsc --build",
-    "validate": "concurrently --kill-others-on-fail -g -p \"[{name}]\" -n \"lint,prettier,typecheck\" \"npm:lint\" \"npm:prettier:check\" \"npm:typecheck\"",
-    "test": "jest"
+    "validate": "concurrently --kill-others-on-fail -g -p \"[{name}]\" -n \"lint,prettier,typecheck,test\" \"npm:lint\" \"npm:prettier:check\" \"npm:typecheck\" \"npm:test\"",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.6",
