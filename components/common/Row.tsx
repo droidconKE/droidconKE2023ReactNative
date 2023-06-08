@@ -1,10 +1,10 @@
 import React from 'react';
-import type { StyleProp, TextStyle } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 
 type RowProps = {
   children: React.ReactNode;
-  style?: StyleProp<TextStyle>;
+  style?: StyleProp<ViewStyle>;
 };
 
 const Row = ({ children, style }: RowProps) => {
