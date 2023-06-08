@@ -18,6 +18,7 @@ const Avatar = ({ bordered }: AvatarProps) => {
       source={{ uri: 'https://robohash.org/5759c92851e66680ae5723f5de4f7757?set=set4&bgset=bg2&size=400x400' }}
       style={[styles.avatar, { borderColor: bordered ? colors.primary : colors.background }]}
       resizeMode="contain"
+      testID="avatar"
     />
   );
 };
