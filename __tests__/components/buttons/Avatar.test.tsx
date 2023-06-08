@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react-native';
+import React from 'react';
 import Avatar from '../../../components/buttons/Avatar';
 
 // Mock useTheme hook.
@@ -11,8 +12,8 @@ jest.mock('@react-navigation/native', () => ({
   }),
 }));
 
-// Test that avatar component is rendered.
 describe('<Avatar/>', () => {
+  // Test that avatar component is rendered.
   it('renders', () => {
     render(<Avatar />);
     expect(screen.getByTestId('avatar')).toBeTruthy();
