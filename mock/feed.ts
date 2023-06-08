@@ -1,4 +1,4 @@
-const feed = {
+export default {
   data: [
     {
       title: 'Juma escorts GDE to UK',
