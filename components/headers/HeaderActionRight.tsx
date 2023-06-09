@@ -13,7 +13,7 @@ const HeaderActionRight = () => {
   };
 
   return (
-    <Row>
+    <Row style={styles.row}>
       <Row>
         <IconButton name="list-alt" isActive={false} onPress={() => router.push('/feedback')} />
         <IconButton name="view-agenda" isActive onPress={() => router.push('/feedback')} />
@@ -27,6 +27,9 @@ const HeaderActionRight = () => {
 export default HeaderActionRight;
 
 const styles = StyleSheet.create({
+  row: {
+    marginHorizontal: 16,
+  },
   gap: {
     width: 8,
   },

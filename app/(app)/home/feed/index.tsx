@@ -5,9 +5,11 @@ import StyledText from '../../../../components/common/StyledText';
 import MainContainer from '../../../../components/container/MainContainer';
 
 /**
- * TODO: Feed page
+ * TASKS:
  * - should render the feed list
  */
+
+// TODO: implement feed page
 
 export default function Page() {
   return (
