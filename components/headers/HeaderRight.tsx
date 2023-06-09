@@ -6,7 +6,6 @@ import FeedbackButton from '../buttons/FeedbackButton';
 import Row from '../common/Row';
 
 // TODO: implement logic if user is logged in
-
 /**
  * -  if user is logged in, show avatar and feedback button
  * -  if user is not logged in, show icon button

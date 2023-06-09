@@ -1,10 +1,10 @@
+// TODO: About page - implement about event page
 /**
  * -  should display an image, description and a grid view of organizing team, and an organizers card
  * -  consider reusing the image component that was used in the speakers list
  * -  clicking on the team member image should navigate to the [speaker] page
  */
-
-// TODO: About page - implement about event page
+// TODO: Use data from mock/organizers.ts
 
 import React from 'react';
 import StyledText from '../../../components/common/StyledText';
