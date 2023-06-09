@@ -1,5 +1,5 @@
 /**
- * TODO: Speakers page
+ * TASK:
  * - Should display a grid view of speakers
  * - <SpeakerCard /> should be used to display each speaker
  */
@@ -20,9 +20,11 @@ const _speakers = [
   },
 ];
 
+// TODO: implement speakers page - use dummy data
+
 const speakers = () => {
   return (
-    <MainContainer>
+    <MainContainer preset="scroll">
       <Stack.Screen
         options={{
           title: 'Speakers',
