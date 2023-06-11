@@ -1,4 +1,6 @@
-export default {
+import type { ISessions } from '../global';
+
+export const Sessions: ISessions = {
   data: [
     {
       title: 'The Apache Way: Doing Community like Apache',

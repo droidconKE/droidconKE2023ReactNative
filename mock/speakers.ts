@@ -1,4 +1,6 @@
-export default {
+import type { ISpeaker } from '../global';
+
+export const Speakers: ISpeaker = {
   data: [
     {
       name: 'Annunziata Kinya',

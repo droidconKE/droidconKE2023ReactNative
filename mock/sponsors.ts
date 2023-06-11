@@ -1,4 +1,6 @@
-export default {
+import type { ISponsors } from '../global';
+
+export const Sponsors: ISponsors = {
   data: [
     {
       name: 'JetBrains',

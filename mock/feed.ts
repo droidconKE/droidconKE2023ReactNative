@@ -1,4 +1,6 @@
-export default {
+import type { IFeed } from '../global';
+
+export const Feed: IFeed = {
   data: [
     {
       title: 'Juma escorts GDE to UK',

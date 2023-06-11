@@ -1,4 +1,6 @@
-export default {
+import type { IOrganizers } from '../global';
+
+export const Organizers: IOrganizers = {
   data: [
     {
       id: 2,

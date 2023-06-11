@@ -1,4 +1,6 @@
-export default {
+import type { ISchedule } from '../global';
+
+export const Schedule: ISchedule = {
   data: {
     '2022-11-16': [
       {
