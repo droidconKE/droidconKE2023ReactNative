@@ -7,7 +7,11 @@ import LogoDark from '../../assets/artworks/LogoDark';
 const MainHeader = () => {
   const { dark } = useTheme();
 
-  return <View style={styles.container}>{dark ? <LogoDark /> : <Logo />}</View>;
+  return (
+    <View testID="mainHeader" style={styles.container}>
+      {dark ? <LogoDark /> : <Logo />}
+    </View>
+  );
 };
 
 export default MainHeader;
