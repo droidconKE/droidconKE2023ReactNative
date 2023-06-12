@@ -1,5 +1,3 @@
-// Test it renders
-
 import { render, screen } from '@testing-library/react-native';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
 
@@ -9,6 +7,7 @@ jest.mock('expo-router', () => ({
 }));
 
 describe('<HeaderActionRight/>', () => {
+  // Test it renders
   it('renders correctly', () => {
     render(<HeaderActionRight />);
     expect(screen.getByTestId('headerActionRight')).toBeTruthy();
