@@ -3,17 +3,23 @@ import React from 'react';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 
+// TODO: Home page
 /**
- * TODO: Home page
- * Should display VideoPlayer component, Sessions list component, Speakers list component, Sponsors card, Organizers card
- * - implement a home page that displays all the components listed above
+ * - Implement a home page that displays all the components listed below:
+ * - Should display VideoPlayer component, Sessions list component, Speakers list component, Sponsors card, Organizers card.
+ * - Check out components folder for the starter code for all those components
+ * - For Videoplayer component, use https://droidcon.co.ke/video/DroidconKe_2019_Highlight_Reel_HD.mp4 as the video link
+ * - For Sessions list component, use mock/sessions.ts data
+ * - For Speakers list component, use mock/speakers.ts data
+ * - For Sponsors card, use mock/sponsors.ts data
+ * - For Organizers card, use mock/organizers.ts data
  * - use the components you’ve implemented in the previous tasks
- * - use dummy data for now
+ *
  */
 
 const main = () => {
   return (
-    <MainContainer>
+    <MainContainer preset="scroll">
       <StyledText title>Welcome to the DroidCon2023!</StyledText>
 
       <Link href="/speakers">

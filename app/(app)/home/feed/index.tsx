@@ -4,9 +4,11 @@ import { View } from 'react-native';
 import StyledText from '../../../../components/common/StyledText';
 import MainContainer from '../../../../components/container/MainContainer';
 
+// TODO: implement feed page
 /**
- * TODO: Feed page
- * - should render the feed list
+ * TASKS:
+ * - should render the feed list component. Check out the starter code component in components/list folder.
+ * - use data from mock/feed.ts
  */
 
 export default function Page() {
