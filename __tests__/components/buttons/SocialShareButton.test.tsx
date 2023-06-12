@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import SocialShareButton from '../../../components/buttons/SocialShareButton';
 
-// Mock useThene hook.
+// Mock useTheme hook.
 jest.mock('@react-navigation/native', () => ({
   useTheme: jest.fn().mockReturnValue({
     colors: {
