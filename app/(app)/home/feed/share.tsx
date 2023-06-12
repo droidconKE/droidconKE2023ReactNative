@@ -8,6 +8,12 @@ import Row from '../../../../components/common/Row';
 import StyledText from '../../../../components/common/StyledText';
 import BottomSheetContainer from '../../../../components/container/BottomSheetContainer';
 
+// TODO: implement share to social media
+/**
+ * TASKS:
+ * - buttons should share to respective social media platforms.
+ */
+
 export default function Share() {
   const { colors } = useTheme();
 

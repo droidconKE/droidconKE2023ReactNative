@@ -1,6 +1,6 @@
 # droidconKE2023ReactNative
 
-React Native App for Kenya's 4rd Android Developer Conference - droidcon to be held in Nairobi from November 8-10th 2022.
+React Native App for Kenya's 4rd Android Developer Conference - droidcon to be held in Nairobi from November 8-10th 2023.
 
 ## Run the published app on your phone
 
@@ -8,11 +8,11 @@ Download the [Expo Go](https://expo.dev/client) Android / iOS app and scan this 
 
 ### Production app
 
-<a href="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2022ReactNative"><img src="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2022ReactNative" height="200px" width="200px"></a>
+<a href="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2023ReactNative"><img src="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2023ReactNative" height="200px" width="200px"></a>
 
 ### Development app
 
-<a href="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2022ReactNative?release-channel=develop"><img src="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2022ReactNative?release-channel=develop" height="200px" width="200px"></a>
+<a href="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2023ReactNative?release-channel=develop"><img src="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2023ReactNative?release-channel=develop" height="200px" width="200px"></a>
 
 # Tech Stack
 

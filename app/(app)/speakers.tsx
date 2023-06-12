@@ -1,14 +1,15 @@
-/**
- * TASK:
- * - Should display a grid view of speakers
- * - <SpeakerCard /> should be used to display each speaker
- */
-
 import { Link, Stack } from 'expo-router';
 import React from 'react';
 import StyledText from '../../components/common/StyledText';
 import MainContainer from '../../components/container/MainContainer';
 
+// TODO: implement speakers page
+/**
+ * TASK:
+ * - Should display a grid view of speakers
+ * - <SpeakerCard /> should be used to display each speaker
+ */
+// TODO: this is dummy data, replace with real data from mock/speakers.ts
 const _speakers = [
   {
     id: '1',
@@ -19,8 +20,6 @@ const _speakers = [
     name: 'Jane Doe',
   },
 ];
-
-// TODO: implement speakers page - use dummy data
 
 const speakers = () => {
   return (

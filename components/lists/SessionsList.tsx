@@ -1,3 +1,7 @@
+import React from 'react';
+import { View } from 'react-native';
+
+// TODO:- Implement a Cards list that displays sessions in a horizontal, scrollable list.
 /**
  * - limit the list size to 5 sessions
  * - order sessions by recent first
@@ -7,11 +11,6 @@
  * - to consider, - whether to use scrollview or flatlist? Explain in PR
  * - consider writing tests for this component
  */
-
-import React from 'react';
-import { View } from 'react-native';
-
-// TODO:- Implement a Cards list that displays sessions in a horizontal, scrollable list.
 
 const SessionsList = () => {
   return <View />;

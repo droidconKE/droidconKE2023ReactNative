@@ -14,7 +14,7 @@ import MainContainer from '../../../../components/container/MainContainer';
  * - consider reusing the session card component from the home page
  */
 
-// TODO: this is dummy data, replace with real data
+// TODO: this is dummy data, replace with real data from mock/sessions.ts
 const _sessions = [
   {
     id: '1',
