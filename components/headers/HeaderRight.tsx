@@ -15,7 +15,7 @@ import Row from '../common/Row';
 const HeaderRight = () => {
   const router = useRouter();
   return (
-    <Row style={styles.row}>
+    <Row style={styles.row} testID="headerRight">
       <FeedbackButton onPress={() => router.push('/feedback')} />
       <Avatar />
     </Row>
