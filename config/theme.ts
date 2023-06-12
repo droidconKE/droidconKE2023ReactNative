@@ -17,7 +17,7 @@ export const theme_colors = {
     accent: '#7070702C',
     textLight: '#707070',
     tint: '#00E2C3',
-    tint2: '#20201E',
+    tint2: '#f5f5f51c',
     link: '#F5F5F5',
     bg: '#20201E',
   },
