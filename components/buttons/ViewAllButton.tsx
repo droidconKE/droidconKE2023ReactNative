@@ -21,7 +21,7 @@ const ViewAllButton = ({ onPress, label }: ViewAllButtonProps) => {
   };
 
   return (
-    <TouchableOpacity style={styles.row} onPress={onPress}>
+    <TouchableOpacity style={styles.row} onPress={onPress} testID="viewAllButton">
       <StyledText small medium colorLink>
         View All
       </StyledText>
