@@ -1,5 +1,6 @@
 import { Link } from 'expo-router';
 import React from 'react';
+import ViewAllButton from '../../../components/buttons/ViewAllButton';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 
@@ -21,7 +22,7 @@ const main = () => {
   return (
     <MainContainer preset="scroll">
       <StyledText title>Welcome to the DroidCon2023!</StyledText>
-
+      <ViewAllButton label="80" onPress={() => console.log('pressed')} />
       <Link href="/speakers">
         <StyledText>speakers</StyledText>
       </Link>

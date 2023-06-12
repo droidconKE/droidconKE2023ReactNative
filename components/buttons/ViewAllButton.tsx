@@ -7,6 +7,12 @@ type ViewAllButtonProps = {
   label: string;
 };
 
+/**
+ * @returns Button component.
+ * @param onPress: function - Navigate to the screeen to view all.
+ * @param label: string - Label showing on the button.
+ */
+
 const ViewAllButton = ({ onPress, label }: ViewAllButtonProps) => {
   const { colors } = useTheme();
 
@@ -16,12 +22,12 @@ const ViewAllButton = ({ onPress, label }: ViewAllButtonProps) => {
 
   return (
     <TouchableOpacity style={styles.row} onPress={onPress}>
-      <StyledText small medium tint2>
+      <StyledText small medium colorLink>
         View All
       </StyledText>
       <View style={styles.gap} />
       <View style={[styles.tallyContainer, tallyContainerTint]}>
-        <StyledText regular extraSmall tint2>
+        <StyledText regular extraSmall colorLink>
           {label}
         </StyledText>
       </View>
