@@ -18,7 +18,7 @@ type TextProps = {
   light?: boolean;
   robotoMedium?: boolean;
   rubikLight?: boolean;
-  tint2?: boolean;
+  colorLink?: boolean;
 };
 
 /**
@@ -36,16 +36,18 @@ type TextProps = {
  * @param rubikLight: boolean - rubik light font
  * @param style: StyleProp<TextStyle> - custom style
  * @param children: React.ReactNode - text
- * @param tint2: boolean
+ * @param colorLink: boolean
  */
+
 const StyledText = (props: TextProps & NativeText['props']) => {
-  const { style, extraSmall, small, title, subtitle, bold, regular, medium, semiBold, light, tint2 } = props;
+  const { style, extraSmall, small, title, subtitle, bold, regular, medium, semiBold, light, colorLink } = props;
 
   const { colors } = useTheme();
 
   const { primary } = typography;
 
   const textStyle = [
+    { color: colors.text },
     extraSmall && { fontSize: 10 },
     small && { fontSize: 12 },
     title && { fontSize: 18, fontFamily: primary.bold },
@@ -55,8 +57,7 @@ const StyledText = (props: TextProps & NativeText['props']) => {
     medium && { fontFamily: primary.medium },
     semiBold && { fontFamily: primary.semiBold },
     light && { fontFamily: primary.light },
-    tint2 && { color: colors.tint2 },
-    { color: colors.text },
+    colorLink && { color: colors.link },
   ].filter(Boolean);
 
   return <NativeText style={StyleSheet.compose(textStyle, style)} {...props} />;
