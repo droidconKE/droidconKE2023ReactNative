@@ -17,7 +17,7 @@ const SocialShareButton = ({ handlePress, title, iconName }: ButtonProps) => {
     <TouchableOpacity onPress={handlePress} style={[styles.button, { backgroundColor: colors.background }]}>
       <FontAwesome name={iconName} size={20} color={colors.text} />
       <View style={styles.gap} />
-      <StyledText subtitle testID="socialShareButtonText">
+      <StyledText size="md" testID="socialShareButtonText">
         {title}
       </StyledText>
     </TouchableOpacity>
