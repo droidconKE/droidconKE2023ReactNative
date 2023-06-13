@@ -10,7 +10,7 @@ declare module '@react-navigation/native' {
       accent: string;
       textLight: string;
       tint: string;
-      tint2: string;
+      secondaryTint: string;
       link: string;
       bg: string;
       background: string;
