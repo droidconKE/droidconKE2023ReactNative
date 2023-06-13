@@ -23,7 +23,7 @@ export default function Share() {
         <Row>
           <FontAwesome name="share" size={20} color={colors.text} />
           <View style={styles.gap} />
-          <StyledText subtitle>Share</StyledText>
+          <StyledText size="md">Share</StyledText>
         </Row>
         <Link href="/home/feed">
           <StyledText>CANCEL</StyledText>

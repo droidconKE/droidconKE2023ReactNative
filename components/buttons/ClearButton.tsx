@@ -14,7 +14,7 @@ const ClearButton = ({ onPress, label, iconName }: Props) => {
   const { colors } = useTheme();
   return (
     <TouchableOpacity style={styles.button} onPress={onPress} testID="clearButton">
-      <StyledText subtitle style={{ color: colors.primary }}>
+      <StyledText size="md" style={{ color: colors.primary }}>
         {label}
       </StyledText>
       <View style={styles.spacer} />

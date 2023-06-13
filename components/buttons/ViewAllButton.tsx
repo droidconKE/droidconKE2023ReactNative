@@ -22,12 +22,12 @@ const ViewAllButton = ({ onPress, label }: ViewAllButtonProps) => {
 
   return (
     <TouchableOpacity style={styles.row} onPress={onPress} testID="viewAllButton">
-      <StyledText small medium colorLink>
+      <StyledText size="sm" font="medium" variant="link">
         View All
       </StyledText>
       <View style={styles.gap} />
       <View style={[styles.tallyContainer, tallyContainerTint]}>
-        <StyledText regular extraSmall colorLink>
+        <StyledText font="medium" size="xs" variant="link">
           {label}
         </StyledText>
       </View>
