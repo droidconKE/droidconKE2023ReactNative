@@ -4,11 +4,10 @@ import { StyleSheet, View } from 'react-native';
 
 type RowProps = {
   children: React.ReactNode;
-  testID?: string | undefined;
   style?: StyleProp<ViewStyle>;
 };
 
-const Row = ({ children, style, testID = 'row' }: RowProps) => {
+const Row = ({ children, style, testID = 'row' }: RowProps & View['props']) => {
   return (
     <View testID={testID} style={StyleSheet.compose(styles.row, style)}>
       {children}
