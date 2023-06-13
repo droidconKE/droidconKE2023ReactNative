@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react-native';
 import MainHeader from '../../../components/headers/MainHeader';
 
-// Mock useTheme hook.
 jest.mock('@react-navigation/native', () => ({
   useTheme: jest.fn().mockReturnValue({
     dark: true,
@@ -9,8 +8,7 @@ jest.mock('@react-navigation/native', () => ({
 }));
 
 describe('<MainHeader/>', () => {
-  // Test it renders
-  it('renders', () => {
+  it('renders MainHeader component', () => {
     render(<MainHeader />);
     expect(screen.getByTestId('mainHeader')).toBeDefined();
   });

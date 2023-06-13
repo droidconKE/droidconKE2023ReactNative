@@ -3,13 +3,11 @@ import React from 'react';
 import FeedbackButton from '../../../components/buttons/FeedbackButton';
 
 describe('<FeedbackButton/>', () => {
-  // Test the feedback button component.
   it('Renders feedback button component', () => {
     render(<FeedbackButton onPress={() => console.log('Feedback gotten succesfully')} />);
     expect(screen.getByText('Feedback')).toBeDefined();
   });
 
-  // Test that onPress function works
   it('calls the function provided by onPress prop after pressing the button', () => {
     const onPress = jest.fn();
     render(<FeedbackButton onPress={onPress} />);
