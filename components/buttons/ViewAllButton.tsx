@@ -17,7 +17,7 @@ const ViewAllButton = ({ onPress, label }: ViewAllButtonProps) => {
   const { colors } = useTheme();
 
   const tallyContainerTint = {
-    backgroundColor: colors.tint2,
+    backgroundColor: colors.secondaryTint,
   };
 
   return (
