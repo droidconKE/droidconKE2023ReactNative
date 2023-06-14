@@ -4,40 +4,58 @@ import type { StyleProp, TextStyle } from 'react-native';
 import { StyleSheet, Text as NativeText } from 'react-native';
 import { typography } from '../../config/typography';
 
-type TextProps = {
+type StyledTextProps = {
   children: React.ReactNode;
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+  font?: 'bold' | 'regular' | 'medium' | 'semiBold' | 'light';
+  variant?: 'text' | 'link';
   style?: StyleProp<TextStyle>;
-  small?: boolean;
-  title?: boolean;
-  bold?: boolean;
-  subtitle?: boolean;
 };
 
 /**
  * @returns Text component
- * @param small: boolean - small font size 12px
- * @param title: boolean - title font size 18px and bold
- * @param subtitle: boolean - subtitle font size 16px and semi-bold
- * @param bold: boolean - bold font
- * @param style: StyleProp<TextStyle> - custom style
  * @param children: React.ReactNode - text
+ * @param size: xs | sm | md | lg
+ * @param fonts: bold | regular | semibold | light
+ * @param variant: text | link
+ * @param style: StyleProp<TextStyle> - custom style
  */
-const StyledText = (props: TextProps & NativeText['props']) => {
-  const { style, small, title, subtitle, bold } = props;
 
+const StyledText = ({
+  style,
+  size = 'md',
+  font = 'regular',
+  variant = 'text',
+  ...rest
+}: StyledTextProps & NativeText['props']) => {
   const { colors } = useTheme();
 
   const { primary } = typography;
 
-  const textStyle = [
-    small && { fontSize: 12 },
-    title && { fontSize: 18, fontFamily: primary.bold },
-    subtitle && { fontSize: 16, fontFamily: primary.semiBold },
-    bold && { fontFamily: primary.bold },
-    { color: colors.text },
-  ].filter(Boolean);
+  const sizes: Record<NonNullable<StyledTextProps['size']>, number> = {
+    xs: 10,
+    sm: 12,
+    md: 16,
+    lg: 18,
+  };
+  const fonts: Record<NonNullable<StyledTextProps['font']>, string> = {
+    bold: primary.bold,
+    regular: primary.regular,
+    medium: primary.medium,
+    semiBold: primary.semiBold,
+    light: primary.light,
+  };
+  const variants: Record<NonNullable<StyledTextProps['variant']>, string> = {
+    text: colors.text,
+    link: colors.link,
+  };
 
-  return <NativeText style={StyleSheet.compose(textStyle, style)} {...props} />;
+  return (
+    <NativeText
+      style={StyleSheet.compose({ fontSize: sizes[size], fontFamily: fonts[font], color: variants[variant] }, style)}
+      {...rest}
+    />
+  );
 };
 
 export default StyledText;

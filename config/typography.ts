@@ -1,3 +1,5 @@
+import type { Fonts, Typography } from '../global';
+
 export const customFontsToLoad = {
   montserratBold: require('../assets/fonts/Montserrat-Bold.ttf'),
   montserratRegular: require('../assets/fonts/Montserrat-Regular.ttf'),
@@ -8,7 +10,7 @@ export const customFontsToLoad = {
   rubikLight: require('../assets/fonts/Rubik-Light.ttf'),
 };
 
-export const fonts = {
+export const fonts: Fonts = {
   montserrat: {
     bold: 'montserratBold',
     regular: 'montserratRegular',
@@ -24,7 +26,7 @@ export const fonts = {
   },
 };
 
-export const typography = {
+export const typography: Typography = {
   /**
    * The primary font.  Used in most places.
    */

@@ -1,4 +1,6 @@
-export const theme_colors = {
+import type { ThemeColors } from '@react-navigation/native';
+
+export const theme_colors: ThemeColors = {
   light: {
     primary: '#000CEB',
     secondary: '#707070',
@@ -6,6 +8,8 @@ export const theme_colors = {
     accent: '#7070702C',
     textLight: '#707070',
     tint: '#00E2C3',
+    secondaryTint: 'rgba(0, 12, 235, 0.11)',
+    link: '#000CEB',
     bg: '#F5F5F5',
   },
   dark: {
@@ -15,6 +19,8 @@ export const theme_colors = {
     accent: '#7070702C',
     textLight: '#707070',
     tint: '#00E2C3',
+    secondaryTint: '#f5f5f51c',
+    link: '#F5F5F5',
     bg: '#20201E',
   },
 };

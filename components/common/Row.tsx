@@ -7,9 +7,9 @@ type RowProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-const Row = ({ children, style }: RowProps) => {
+const Row = ({ children, style, testID = 'row' }: RowProps & View['props']) => {
   return (
-    <View testID="row" style={StyleSheet.compose(styles.row, style)}>
+    <View testID={testID} style={StyleSheet.compose(styles.row, style)}>
       {children}
     </View>
   );

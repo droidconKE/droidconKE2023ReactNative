@@ -7,7 +7,7 @@ import Row from '../../../components/common/Row';
 describe('<Row />', () => {
   const children = <View />;
 
-  it('renders correctly', () => {
+  it('renders Row component', () => {
     render(<Row children={children} />);
     expect(screen.getByTestId('row')).toBeTruthy();
   });

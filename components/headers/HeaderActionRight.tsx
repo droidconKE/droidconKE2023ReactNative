@@ -13,7 +13,7 @@ const HeaderActionRight = () => {
   };
 
   return (
-    <Row style={styles.row}>
+    <Row style={styles.row} testID="headerActionRight">
       <Row>
         <IconButton name="list-alt" isActive={false} onPress={() => router.push('/feedback')} />
         <IconButton name="view-agenda" isActive onPress={() => router.push('/feedback')} />

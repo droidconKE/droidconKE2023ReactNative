@@ -12,8 +12,8 @@ type Props = {
 const IconButton = ({ onPress, name, isActive }: Props) => {
   const { colors } = useTheme();
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <MaterialIcons name={name} size={24} color={isActive ? colors.primary : colors.text} />
+    <TouchableOpacity style={styles.button} onPress={onPress} testID="iconButton">
+      <MaterialIcons testID="icon" name={name} size={24} color={isActive ? colors.primary : colors.text} />
     </TouchableOpacity>
   );
 };
