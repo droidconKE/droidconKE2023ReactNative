@@ -1,4 +1,6 @@
-export const theme_colors = {
+import type { ThemeColors } from '@react-navigation/native';
+
+export const theme_colors: ThemeColors = {
   light: {
     primary: '#000CEB',
     secondary: '#707070',

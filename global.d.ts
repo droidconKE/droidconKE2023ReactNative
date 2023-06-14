@@ -20,8 +20,41 @@ declare module '@react-navigation/native' {
       notification: string;
     };
   };
+
+  export type ThemeColors = {
+    [key in 'light' | 'dark']: Omit<
+      ExtendedTheme['colors'],
+      'background' | 'text' | 'border' | 'card' | 'notification'
+    >;
+  };
   export function useTheme(): ExtendedTheme;
 }
+
+type Montserrat = {
+  bold: string;
+  regular: string;
+  medium: string;
+  semiBold: string;
+  light: string;
+};
+type Roboto = {
+  medium: string;
+};
+type Rubik = {
+  light: string;
+};
+
+export type Fonts = {
+  montserrat: Montserrat;
+  roboto: Roboto;
+  rubik: Rubik;
+};
+
+export type Typography = {
+  primary: Montserrat;
+  secondary: Roboto;
+  logo: Rubik;
+};
 
 export interface IFeed {
   data: Array<{
