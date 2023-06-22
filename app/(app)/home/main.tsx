@@ -1,8 +1,15 @@
-import { Link } from 'expo-router';
-import React from 'react';
+/* eslint-disable react/no-unstable-nested-components */
+import { useTheme } from '@react-navigation/native';
+import { Link, Stack } from 'expo-router';
+import React, { useState } from 'react';
+import { Pressable, View } from 'react-native';
 import ViewAllButton from '../../../components/buttons/ViewAllButton';
+import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
+import HeaderRight from '../../../components/headers/HeaderRight';
+import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
+import { useAuth } from '../../../context/auth';
 
 // TODO: Home page
 /**
@@ -18,16 +25,52 @@ import MainContainer from '../../../components/container/MainContainer';
  *
  */
 
-const main = () => {
+const Main = () => {
+  const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
+
+  const { user, signOut } = useAuth();
+
+  const { colors } = useTheme();
+
+  const showSignInModal = () => {
+    setSignInModalVisible(true);
+  };
+
   return (
     <MainContainer preset="scroll">
+      <Stack.Screen
+        options={{
+          headerRight: () => <HeaderRight handlePress={showSignInModal} />,
+        }}
+      />
+
+      <Space size={16} />
+
       <StyledText>Welcome to the DroidCon2023!</StyledText>
+
+      <Space size={16} />
+
       <ViewAllButton label="80" onPress={() => console.log('pressed')} />
+
+      <Space size={16} />
+
       <Link href="/speakers">
         <StyledText>speakers</StyledText>
       </Link>
+
+      <Space size={16} />
+
+      {user && (
+        <Pressable onPress={() => signOut()}>
+          <StyledText style={{ color: colors.tertiary }}>Sign Out</StyledText>
+        </Pressable>
+      )}
+
+      <View>
+        <GoogleSignInModal visible={signInModalVisible} onClose={() => setSignInModalVisible(false)} />
+      </View>
     </MainContainer>
   );
 };
 
-export default main;
+export default Main;
