@@ -2,8 +2,8 @@
 import { useTheme } from '@react-navigation/native';
 import { Link, Stack } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, View } from 'react-native';
-import ViewAllButton from '../../../components/buttons/ViewAllButton';
+import { Dimensions, Image, Pressable, StyleSheet, View } from 'react-native';
+import CallForSpeakersCard from '../../../components/cards/CallForSpeakersCard';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
@@ -24,6 +24,8 @@ import { useAuth } from '../../../context/auth';
  * - use the components you’ve implemented in the previous tasks
  *
  */
+
+const { width } = Dimensions.get('window');
 
 const Main = () => {
   const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
@@ -46,16 +48,26 @@ const Main = () => {
 
       <Space size={16} />
 
-      <StyledText>Welcome to the DroidCon2023!</StyledText>
+      {!user && (
+        <View>
+          <StyledText font="semiBold" size="md">
+            Welcome to the largest Focussed Android Developer community in Africa
+          </StyledText>
 
-      <Space size={16} />
+          <Space size={16} />
 
-      <ViewAllButton label="80" onPress={() => console.log('pressed')} />
+          <Image source={require('../../../assets/images/banner.png')} style={styles.image} resizeMode="contain" />
 
-      <Space size={16} />
+          <Space size={16} />
+
+          <CallForSpeakersCard />
+
+          <Space size={16} />
+        </View>
+      )}
 
       <Link href="/speakers">
-        <StyledText>speakers</StyledText>
+        <StyledText>Go to speakers page</StyledText>
       </Link>
 
       <Space size={16} />
@@ -74,3 +86,10 @@ const Main = () => {
 };
 
 export default Main;
+
+const styles = StyleSheet.create({
+  image: {
+    height: 175,
+    width: width - 32,
+  },
+});

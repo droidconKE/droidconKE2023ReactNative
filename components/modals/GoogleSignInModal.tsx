@@ -2,9 +2,9 @@ import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import { Modal, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native';
 import GoogleIcon from '../../assets/artworks/GoogleIcon';
+import { typography } from '../../config/typography';
 import { useAuth } from '../../context/auth';
 import Row from '../common/Row';
-import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
 type GoogleSignInModalProps = {
@@ -15,6 +15,7 @@ type GoogleSignInModalProps = {
 const GoogleSignInModal = ({ visible, onClose }: GoogleSignInModalProps) => {
   const { signInWithGoogle } = useAuth();
   const { colors } = useTheme();
+  const { primary, secondary } = typography;
 
   const handleSignIn = () => {
     signInWithGoogle();
@@ -29,7 +30,14 @@ const GoogleSignInModal = ({ visible, onClose }: GoogleSignInModalProps) => {
             <Row style={styles.header}>
               <StyledText> </StyledText>
               <TouchableOpacity onPress={onClose}>
-                <StyledText style={{ color: colors.textLight }}>CANCEL</StyledText>
+                <StyledText
+                  style={{
+                    color: colors.textLight,
+                    fontFamily: primary.light,
+                  }}
+                >
+                  CANCEL
+                </StyledText>
               </TouchableOpacity>
             </Row>
 
@@ -39,9 +47,14 @@ const GoogleSignInModal = ({ visible, onClose }: GoogleSignInModalProps) => {
                 style={[styles.button, { backgroundColor: colors.card, borderColor: colors.border }]}
               >
                 <Row>
-                  <GoogleIcon width={30} height={30} />
-                  <Space size={8} horizontal />
-                  <StyledText style={styles.buttonText}>Sign in with Google</StyledText>
+                  <View style={[styles.buttonIcon, { backgroundColor: colors.card }]}>
+                    <GoogleIcon width={24} height={24} />
+                  </View>
+                  <View style={[styles.buttonText, { backgroundColor: colors.bg }]}>
+                    <StyledText font="medium" size="md" style={{ fontFamily: secondary.medium }}>
+                      Sign in with Google
+                    </StyledText>
+                  </View>
                 </Row>
               </Pressable>
             </View>
@@ -66,13 +79,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: 8,
-    borderBottomColor: '#fdcb7520',
-    borderBottomWidth: 0.5,
+    paddingVertical: 8,
   },
   modalView: {
     width: '90%',
-    height: '40%',
+    height: '50%',
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 20,
@@ -86,14 +97,18 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '80%',
-    marginTop: 16,
-    height: 48,
-    paddingHorizontal: 16,
     borderRadius: 4,
     justifyContent: 'center',
     borderWidth: 1,
   },
+  buttonIcon: {
+    padding: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   buttonText: {
-    marginRight: 12,
+    flex: 1,
+    paddingHorizontal: 12,
+    paddingVertical: 16,
   },
 });
