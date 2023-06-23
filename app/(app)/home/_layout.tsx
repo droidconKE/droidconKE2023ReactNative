@@ -3,7 +3,6 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import HeaderRight from '../../../components/headers/HeaderRight';
 import MainHeader from '../../../components/headers/MainHeader';
 
 export default () => {
@@ -43,7 +42,6 @@ export default () => {
           },
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
-          headerRight: () => <HeaderRight />,
         }}
       />
       <Tabs.Screen
@@ -59,7 +57,6 @@ export default () => {
           },
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
-          headerRight: () => <HeaderRight />,
         }}
       />
       <Tabs.Screen
@@ -85,7 +82,6 @@ export default () => {
           },
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
-          headerRight: () => <HeaderRight />,
         }}
       />
     </Tabs>

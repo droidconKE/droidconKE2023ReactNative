@@ -7,6 +7,7 @@ import type { ColorSchemeName } from 'react-native';
 import { Appearance } from 'react-native';
 import { theme_colors } from '../config/theme';
 import { customFontsToLoad } from '../config/typography';
+import { AuthProvider } from '../context/auth';
 
 type Theme = {
   mode: ColorSchemeName;
@@ -69,7 +70,9 @@ export default () => {
 
   return (
     <ThemeProvider value={theme.mode === 'light' ? _lightTheme : _darkTheme}>
-      <Slot />
+      <AuthProvider>
+        <Slot />
+      </AuthProvider>
     </ThemeProvider>
   );
 };
