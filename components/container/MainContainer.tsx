@@ -38,7 +38,7 @@ function ScreenWithoutScrolling(props: ScreenProps) {
   const { children, ...rest } = props;
   const { colors } = useTheme();
   return (
-    <View style={[{ backgroundColor: colors.bg }, styles.container]} {...rest}>
+    <View style={[{ backgroundColor: colors.background }, styles.container]} {...rest}>
       {children}
     </View>
   );
@@ -48,7 +48,7 @@ function ScreenWithScrolling(props: ScreenProps) {
   const { children, keyboardShouldPersistTaps = 'handled', ScrollViewProps, ...rest } = props as ScrollScreenProps;
   const { colors } = useTheme();
   return (
-    <View style={[{ backgroundColor: colors.bg }, styles.container]} {...rest}>
+    <View style={[{ backgroundColor: colors.background }, styles.container]} {...rest}>
       <ScrollView
         {...{ keyboardShouldPersistTaps }}
         {...ScrollViewProps}
@@ -93,7 +93,6 @@ const MainContainer = (props: ScreenProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
   },
   containerStyle: {
     width: '100%',

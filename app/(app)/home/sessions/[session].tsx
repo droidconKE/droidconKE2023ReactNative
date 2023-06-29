@@ -10,16 +10,16 @@ import MainContainer from '../../../../components/container/MainContainer';
 // TODO: Use real data from mock/sessions.ts
 
 const Session = () => {
-  const { id } = useSearchParams();
+  const { session } = useSearchParams();
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          title: `Session ${id}`,
+          title: `Session ${session}`,
           headerTitleAlign: 'center',
         }}
       />
-      <StyledText>session id: {id}</StyledText>
+      <StyledText>session slug: {session}</StyledText>
     </MainContainer>
   );
 };

@@ -1,12 +1,10 @@
 import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Vector from '../../assets/artworks/Vector';
 import Row from '../common/Row';
 import StyledText from '../common/StyledText';
-
-const { width } = Dimensions.get('window');
 
 const CallForSpeakersCard = () => {
   const { colors } = useTheme();
@@ -33,7 +31,7 @@ export default CallForSpeakersCard;
 
 const styles = StyleSheet.create({
   card: {
-    width: width - 32,
+    width: '100%',
     borderRadius: 8,
     paddingHorizontal: 18,
     paddingVertical: 24,
