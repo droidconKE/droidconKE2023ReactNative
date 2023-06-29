@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { useTheme } from '@react-navigation/native';
+import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
 import React, { useState } from 'react';
-import { Image, Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import CallForSpeakersCard from '../../../components/cards/CallForSpeakersCard';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
@@ -55,7 +56,7 @@ const Main = () => {
           <Space size={16} />
 
           <View style={styles.section}>
-            <Image source={require('../../../assets/images/banner.png')} style={styles.image} resizeMode="contain" />
+            <Image source={require('../../../assets/images/banner.png')} style={styles.image} contentFit="contain" />
           </View>
 
           <Space size={16} />

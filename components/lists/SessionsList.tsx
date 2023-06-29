@@ -4,7 +4,8 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import type { ListRenderItemInfo } from 'react-native';
 import { Dimensions, FlatList, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import type { Session } from '../../global';
+import type { Session, SessionForSchedule } from '../../global';
+import { Schedule } from '../../mock/schedule';
 import { Sessions } from '../../mock/sessions';
 import ViewAllButton from '../buttons/ViewAllButton';
 import Row from '../common/Row';
@@ -18,8 +19,6 @@ const SessionsList = () => {
   const router = useRouter();
   const sessions = Sessions.data.slice(0, 5); // filter sessions to 5
   const sessionCount = (Sessions.data.length - 5).toString();
-  const sessionTime = '10:00 AM';
-  const sessionLocation = 'Main Hall';
 
   // truncate title to 2 lines, and add ellipsis at the end
   const truncateTitle = (title: string) => {
@@ -29,6 +28,19 @@ const SessionsList = () => {
       return `${title.substring(0, maxTitleLength)}...`;
     }
     return title;
+  };
+
+  // a function that gets the start time and room.title of a session from the schedule.data array
+  const getSessionTimeAndLocation = (slug: string) => {
+    for (const key in Schedule.data) {
+      const sessionData = Schedule.data[key];
+      const session = sessionData?.find((item: SessionForSchedule) => item.slug === slug);
+      if (session) {
+        const startTime = session.start_time.split(':').slice(0, 2).join(':');
+        return `@ ${startTime}  |  Room ${session?.rooms[0]?.title}`;
+      }
+    }
+    return '';
   };
 
   return (
@@ -47,20 +59,22 @@ const SessionsList = () => {
         renderItem={({ item }: ListRenderItemInfo<Session>) => (
           <TouchableWithoutFeedback
             testID="session-card"
-            onPress={() => router.push({ pathname: `/home/sessions/${item.slug}`, params: { slug: item.slug } })}
+            onPress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
           >
             <View style={[styles.card, { backgroundColor: colors.bg }]}>
               <Image source={{ uri: item.session_image || '' }} style={styles.image} contentFit="cover" />
               <Space size={8} />
-              <View style={styles.description}>
-                <StyledText font="bold" numberOfLines={2} style={styles.title}>
-                  {truncateTitle(item.title)}
-                </StyledText>
+              <View style={styles.bottom}>
+                <View style={styles.description}>
+                  <StyledText font="bold" numberOfLines={2} style={styles.title}>
+                    {truncateTitle(item.title)}
+                  </StyledText>
+                </View>
 
                 <Space size={12} />
 
                 <StyledText size="sm" font="light">
-                  @ {sessionTime} {''} | {''} {sessionLocation}
+                  {getSessionTimeAndLocation(item.slug)}
                 </StyledText>
               </View>
             </View>
@@ -92,10 +106,13 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
-  description: {
+  bottom: {
     width: '100%',
     paddingHorizontal: 12,
     paddingVertical: 12,
+  },
+  description: {
+    height: 40,
   },
   title: {
     textAlign: 'left',

@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Stack, useRouter } from 'expo-router';
 import React from 'react';
-import StyledText from '../../../../components/common/StyledText';
-import MainContainer from '../../../../components/container/MainContainer';
+import { StyleSheet, View } from 'react-native';
+import StyledText from '../../../components/common/StyledText';
+import MainContainer from '../../../components/container/MainContainer';
+import HeaderActionRight from '../../../components/headers/HeaderActionRight';
 
 // TODO: ALL Sessions page
 
@@ -22,12 +24,14 @@ const _sessions = [
     description:
       'React Native is a JavaScript framework for writing real, natively rendering mobile applications for iOS and Android.',
     speaker: '1',
+    slug: 'react-native',
   },
   {
     id: '2',
     title: 'React',
     description: 'React is a JavaScript library for building user interfaces.',
     speaker: '2',
+    slug: 'react',
   },
 ];
 
@@ -38,22 +42,31 @@ const sessions = () => {
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          title: 'Sessions',
-          headerTitleAlign: 'center',
+          headerRight: () => <HeaderActionRight />,
         }}
       />
-      <StyledText>sessions</StyledText>
 
-      {_sessions.map((session) => (
-        <StyledText
-          key={session.id}
-          onPress={() => router.push({ pathname: `/home/sessions/${session.id}`, params: { id: session.id } })}
-        >
-          {session.title}
-        </StyledText>
-      ))}
+      <View style={styles.main}>
+        <StyledText>sessions</StyledText>
+
+        {_sessions.map((session) => (
+          <StyledText
+            key={session.id}
+            onPress={() => router.push({ pathname: `/session/${session.slug}`, params: { slug: session.slug } })}
+          >
+            {session.title}
+          </StyledText>
+        ))}
+      </View>
     </MainContainer>
   );
 };
 
 export default sessions;
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    paddingHorizontal: 10,
+  },
+});

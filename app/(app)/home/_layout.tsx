@@ -66,7 +66,12 @@ export default () => {
             <AntDesign name="clockcircle" size={24} color={focused ? colors.primary : color} />
           ),
           tabBarLabel: 'Sessions',
-          headerShown: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTitleAlign: 'left',
+          headerTitle: () => <MainHeader />,
         }}
       />
       <Tabs.Screen

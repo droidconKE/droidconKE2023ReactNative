@@ -3,8 +3,9 @@ import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Stack, useRouter, useSearchParams } from 'expo-router';
 import React from 'react';
-import StyledText from '../../../../components/common/StyledText';
-import MainContainer from '../../../../components/container/MainContainer';
+import { StyleSheet, View } from 'react-native';
+import StyledText from '../../../components/common/StyledText';
+import MainContainer from '../../../components/container/MainContainer';
 
 // TODO: Session page
 /**
@@ -23,14 +24,26 @@ const Session = () => {
         options={{
           title: `Session ${slug}`,
           headerTitleAlign: 'center',
-          headerLeft: () => {
-            return <AntDesign name="left" size={24} color={colors.text} onPress={() => router.back()} />;
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.background,
           },
+          headerLeft: () => <AntDesign name="arrowleft" size={24} color={colors.text} onPress={() => router.back()} />,
         }}
       />
-      <StyledText>session slug: {slug}</StyledText>
+
+      <View style={styles.main}>
+        <StyledText>session slug: {slug}</StyledText>
+      </View>
     </MainContainer>
   );
 };
 
 export default Session;
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    paddingHorizontal: 10,
+  },
+});
