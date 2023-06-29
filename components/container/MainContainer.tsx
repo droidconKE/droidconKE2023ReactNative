@@ -36,9 +36,8 @@ function isNonScrolling(preset?: ScreenProps['preset']) {
 
 function ScreenWithoutScrolling(props: ScreenProps) {
   const { children, ...rest } = props;
-  const { colors } = useTheme();
   return (
-    <View style={[{ backgroundColor: colors.background }, styles.container]} {...rest}>
+    <View style={styles.container} {...rest}>
       {children}
     </View>
   );
@@ -46,9 +45,8 @@ function ScreenWithoutScrolling(props: ScreenProps) {
 
 function ScreenWithScrolling(props: ScreenProps) {
   const { children, keyboardShouldPersistTaps = 'handled', ScrollViewProps, ...rest } = props as ScrollScreenProps;
-  const { colors } = useTheme();
   return (
-    <View style={[{ backgroundColor: colors.background }, styles.container]} {...rest}>
+    <View style={styles.container} {...rest}>
       <ScrollView
         {...{ keyboardShouldPersistTaps }}
         {...ScrollViewProps}
@@ -66,7 +64,7 @@ const MainContainer = (props: ScreenProps) => {
 
   const { SafeAreaViewProps, StatusBarProps, safeAreaEdges, keyboardOffset = 0, KeyboardAvoidingViewProps } = props;
 
-  const backgroundColor = colors.bg;
+  const backgroundColor = dark ? colors.bg : colors.background;
 
   const statusBarStyle = dark ? 'light' : 'dark';
 

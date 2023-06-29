@@ -12,6 +12,7 @@ import HeaderRight from '../../../components/headers/HeaderRight';
 import SessionsList from '../../../components/lists/SessionsList';
 import SpeakersList from '../../../components/lists/SpeakersList';
 import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
+import VideoPlayer from '../../../components/player/VideoPlayer';
 import { useAuth } from '../../../context/auth';
 
 // TODO: Home page
@@ -19,7 +20,6 @@ import { useAuth } from '../../../context/auth';
  * - Implement a home page that displays all the components listed below:
  * - Should display VideoPlayer component, Sessions list component, Speakers list component, Sponsors card, Organizers card.
  * - Check out components folder for the starter code for all those components
- * - For Videoplayer component, use https://droidcon.co.ke/video/DroidconKe_2019_Highlight_Reel_HD.mp4 as the video link
  * - For Sponsors card, use mock/sponsors.ts data
  * - For Organizers card, use mock/organizers.ts data
  * - use the components you’ve implemented in the previous tasks
@@ -71,7 +71,11 @@ const Main = () => {
 
       {user && (
         <>
-          <Space size={16} />
+          <Space size={10} />
+
+          <VideoPlayer />
+
+          <Space size={30} />
 
           <SessionsList />
 

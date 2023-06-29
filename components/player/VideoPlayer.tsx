@@ -1,15 +1,57 @@
-import React from 'react';
-import { View } from 'react-native';
+/* eslint-disable react/no-unstable-nested-components */
+import { useTheme } from '@react-navigation/native';
+import { ResizeMode, Video } from 'expo-av';
+import { Image } from 'expo-image';
+import React, { useRef } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
+import { VIDEO_URL } from '../../config/constants';
 
-// TODO: Add VideoPlayer component
-/**
- * -  Implement a video player card component
- * - Hint: use `expo-av` to implement the video player with hidden controls
- * - consider adding fullscreen player
- */
+const { width } = Dimensions.get('window');
 
 const VideoPlayer = () => {
-  return <View />;
+  const { colors } = useTheme();
+
+  const video = useRef(null);
+
+  return (
+    <View style={[styles.container, { backgroundColor: colors.card }]} testID="video-player">
+      <Video
+        testID="video-component"
+        ref={video}
+        style={styles.video}
+        source={{
+          uri: VIDEO_URL,
+        }}
+        useNativeControls
+        resizeMode={ResizeMode.CONTAIN}
+        isLooping
+        isMuted
+        shouldPlay
+        PosterComponent={() => (
+          <Image source={require('../../assets/images/banner.png')} style={styles.image} contentFit="contain" />
+        )}
+      />
+    </View>
+  );
 };
 
 export default VideoPlayer;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    borderRadius: 12,
+    width: width - 32,
+  },
+  video: {
+    alignSelf: 'center',
+    width: '100%',
+    height: 180,
+    borderRadius: 12,
+  },
+  image: {
+    height: 180,
+    width: '100%',
+  },
+});
