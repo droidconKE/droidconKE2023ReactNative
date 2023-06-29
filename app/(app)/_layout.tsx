@@ -39,6 +39,12 @@ export default () => {
           },
         }}
       />
+      <Stack.Screen
+        name="session"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 };

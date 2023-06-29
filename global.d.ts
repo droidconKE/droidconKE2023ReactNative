@@ -22,10 +22,7 @@ declare module '@react-navigation/native' {
   };
 
   export type ThemeColors = {
-    [key in 'light' | 'dark']: Omit<
-      ExtendedTheme['colors'],
-      'background' | 'text' | 'border' | 'card' | 'notification'
-    >;
+    [key in 'light' | 'dark']: Omit<ExtendedTheme['colors'], 'text' | 'border' | 'card' | 'notification'>;
   };
   export function useTheme(): ExtendedTheme;
 }
@@ -100,7 +97,7 @@ export interface Session {
   session_format: string;
   session_level: string;
   is_keynote: boolean;
-  session_image: null | string;
+  session_image: string | null;
   speakers: Array<Speaker>;
 }
 

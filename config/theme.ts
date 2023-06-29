@@ -11,6 +11,7 @@ export const theme_colors: ThemeColors = {
     secondaryTint: 'rgba(0, 12, 235, 0.11)',
     link: '#000CEB',
     bg: '#F5F5F5',
+    background: '#FFFFFF',
   },
   dark: {
     primary: '#00E2C3',
@@ -22,5 +23,6 @@ export const theme_colors: ThemeColors = {
     secondaryTint: '#f5f5f51c',
     link: '#F5F5F5',
     bg: '#20201E',
+    background: '#000000',
   },
 };
