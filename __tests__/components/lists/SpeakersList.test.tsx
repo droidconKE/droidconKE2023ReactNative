@@ -10,6 +10,8 @@ describe('SpeakersList', () => {
 
     expect(getByText('Speakers')).toBeDefined();
 
-    expect(getByText(Speakers.data.length.toString())).toBeDefined();
+    const speakersCount = (Speakers.data.length - 5).toString();
+
+    expect(getByText(`+${speakersCount}`)).toBeDefined();
   });
 });

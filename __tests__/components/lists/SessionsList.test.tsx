@@ -10,6 +10,8 @@ describe('SessionsList', () => {
 
     expect(getByText('Sessions')).toBeDefined();
 
-    expect(getByText(Sessions.data.length.toString())).toBeDefined();
+    const sessionCount = (Sessions.data.length - 5).toString();
+
+    expect(getByText(`+${sessionCount}`)).toBeDefined();
   });
 });

@@ -1,8 +1,9 @@
 import { useTheme } from '@react-navigation/native';
-import { Link, useRouter } from 'expo-router';
+import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import type { ListRenderItemInfo } from 'react-native';
-import { Dimensions, FlatList, Image, StyleSheet, View } from 'react-native';
+import { Dimensions, FlatList, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import type { Session } from '../../global';
 import { Sessions } from '../../mock/sessions';
 import ViewAllButton from '../buttons/ViewAllButton';
@@ -16,6 +17,19 @@ const SessionsList = () => {
   const { colors } = useTheme();
   const router = useRouter();
   const sessions = Sessions.data.slice(0, 5); // filter sessions to 5
+  const sessionCount = (Sessions.data.length - 5).toString();
+  const sessionTime = '10:00 AM';
+  const sessionLocation = 'Main Hall';
+
+  // truncate title to 2 lines, and add ellipsis at the end
+  const truncateTitle = (title: string) => {
+    const titleLength = title.length;
+    const maxTitleLength = 50;
+    if (titleLength > maxTitleLength) {
+      return `${title.substring(0, maxTitleLength)}...`;
+    }
+    return title;
+  };
 
   return (
     <View style={styles.list}>
@@ -23,21 +37,34 @@ const SessionsList = () => {
         <StyledText font="bold" size="lg" style={{ color: colors.primary }}>
           Sessions
         </StyledText>
-        <ViewAllButton onPress={() => router.push('/home/sessions')} label={Sessions.data.length.toString()} />
+        <ViewAllButton onPress={() => router.push('/home/sessions')} label={`+${sessionCount}`} />
       </Row>
+
       <Space size={16} />
+
       <FlatList
         data={sessions}
         renderItem={({ item }: ListRenderItemInfo<Session>) => (
-          <View style={[styles.card, { backgroundColor: colors.bg }]} testID="session-card">
-            <Image source={{ uri: item.session_image || '' }} style={styles.image} resizeMode="cover" />
-            <Space size={8} />
-            <Link href={`/home/sessions/${item.slug}`} style={styles.description}>
-              <StyledText font="bold" numberOfLines={2}>
-                {item.title}
-              </StyledText>
-            </Link>
-          </View>
+          <TouchableWithoutFeedback
+            testID="session-card"
+            onPress={() => router.push({ pathname: `/home/sessions/${item.slug}`, params: { slug: item.slug } })}
+          >
+            <View style={[styles.card, { backgroundColor: colors.bg }]}>
+              <Image source={{ uri: item.session_image || '' }} style={styles.image} contentFit="cover" />
+              <Space size={8} />
+              <View style={styles.description}>
+                <StyledText font="bold" numberOfLines={2} style={styles.title}>
+                  {truncateTitle(item.title)}
+                </StyledText>
+
+                <Space size={12} />
+
+                <StyledText size="sm" font="light">
+                  @ {sessionTime} {''} | {''} {sessionLocation}
+                </StyledText>
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
         )}
         keyExtractor={(item: Session, index: number) => index.toString()}
         horizontal
@@ -67,7 +94,11 @@ const styles = StyleSheet.create({
   },
   description: {
     width: '100%',
-    marginHorizontal: 10,
-    marginVertical: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+  },
+  title: {
+    textAlign: 'left',
+    marginRight: 10,
   },
 });

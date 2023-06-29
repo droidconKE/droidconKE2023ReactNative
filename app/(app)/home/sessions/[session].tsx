@@ -1,4 +1,7 @@
-import { Stack, useSearchParams } from 'expo-router';
+/* eslint-disable react/no-unstable-nested-components */
+import { AntDesign } from '@expo/vector-icons';
+import { useTheme } from '@react-navigation/native';
+import { Stack, useRouter, useSearchParams } from 'expo-router';
 import React from 'react';
 import StyledText from '../../../../components/common/StyledText';
 import MainContainer from '../../../../components/container/MainContainer';
@@ -10,16 +13,22 @@ import MainContainer from '../../../../components/container/MainContainer';
 // TODO: Use real data from mock/sessions.ts
 
 const Session = () => {
-  const { session } = useSearchParams();
+  const { colors } = useTheme();
+  const { slug } = useSearchParams();
+  const router = useRouter();
+
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          title: `Session ${session}`,
+          title: `Session ${slug}`,
           headerTitleAlign: 'center',
+          headerLeft: () => {
+            return <AntDesign name="left" size={24} color={colors.text} onPress={() => router.back()} />;
+          },
         }}
       />
-      <StyledText>session slug: {session}</StyledText>
+      <StyledText>session slug: {slug}</StyledText>
     </MainContainer>
   );
 };
