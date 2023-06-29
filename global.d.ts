@@ -57,14 +57,7 @@ export type Typography = {
 };
 
 export interface IFeed {
-  data: Array<{
-    title: string;
-    body: string;
-    topic: string;
-    url: string;
-    image: string;
-    created_at: string;
-  }>;
+  data: Array<Feed>;
   meta: Meta;
 }
 
@@ -168,4 +161,13 @@ export interface Paginator {
   has_more_pages: boolean;
   next_page_url: string | null;
   previous_page_url: string | null;
+}
+
+export interface Feed {
+  title: string;
+  body: string;
+  topic: string;
+  url: string;
+  image: string;
+  created_at: string;
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import StyledText from '../../../../components/common/StyledText';
 import MainContainer from '../../../../components/container/MainContainer';
+import FeedList from '../../../../components/lists/FeedList';
 
 // TODO: implement feed page
 /**
@@ -15,7 +16,7 @@ export default function Page() {
   return (
     <MainContainer>
       <View>
-        <StyledText>Sheet</StyledText>
+        <FeedList />
         <Link href="/home/feed/share">
           <StyledText>Open Share bottomsheet</StyledText>
         </Link>
