@@ -2224,6 +2224,14 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
+"@react-native/virtualized-lists@^0.72.4":
+  version "0.72.5"
+  resolved "https://registry.yarnpkg.com/@react-native/virtualized-lists/-/virtualized-lists-0.72.5.tgz#a7b261357ec7e0e5aa97a24d4acab1d903811e09"
+  integrity sha512-AtKE3dez3lf89O87wC2ZglV5aPsifopQgn/UmFhXAwi18Yp1BJfEGh3sUqOPNgZNByYPAGxFANeZq44VATXeJA==
+  dependencies:
+    invariant "^2.2.4"
+    nullthrows "^1.1.1"
+
 "@react-navigation/bottom-tabs@~6.5.7":
   version "6.5.9"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-6.5.9.tgz#d132e787b58b23dedfeb19b586f9467613a0c6bf"
@@ -2479,6 +2487,14 @@
   version "18.0.1"
   resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-18.0.1.tgz#d3f308912fcc4491e4fbc134b906bb65bdee73f6"
   integrity sha512-LjEF+jTUCjzd+Qq4eWqsmZvEWPA/l4L0my+YWN5US8Fo3wZOMiyrpBshHDFbkO8usjdO1B430mEWNU/i1MF7Qg==
+"@types/react-native@^0.72.2":
+  version "0.72.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.72.2.tgz#27c931a899c555b28e20cdd12e570b017808de96"
+  integrity sha512-/eEjr04Zqo7mTMszuSdrLx90+j5nWhDMMOgtnKZfAYyV3RwmlpSb7F17ilmMMxZWJY81n/JZ4e6wdhMJFpjrCg==
+  dependencies:
+    "@react-native/virtualized-lists" "^0.72.4"
+    "@types/react" "*"
+
 "@types/react-native@^0.72.2":
   version "0.72.2"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.72.2.tgz#27c931a899c555b28e20cdd12e570b017808de96"
