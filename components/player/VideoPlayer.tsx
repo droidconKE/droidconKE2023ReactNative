@@ -23,12 +23,19 @@ const VideoPlayer = () => {
           uri: VIDEO_URL,
         }}
         useNativeControls
-        resizeMode={ResizeMode.CONTAIN}
+        resizeMode={ResizeMode.COVER}
         isLooping
-        isMuted
+        isMuted={false}
+        volume={0.3}
         shouldPlay
+        usePoster
         PosterComponent={() => (
-          <Image source={require('../../assets/images/banner.png')} style={styles.image} contentFit="contain" />
+          <Image
+            source={require('../../assets/images/banner.png')}
+            style={styles.image}
+            contentFit="none"
+            contentPosition="center"
+          />
         )}
       />
     </View>
@@ -53,5 +60,6 @@ const styles = StyleSheet.create({
   image: {
     height: 180,
     width: '100%',
+    borderRadius: 12,
   },
 });
