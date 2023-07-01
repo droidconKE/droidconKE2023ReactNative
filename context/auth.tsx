@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -33,6 +32,13 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         setUser(JSON.parse(data));
       }
     });
+    /**
+     * Reason: The `useAsyncStorage` "experimental" hook is not memoized and always returns new functions
+     * which causes an infinite loop when `getItem` is used as a dependency in `useEffect`.
+     * Disabling the check here should be fine since we only want to fetch the data from async storage once
+     * and there is no need to synchronize the data with our state.
+     */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

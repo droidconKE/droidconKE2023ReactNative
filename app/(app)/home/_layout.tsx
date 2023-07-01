@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';

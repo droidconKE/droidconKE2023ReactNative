@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { Stack } from 'expo-router';
 import React, { useState } from 'react';
 import { View } from 'react-native';

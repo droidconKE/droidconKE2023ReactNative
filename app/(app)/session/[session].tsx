@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Stack, useRouter, useSearchParams } from 'expo-router';

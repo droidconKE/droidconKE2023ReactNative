@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
