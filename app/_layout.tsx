@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Slot, SplashScreen } from 'expo-router';
@@ -18,29 +17,29 @@ export default () => {
   const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
   const [isReady, setIsReady] = useState(false);
 
-  const updateTheme = (newTheme: Theme) => {
-    let mode: ColorSchemeName;
-    if (!newTheme) {
-      mode = theme.mode === 'dark' ? 'light' : 'dark';
-      newTheme = { mode, system: false };
-    } else {
-      if (newTheme.system) {
-        mode = Appearance.getColorScheme();
-        newTheme = { ...newTheme, mode };
-      } else {
-        newTheme = { ...newTheme, system: false };
-      }
-    }
-    setTheme(newTheme);
-  };
-
   useEffect(() => {
+    const updateTheme = (newTheme: Theme) => {
+      let mode: ColorSchemeName;
+      if (!newTheme) {
+        mode = theme.mode === 'dark' ? 'light' : 'dark';
+        newTheme = { mode, system: false };
+      } else {
+        if (newTheme.system) {
+          mode = Appearance.getColorScheme();
+          newTheme = { ...newTheme, mode };
+        } else {
+          newTheme = { ...newTheme, system: false };
+        }
+      }
+      setTheme(newTheme);
+    };
+
     // if the theme of the device changes, update the theme
     Appearance.addChangeListener(({ colorScheme }) => {
       updateTheme({ mode: colorScheme, system: true });
       setTheme({ mode: colorScheme });
     });
-  }, []);
+  }, [theme.mode]);
 
   const [fontsLoaded] = useFonts(customFontsToLoad);
 

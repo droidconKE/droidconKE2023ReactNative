@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Stack, useRouter } from 'expo-router';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -35,7 +34,7 @@ const _sessions = [
   },
 ];
 
-const sessions = () => {
+const Sessions = () => {
   const router = useRouter();
 
   return (
@@ -62,7 +61,7 @@ const sessions = () => {
   );
 };
 
-export default sessions;
+export default Sessions;
 
 const styles = StyleSheet.create({
   main: {

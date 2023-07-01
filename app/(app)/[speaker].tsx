@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Stack, useSearchParams } from 'expo-router';
 import React from 'react';
 import StyledText from '../../components/common/StyledText';
@@ -11,7 +10,7 @@ import MainContainer from '../../components/container/MainContainer';
  */
 // TODO: Use data from mock/speaker to display speaker  and mock/organizers.ts to display organizer
 
-const speaker = () => {
+const Speaker = () => {
   const { id } = useSearchParams();
 
   return (
@@ -27,4 +26,4 @@ const speaker = () => {
   );
 };
 
-export default speaker;
+export default Speaker;
