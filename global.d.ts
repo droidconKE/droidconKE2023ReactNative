@@ -22,7 +22,7 @@ declare module '@react-navigation/native' {
   };
 
   export type ThemeColors = {
-    [key in 'light' | 'dark']: Omit<ExtendedTheme['colors'], 'text' | 'border' | 'card' | 'notification'>;
+    [key in 'light' | 'dark']: Omit<ExtendedTheme['colors'], 'text' | 'border' | 'notification'>;
   };
   export function useTheme(): ExtendedTheme;
 }

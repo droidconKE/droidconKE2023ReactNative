@@ -12,6 +12,7 @@ export const theme_colors: ThemeColors = {
     link: '#000CEB',
     bg: '#F5F5F5',
     background: '#FFFFFF',
+    card: '#F5F5F5',
   },
   dark: {
     primary: '#00E2C3',
@@ -24,5 +25,6 @@ export const theme_colors: ThemeColors = {
     link: '#F5F5F5',
     bg: '#20201E',
     background: '#000000',
+    card: '#000000',
   },
 };

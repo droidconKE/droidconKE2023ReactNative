@@ -61,7 +61,7 @@ const SessionsList = () => {
             testID="session-card"
             onPress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
           >
-            <View style={[styles.card, { backgroundColor: colors.bg }]}>
+            <View style={[styles.card, { backgroundColor: colors.card }]}>
               <Image source={{ uri: item.session_image || '' }} style={styles.image} contentFit="cover" />
               <Space size={8} />
               <View style={styles.bottom}>
