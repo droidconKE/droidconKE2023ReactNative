@@ -176,7 +176,7 @@ const Session = () => {
 
       {/** Floating action button. TODO: Add share functionality */}
       <Pressable style={[styles.fab, { backgroundColor: colors.tertiary }]}>
-        <MaterialCommunityIcons name="share" size={30} color={colors.background} />
+        <MaterialCommunityIcons name="share" size={30} color="white" />
       </Pressable>
     </View>
   );
