@@ -13,11 +13,11 @@ export const Feed: IFeed = {
     },
     {
       title: 'droidconKe Ticket sales',
-      body: 'This 4th in-person event will include several tech communities from the East African Region and continental members. Participants will have an excellent chance to learn about Android development and opportunities and to network with Android experts in the ecosystem.',
+      body: 'This 4th in-person event will include several tech communities from the East African Region and continental members. Participants will have an excellent chance to learn about Android development and opportunities and to network with Android expert in the ecosystem.',
       topic: 'droidconke-2022-281',
       url: 'https://droidcon.co.ke/',
       image:
-        'https://res.cloudinary.com/droidconke/image/upload/v1684788047/prod/upload/event/feeds/qhk1umslrdkqmmfklqsn.png',
+        'https://res.cloudinary.com/droidconke/image/upload/v1684788565/prod/upload/event/feeds/r0gtvnh2qtfy0rnkoxwq.png',
       created_at: '2023-05-22 23:40:48',
     },
   ],
