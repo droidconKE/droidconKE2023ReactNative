@@ -4,9 +4,9 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import type { ListRenderItemInfo } from 'react-native';
 import { Dimensions, FlatList, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import type { Session, SessionForSchedule } from '../../global';
-import { Schedule } from '../../mock/schedule';
+import type { Session } from '../../global';
 import { Sessions } from '../../mock/sessions';
+import { getSessionTimeAndLocation, truncate } from '../../util/helpers';
 import ViewAllButton from '../buttons/ViewAllButton';
 import Row from '../common/Row';
 import Space from '../common/Space';
@@ -19,29 +19,6 @@ const SessionsList = () => {
   const router = useRouter();
   const sessions = Sessions.data.slice(0, 5); // filter sessions to 5
   const sessionCount = (Sessions.data.length - 5).toString();
-
-  // truncate title to 2 lines, and add ellipsis at the end
-  const truncateTitle = (title: string) => {
-    const titleLength = title.length;
-    const maxTitleLength = 50;
-    if (titleLength > maxTitleLength) {
-      return `${title.substring(0, maxTitleLength)}...`;
-    }
-    return title;
-  };
-
-  // a function that gets the start time and room.title of a session from the schedule.data array
-  const getSessionTimeAndLocation = (slug: string) => {
-    for (const key in Schedule.data) {
-      const sessionData = Schedule.data[key];
-      const session = sessionData?.find((item: SessionForSchedule) => item.slug === slug);
-      if (session) {
-        const startTime = session.start_time.split(':').slice(0, 2).join(':');
-        return `@ ${startTime}  |  Room ${session?.rooms[0]?.title}`;
-      }
-    }
-    return '';
-  };
 
   return (
     <View style={styles.list}>
@@ -62,12 +39,17 @@ const SessionsList = () => {
             onPress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
           >
             <View style={[styles.card, { backgroundColor: colors.card }]}>
-              <Image source={{ uri: item.session_image || '' }} style={styles.image} contentFit="cover" />
+              <Image
+                source={{ uri: item.session_image || '' }}
+                style={styles.image}
+                contentFit="cover"
+                contentPosition="left"
+              />
               <Space size={8} />
               <View style={styles.bottom}>
                 <View style={styles.description}>
                   <StyledText font="bold" numberOfLines={2} style={styles.title}>
-                    {truncateTitle(item.title)}
+                    {truncate(50, item.title)}
                   </StyledText>
                 </View>
 
