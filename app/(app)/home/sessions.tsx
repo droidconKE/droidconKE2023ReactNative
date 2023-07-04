@@ -1,6 +1,9 @@
 import { Stack, useRouter } from 'expo-router';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Switch, View } from 'react-native';
+import DayButton from '../../../components/buttons/DayButton';
+import Row from '../../../components/common/Row';
+import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
@@ -36,7 +39,8 @@ const _sessions = [
 
 const Sessions = () => {
   const router = useRouter();
-
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
@@ -46,6 +50,41 @@ const Sessions = () => {
       />
 
       <View style={styles.main}>
+        <Row style={{ alignItems: 'flex-start' }}>
+          <Row>
+            <DayButton
+              date="16th"
+              day="Day 1"
+              handlePress={function (): void {
+                throw new Error('Function not implemented.');
+              }}
+              selected
+            />
+            <Space size={20} horizontal />
+            <DayButton
+              date="17th"
+              day="Day 2"
+              handlePress={function (): void {
+                throw new Error('Function not implemented.');
+              }}
+            />
+            <Space size={20} horizontal />
+            <DayButton
+              date="18th"
+              day="Day 3"
+              handlePress={function (): void {
+                throw new Error('Function not implemented.');
+              }}
+            />
+          </Row>
+          <Switch
+            trackColor={{ false: '#767577', true: '#81b0ff' }}
+            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </Row>
         <StyledText>sessions</StyledText>
 
         {_sessions.map((session) => (
@@ -67,5 +106,10 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     paddingHorizontal: 10,
+  },
+  dayButton: {
+    borderRadius: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 8,
   },
 });

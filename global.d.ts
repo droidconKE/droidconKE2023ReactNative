@@ -11,6 +11,7 @@ declare module '@react-navigation/native' {
       textLight: string;
       tint: string;
       secondaryTint: string;
+      tertiaryTint: string;
       link: string;
       bg: string;
       background: string;
