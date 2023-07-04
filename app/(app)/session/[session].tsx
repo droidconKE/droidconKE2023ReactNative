@@ -57,6 +57,7 @@ const Session = () => {
                   {session?.speakers.map((speaker) => speaker.name).join(', ')}
                 </StyledText>
               </View>
+              {/** Bookmark session button. TODO: Add bookmark functionality */}
               <View>
                 <Space size={14} />
                 <FontAwesome5 name="star" size={24} color={colors.primary} />
@@ -76,7 +77,7 @@ const Session = () => {
                 <View key={index.toString()}>
                   <StyledText font="regular" style={{ color: colors.primary }}>
                     {speaker.name} - {''}
-                    <StyledText font="regular" style={{ color: colors.textLight }}>
+                    <StyledText font="regular" style={{ color: dark ? colors.text : colors.textLight }}>
                       {!showMoreBio ? truncate(140, speaker.biography) : speaker.biography}
                       {speaker.biography && speaker.biography.length > 140 && (
                         <StyledText
@@ -94,7 +95,7 @@ const Session = () => {
                 </View>
               ))
             ) : (
-              <StyledText font="regular" style={{ color: colors.textLight }}>
+              <StyledText font="regular" style={{ color: dark ? colors.text : colors.textLight }}>
                 {!showMoreBio ? truncate(140, session?.speakers[0]?.biography) : session?.speakers[0]?.biography}
                 {session?.speakers[0]?.biography && session?.speakers[0]?.biography.length > 140 && (
                   <StyledText
@@ -114,8 +115,8 @@ const Session = () => {
             <Image
               source={{ uri: session?.session_image || '' }}
               style={styles.image}
-              contentFit="fill"
-              contentPosition="left center"
+              contentFit="cover"
+              contentPosition="left"
             />
           </View>
 
@@ -125,18 +126,17 @@ const Session = () => {
             <Space size={16} />
 
             <View style={[styles.chip, { backgroundColor: dark ? colors.background : colors.text }]}>
-              <StyledText style={[styles.chipText, { color: dark ? colors.text : colors.background }]}>
+              <StyledText size="sm" style={[styles.chipText, { color: dark ? colors.text : colors.background }]}>
                 #{session?.session_level}
               </StyledText>
             </View>
           </View>
 
           <View style={styles.withPadding}>
+            {/** TODO: Add twitter redirect functionality */}
             {session?.speakers && session?.speakers.length > 1 ? (
               <View>
-                <StyledText font="medium" size="lg">
-                  Twitter Handles
-                </StyledText>
+                <StyledText font="medium">Twitter Handles</StyledText>
 
                 <Space size={16} />
 
@@ -157,9 +157,7 @@ const Session = () => {
               </View>
             ) : (
               <Row>
-                <StyledText font="medium" size="lg">
-                  Twitter Handle
-                </StyledText>
+                <StyledText font="medium">Twitter Handle</StyledText>
 
                 <Pressable style={[styles.button, { borderColor: colors.primary, backgroundColor: colors.background }]}>
                   <FontAwesome5 name="twitter" size={20} color={colors.primary} />
@@ -171,6 +169,7 @@ const Session = () => {
               </Row>
             )}
           </View>
+          <Space size={30} />
         </View>
       </MainContainer>
 
@@ -188,6 +187,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     width: '100%',
+    marginBottom: 60,
   },
   centered: {
     paddingHorizontal: 16,
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    bottom: 30,
+    bottom: 20,
     right: 20,
     width: 60,
     height: 60,
