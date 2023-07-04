@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import type { VideoProps } from 'expo-av';
