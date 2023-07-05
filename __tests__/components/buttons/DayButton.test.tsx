@@ -1,11 +1,6 @@
-import { render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
 import DayButton from '../../../components/buttons/DayButton';
-
-// Test that the button renders.
-// Test that date is shown.
-// Test that day is shown too.
-// Test that color changes when button is selected
 
 jest.mock('@react-navigation/native', () => ({
   useTheme: jest.fn().mockReturnValue({
@@ -19,6 +14,8 @@ jest.mock('@react-navigation/native', () => ({
 }));
 
 describe('<DayButton/>', () => {
+  const onPress = jest.fn();
+
   it('renders daybutton component', () => {
     render(<DayButton handlePress={() => console.log('pressed')} date={''} day={''} />);
   });
@@ -34,16 +31,7 @@ describe('<DayButton/>', () => {
   });
 
   it('renders different color when button is selected', () => {
-    render(
-      <DayButton
-        handlePress={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        date={''}
-        day={''}
-        selected
-      />,
-    );
+    render(<DayButton handlePress={onPress} date={''} day={''} selected />);
     expect(screen.getByTestId('dayButton')).toHaveStyle({
       backgroundColor: 'red',
     });
@@ -53,5 +41,12 @@ describe('<DayButton/>', () => {
     expect(screen.getByTestId('day')).toHaveStyle({
       color: 'orange',
     });
+  });
+
+  it('fires onPress function when pressed', () => {
+    render(<DayButton handlePress={onPress} date={''} day={''} />);
+    fireEvent.press(screen.getByTestId('dayButton'));
+
+    expect(onPress).toHaveBeenCalledTimes(1);
   });
 });
