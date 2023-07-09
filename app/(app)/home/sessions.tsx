@@ -4,7 +4,7 @@ import { Stack, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import DayButton from '../../../components/buttons/DayButton';
-import StyledSwitch from '../../../components/buttons/StyledSwitch';
+import CustomSwitch from '../../../components/buttons/StyledSwitch';
 import Row from '../../../components/common/Row';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
@@ -70,20 +70,17 @@ const Sessions = () => {
               <DayButton date="18th" day="Day 3" handlePress={() => console.log('pressed')} />
             </Row>
             <View style={styles.column}>
-              <StyledSwitch
+              <CustomSwitch
                 value={isEnabled}
                 onValueChange={toggleSwitch}
                 trackColor={{
                   true: colors.tertiary,
                   false: colors.bgInverse,
                 }}
-                thumbColor={{
-                  true: colors.whiteConstant,
-                  false: colors.whiteConstant,
-                }}
-                iconColors={{
-                  true: colors.iconSwitch,
-                  false: colors.tertiary,
+                thumbColor={colors.whiteConstant}
+                iconColor={{
+                  true: colors.tertiary,
+                  false: colors.iconSwitch,
                 }}
               />
               <Space size={6} />
@@ -128,6 +125,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   dayHeader: {
-    position: 'absolute',
+    //position: 'absolute',
   },
 });
