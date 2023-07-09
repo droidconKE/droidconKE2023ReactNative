@@ -26,11 +26,8 @@ describe('<StyledSwitch/>', () => {
           true: 'red',
           false: 'blue',
         }}
-        thumbColor={{
-          true: 'green',
-          false: 'purple',
-        }}
-        iconColors={{
+        thumbColor={'purple'}
+        iconColor={{
           true: 'red',
           false: 'purple',
         }}
@@ -39,27 +36,24 @@ describe('<StyledSwitch/>', () => {
     expect(screen.getByTestId('styled-switch')).toBeDefined();
   });
 
-  it('renders red trackColor when true', () => {
+  it('renders blue trackColor when blue', () => {
     render(
       <StyledSwitch
         value={false}
         onValueChange={onPress}
         trackColor={{
-          true: 'red',
+          true: 'rgb(255, 110, 77)',
           false: 'blue',
         }}
-        thumbColor={{
-          true: 'yellow',
-          false: 'green',
-        }}
-        iconColors={{
+        thumbColor={'purple'}
+        iconColor={{
           true: 'orange',
           false: 'maroon',
         }}
       />,
     );
     expect(screen.getByTestId('track')).toHaveStyle({
-      backgroundColor: 'red',
+      backgroundColor: 'blue',
     });
   });
 });
