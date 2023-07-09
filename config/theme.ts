@@ -14,6 +14,9 @@ export const theme_colors: ThemeColors = {
     bg: '#F5F5F5',
     background: '#FFFFFF',
     card: '#F5F5F5',
+    bgInverse: '#20201E',
+    whiteConstant: '#FFFFFF',
+    iconSwitch: '#20201E',
   },
   dark: {
     primary: '#00E2C3',
@@ -28,5 +31,8 @@ export const theme_colors: ThemeColors = {
     bg: '#20201E',
     background: '#000000',
     card: '#000000',
+    bgInverse: '#F5F5F5',
+    whiteConstant: '#FFFFFF',
+    iconSwitch: '#20201E',
   },
 };

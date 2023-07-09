@@ -1,12 +1,6 @@
 import * as React from 'react';
-import type { SvgProps } from 'react-native-svg';
 import Svg, { Circle, Defs, G, LinearGradient, Path, Rect, Stop } from 'react-native-svg';
-
-export interface ISvgProps extends SvgProps {
-  xmlns?: string;
-  xmlnsXlink?: string;
-  xmlSpace?: string;
-}
+import type { ISvgProps } from '../../global';
 
 const Vector = (props: ISvgProps) => (
   <Svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 118 65" {...props}>

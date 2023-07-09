@@ -1,4 +1,5 @@
 import '@react-navigation/native';
+import type { SvgProps } from 'react-native-svg';
 
 declare module '@react-navigation/native' {
   export type ExtendedTheme = {
@@ -19,6 +20,9 @@ declare module '@react-navigation/native' {
       border: string;
       card: string;
       notification: string;
+      bgInverse: string;
+      whiteConstant: string;
+      iconSwitch: string;
     };
   };
 
@@ -166,4 +170,10 @@ export interface Paginator {
   has_more_pages: boolean;
   next_page_url: string | null;
   previous_page_url: string | null;
+}
+
+export interface ISvgProps extends SvgProps {
+  xmlns?: string;
+  xmlnsXlink?: string;
+  xmlSpace?: string;
 }
