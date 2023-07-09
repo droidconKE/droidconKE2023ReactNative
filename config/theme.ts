@@ -4,7 +4,7 @@ export const theme_colors: ThemeColors = {
   light: {
     primary: '#000CEB',
     secondary: '#707070',
-    tertiary: '#FF6E4D',
+    tertiary: 'rgba(255, 110, 77, 1)',
     accent: '#7070702C',
     textLight: '#707070',
     tint: '#00E2C3',
@@ -21,7 +21,7 @@ export const theme_colors: ThemeColors = {
   dark: {
     primary: '#00E2C3',
     secondary: '#707070',
-    tertiary: '#FF6E4D',
+    tertiary: 'rgba(255, 110, 77, 1)',
     accent: '#7070702C',
     textLight: '#707070',
     tint: '#00E2C3',
