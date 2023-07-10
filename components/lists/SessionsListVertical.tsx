@@ -4,7 +4,7 @@ import React from 'react';
 import type { ListRenderItemInfo } from 'react-native';
 import { FlatList, StyleSheet, View } from 'react-native';
 import SessionListSeparator from '../../assets/artworks/ListSeparator';
-import type { Session, SessionForSchedule } from '../../global';
+import type { SessionForSchedule } from '../../global';
 import SessionCard from '../cards/SessionCard';
 import Row from '../common/Row';
 import Space from '../common/Space';
@@ -71,14 +71,14 @@ const SessionsListVertical = ({
                 variant={'list'}
               />
             )}
-            keyExtractor={(item: Session) => item.slug + item.id}
+            keyExtractor={(item: SessionForSchedule) => item.slug + item.id}
             ItemSeparatorComponent={(item: SessionForSchedule, index: number) => (
               <>
-                {index < sessions.length - 1 && (
-                  <View style={styles.cardContainer}>
-                    <SessionListSeparator color={index % 2 !== 0 ? colors.tertiary : colors.tint} />
-                  </View>
-                )}
+                {/* {index < sessions.length - 1 && ( */}
+                <View style={styles.cardContainer}>
+                  <SessionListSeparator color={index % 2 === 0 ? colors.tertiary : colors.tint} />
+                </View>
+                {/* // )} */}
               </>
             )}
           />

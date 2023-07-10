@@ -77,7 +77,7 @@ const Sessions = () => {
           </Row>
         </View>
         <SessionsListVertical
-          variant="card"
+          variant="list"
           bookmarked={false}
           handleBookMark={() => console.log('pressed')}
           sessions={Schedule.data['2022-11-16'] as unknown as SessionForSchedule}
