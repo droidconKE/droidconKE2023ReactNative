@@ -46,6 +46,7 @@ const StyledSwitch = (props: StyledSwitchProps) => {
         ]}
       >
         <Animated.View
+          testID={'thumb'}
           style={[
             styles.thumb,
             {
@@ -55,6 +56,7 @@ const StyledSwitch = (props: StyledSwitchProps) => {
           ]}
         >
           <StarIcon
+            testID="icon"
             fontSize={12.5}
             color={value ? iconColor.true : iconColor.false}
             fill={!value ? iconColor.false : iconColor.true}
