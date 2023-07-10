@@ -61,33 +61,51 @@ const SessionCardOnHome = (props: SessionCardProps<Session>) => {
 };
 
 const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
-  const { handlePress, item } = props;
+  const { handlePress, item, handleBookMark } = props;
   const { colors } = useTheme();
 
   return (
     <TouchableWithoutFeedback testID="session-card-sessions" onPress={handlePress}>
-      <View style={[styles.card, { backgroundColor: colors.card }]}>
+      <View style={[styles.card, styles.cardTertiary, { backgroundColor: colors.card }]}>
         <Image
-          source={{ uri: item.session_image || '' }}
+          source={{
+            uri:
+              item.session_image ||
+              'https://res.cloudinary.com/droidconke/image/upload/v1668083311/prod/upload/sessions/pwt9pnojtmng8bymxkls.png',
+          }}
           style={styles.image}
           contentFit="cover"
           contentPosition="left"
         />
-        <Space size={8} />
+        <Space size={4} />
+
         <View style={styles.bottom}>
-          <View style={styles.description}>
+          <StyledText size="sm" font="light">
+            {getSessionTimeAndLocation(item.slug)}
+          </StyledText>
+          <Space size={12} />
+          <View>
             <StyledText font="bold" numberOfLines={2} style={styles.title}>
               {truncate(50, item.title)}
             </StyledText>
           </View>
           <Space size={12} />
-          {item.speakers.map((speaker) => (
-            <Image source={{ uri: speaker.avatar || '' }} style={[styles.avatar, { borderColor: colors.primary }]} />
-          ))}
-          <Space size={12} />
-          <StyledText size="sm" font="light">
-            {getSessionTimeAndLocation(item.slug)}
-          </StyledText>
+          <Row>
+            <View>
+              {item.speakers.map((speaker) => (
+                <Image
+                  source={{ uri: speaker.avatar || '' }}
+                  style={[styles.avatar, { borderColor: colors.primary }]}
+                />
+              ))}
+            </View>
+            <AntDesign
+              name={item.is_bookmarked ? 'star' : 'staro'}
+              size={21}
+              color={colors.primary}
+              onPress={handleBookMark}
+            />
+          </Row>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -173,6 +191,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
   },
+  cardTertiary: {
+    width: width - 20,
+  },
   image: {
     width: '100%',
     height: 124,
@@ -195,13 +216,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   avatar: {
-    width: 40,
-    height: 40,
+    width: 33,
+    height: 33,
     borderRadius: 20,
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 8,
   },
   listCard: {
     borderRadius: 10,

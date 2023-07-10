@@ -10,6 +10,9 @@ import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
+import SessionsListVertical from '../../../components/lists/SessionsListVertical';
+import type { SessionForSchedule } from '../../../global';
+import { Schedule } from '../../../mock/schedule';
 
 // TODO: ALL Sessions page
 
@@ -22,23 +25,6 @@ import HeaderActionRight from '../../../components/headers/HeaderActionRight';
  */
 
 // TODO: this is dummy data, replace with real data from mock/sessions.ts
-const _sessions = [
-  {
-    id: '1',
-    title: 'React Native',
-    description:
-      'React Native is a JavaScript framework for writing real, natively rendering mobile applications for iOS and Android.',
-    speaker: '1',
-    slug: 'react-native',
-  },
-  {
-    id: '2',
-    title: 'React',
-    description: 'React is a JavaScript library for building user interfaces.',
-    speaker: '2',
-    slug: 'react',
-  },
-];
 
 let HEADERHEIGHT;
 const Sessions = () => {
@@ -52,7 +38,7 @@ const Sessions = () => {
 
   console.log(HEADERHEIGHT);
   return (
-    <MainContainer preset="scroll">
+    <MainContainer preset="fixed">
       <Stack.Screen
         options={{
           headerRight: () => <HeaderActionRight />,
@@ -90,16 +76,12 @@ const Sessions = () => {
             </View>
           </Row>
         </View>
-        <StyledText>sessions</StyledText>
-
-        {_sessions.map((session) => (
-          <StyledText
-            key={session.id}
-            onPress={() => router.push({ pathname: `/session/${session.slug}`, params: { slug: session.slug } })}
-          >
-            {session.title}
-          </StyledText>
-        ))}
+        <SessionsListVertical
+          variant="card"
+          bookmarked={false}
+          handleBookMark={() => console.log('pressed')}
+          sessions={Schedule.data['2022-11-16'] as unknown as SessionForSchedule}
+        />
       </View>
     </MainContainer>
   );
