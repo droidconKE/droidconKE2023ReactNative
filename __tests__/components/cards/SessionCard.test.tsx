@@ -9,7 +9,7 @@ describe('<SessionCard/>', () => {
 
   it('renders SessionCard component', () => {
     render(<SessionCard handlePress={onPress} item={Sessions.data[0] as Session} />);
-    expect(screen.getByTestId('session-card')).toBeDefined();
+    expect(screen.getByTestId('session-card-home')).toBeDefined();
   });
 
   it('renders session details', () => {
@@ -22,5 +22,15 @@ describe('<SessionCard/>', () => {
     fireEvent.press(screen.getByText('The Apache Way: Doing Community like Apache'));
 
     expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders SessionCardOnSessions when you pass sessions to screen prop', () => {
+    render(<SessionCard screen="sessions" handlePress={onPress} item={Sessions.data[0] as Session} />);
+    expect(screen.getByTestId('session-card-sessions')).toBeDefined();
+  });
+
+  it('renders SessionCardList when you pass sessions and list to screen prop', () => {
+    render(<SessionCard variant="list" screen="sessions" handlePress={onPress} item={Sessions.data[0] as Session} />);
+    expect(screen.getByTestId('session-card-list')).toBeDefined();
   });
 });

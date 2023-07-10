@@ -1,22 +1,39 @@
+import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Dimensions, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import type { Session } from '../../global';
+import type { Session, SessionForSchedule } from '../../global';
 import { getSessionTimeAndLocation, truncate } from '../../util/helpers';
+import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
-interface SessionCardProps {
+interface SessionCardProps<T> {
   handlePress: () => void;
-  item: Session;
+  handleBookMark?: () => void;
+  item: T;
+  screen?: 'home' | 'sessions';
+  variant?: 'card' | 'list';
 }
+
 const { width } = Dimensions.get('window');
 
-const SessionCard = (props: SessionCardProps) => {
+/**
+ *
+ * @param handlePress: function that returns nothing
+ * @param handleBookMark: function that bookmarks and returns nothing
+ * @param item: object of type Session
+ * @param screen: 'home' | 'sessions', default is 'home'
+ * @param variant: 'card' | 'list'
+ * @returns SessionCard Component
+ */
+
+const SessionCardOnHome = (props: SessionCardProps<Session>) => {
   const { handlePress, item } = props;
   const { colors } = useTheme();
+
   return (
-    <TouchableWithoutFeedback testID="session-card" onPress={handlePress}>
+    <TouchableWithoutFeedback testID="session-card-home" onPress={handlePress}>
       <View style={[styles.card, { backgroundColor: colors.card }]}>
         <Image
           source={{ uri: item.session_image || '' }}
@@ -41,6 +58,111 @@ const SessionCard = (props: SessionCardProps) => {
       </View>
     </TouchableWithoutFeedback>
   );
+};
+
+const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
+  const { handlePress, item } = props;
+  const { colors } = useTheme();
+
+  return (
+    <TouchableWithoutFeedback testID="session-card-sessions" onPress={handlePress}>
+      <View style={[styles.card, { backgroundColor: colors.card }]}>
+        <Image
+          source={{ uri: item.session_image || '' }}
+          style={styles.image}
+          contentFit="cover"
+          contentPosition="left"
+        />
+        <Space size={8} />
+        <View style={styles.bottom}>
+          <View style={styles.description}>
+            <StyledText font="bold" numberOfLines={2} style={styles.title}>
+              {truncate(50, item.title)}
+            </StyledText>
+          </View>
+          <Space size={12} />
+          {item.speakers.map((speaker) => (
+            <Image source={{ uri: speaker.avatar || '' }} style={[styles.avatar, { borderColor: colors.primary }]} />
+          ))}
+          <Space size={12} />
+          <StyledText size="sm" font="light">
+            {getSessionTimeAndLocation(item.slug)}
+          </StyledText>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
+
+const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
+  const { handlePress, item, handleBookMark } = props;
+  const { colors } = useTheme();
+
+  return (
+    <TouchableWithoutFeedback testID="session-card-list" onPress={handlePress}>
+      <Row style={[styles.listCard, { backgroundColor: colors.card }]}>
+        <Row style={styles.sessionCardRow}>
+          <View>
+            <StyledText font="medium" size="lg">
+              {item.slug}
+            </StyledText>
+            <StyledText font="medium" size="md" variant="text" style={styles.amOrPm}>
+              {item.slug}
+            </StyledText>
+          </View>
+          <View style={styles.listCardDetails}>
+            <>
+              <StyledText font="bold" size="lg">
+                {truncate(50, item.title)}
+              </StyledText>
+              <StyledText font="regular" size="md" variant="text">
+                {truncate(72, item.description)}
+              </StyledText>
+              <StyledText size="sm" font="light">
+                {getSessionTimeAndLocation(item.slug)}
+              </StyledText>
+              {item.speakers.length > 0 &&
+                item.speakers.map((speaker, index) => {
+                  <>
+                    <Row>
+                      <FontAwesome5 name="android" size={17} color={colors.primary} />
+                      <Space size={12} />
+                      <StyledText font="regular" size="sm">
+                        {speaker.name}
+                      </StyledText>
+                    </Row>
+                    {index + 1 !== item.speakers.length ? <Space size={4} /> : ''}
+                  </>;
+                })}
+            </>
+          </View>
+        </Row>
+        <AntDesign
+          name={item.is_bookmarked ? 'star' : 'staro'}
+          size={21}
+          color={colors.primary}
+          onPress={handleBookMark}
+        />
+      </Row>
+    </TouchableWithoutFeedback>
+  );
+};
+
+const SessionCard = ({
+  handlePress,
+  handleBookMark,
+  item,
+  screen = 'home',
+  variant = 'card',
+}: SessionCardProps<SessionForSchedule> | SessionCardProps<Session>) => {
+  if (screen === 'sessions' && variant === 'list') {
+    return (
+      <SessionCardList handlePress={handlePress} handleBookMark={handleBookMark} item={item as SessionForSchedule} />
+    );
+  } else if (screen === 'sessions') {
+    return <SessionCardOnSessions item={item as SessionForSchedule} handlePress={handlePress} />;
+  }
+  return <SessionCardOnHome item={item} handlePress={handlePress} />;
 };
 
 export default SessionCard;
@@ -68,5 +190,28 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'left',
     marginRight: 10,
+  },
+  sessionCardRow: {
+    flex: 1,
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 8,
+  },
+  listCard: {
+    borderRadius: 10,
+    padding: 16,
+  },
+  listCardDetails: {
+    flex: 1,
+    marginStart: 24,
+  },
+  amOrPm: {
+    textAlign: 'right',
   },
 });
