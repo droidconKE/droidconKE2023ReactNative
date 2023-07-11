@@ -24,8 +24,6 @@ import { Schedule } from '../../../mock/schedule';
  * - consider reusing the session card component from the home page
  */
 
-// TODO: this is dummy data, replace with real data from mock/sessions.ts
-
 let HEADERHEIGHT;
 const Sessions = () => {
   const router = useRouter();
@@ -77,10 +75,10 @@ const Sessions = () => {
           </Row>
         </View>
         <SessionsListVertical
-          variant="list"
+          variant="card"
           bookmarked={false}
           handleBookMark={() => console.log('pressed')}
-          sessions={Schedule.data['2022-11-16'] as unknown as SessionForSchedule}
+          sessions={Schedule.data['2022-11-17'] as unknown as Array<SessionForSchedule>}
         />
       </View>
     </MainContainer>
