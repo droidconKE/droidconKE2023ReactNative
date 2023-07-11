@@ -11,7 +11,6 @@ import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
 /**
- * @param screen: 'home' | 'sessions', default is home
  * @param variant: 'card' | 'list'
  * @param bookmarked: boolean
  * @param handleBookMark: () => void
@@ -34,7 +33,7 @@ const SessionsListVertical = ({
   const router = useRouter();
 
   return (
-    <View style={styles.list}>
+    <View style={styles.list} testID="sessions-list-vertical">
       <Row>
         <StyledText font="bold" size="lg" style={{ color: colors.primary }}>
           {bookmarked ? 'All Sessions' : 'My Sessions'}
@@ -42,48 +41,31 @@ const SessionsListVertical = ({
       </Row>
 
       <Space size={16} />
-      {variant === 'card' ? (
-        <>
-          <FlatList
-            data={sessions}
-            renderItem={({ item }: ListRenderItemInfo<SessionForSchedule>) => (
-              <SessionCard
-                handlePress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
-                item={item}
-                handleBookMark={handleBookMark}
-                screen={'sessions'}
-              />
-            )}
-            keyExtractor={(item: SessionForSchedule) => item.slug + item.id}
-            ItemSeparatorComponent={() => <Space size={20} />}
+      <FlatList
+        data={sessions}
+        renderItem={({ item }: ListRenderItemInfo<SessionForSchedule>) => (
+          <SessionCard
+            handlePress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
+            item={item}
+            handleBookMark={handleBookMark}
+            screen={'sessions'}
+            variant={variant === 'card' ? 'card' : 'list'}
           />
-        </>
-      ) : (
-        <>
-          <FlatList
-            data={sessions}
-            renderItem={({ item }: ListRenderItemInfo<SessionForSchedule>) => (
-              <SessionCard
-                handlePress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
-                item={item}
-                handleBookMark={handleBookMark}
-                screen={'sessions'}
-                variant={'list'}
-              />
-            )}
-            keyExtractor={(item: SessionForSchedule) => item.slug + item.id}
-            ItemSeparatorComponent={(item: SessionForSchedule, index: number) => (
-              <>
-                {/* {index < sessions.length - 1 && ( */}
-                <View style={styles.cardContainer}>
-                  <SessionListSeparator color={index % 2 === 0 ? colors.tertiary : colors.tint} />
-                </View>
-                {/* // )} */}
-              </>
-            )}
-          />
-        </>
-      )}
+        )}
+        keyExtractor={(item: SessionForSchedule) => item.slug + item.id}
+        ItemSeparatorComponent={(props) =>
+          variant === 'card' ? (
+            <Space size={20} />
+          ) : (
+            <>
+              {console.log(props)}
+              <View style={styles.cardContainer}>
+                <SessionListSeparator color={props.leadingItem.id % 2 === 0 ? colors.tertiary : colors.tint} />
+              </View>
+            </>
+          )
+        }
+      />
     </View>
   );
 };

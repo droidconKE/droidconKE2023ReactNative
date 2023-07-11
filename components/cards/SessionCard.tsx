@@ -79,26 +79,30 @@ const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
         />
         <Space size={4} />
 
-        <View style={styles.bottom}>
+        <View style={styles.bottomForSessions}>
           <StyledText size="sm" font="light">
             {getSessionTimeAndLocation(item.slug)}
           </StyledText>
-          <Space size={12} />
+          <Space size={11} />
           <View>
             <StyledText font="bold" numberOfLines={2} style={styles.title}>
               {truncate(50, item.title)}
             </StyledText>
           </View>
-          <Space size={12} />
+          <Space size={16} />
           <Row>
-            <View>
-              {item.speakers.map((speaker) => (
-                <Image
-                  source={{ uri: speaker.avatar || '' }}
-                  style={[styles.avatar, { borderColor: colors.primary }]}
-                />
+            <Row>
+              {item.speakers.map((speaker, index) => (
+                <>
+                  <Image
+                    key={speaker.avatar}
+                    source={{ uri: speaker.avatar || '' }}
+                    style={[styles.avatar, { borderColor: colors.primary }]}
+                  />
+                  {index !== item.speakers.length - 1 && <Space size={15} horizontal />}
+                </>
               ))}
-            </View>
+            </Row>
             <AntDesign
               name={item.is_bookmarked ? 'star' : 'staro'}
               size={21}
@@ -204,6 +208,11 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 12,
     paddingVertical: 12,
+  },
+  bottomForSessions: {
+    width: '100%',
+    paddingHorizontal: 15,
+    paddingVertical: 15,
   },
   description: {
     height: 40,
