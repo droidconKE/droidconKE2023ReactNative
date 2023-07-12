@@ -32,6 +32,19 @@ const SessionsListVertical = ({
   const { colors } = useTheme();
   const router = useRouter();
 
+  const renderComponentItem = ({ item, index, separators }: ListRenderItemInfo<SessionForSchedule>) => {
+    separators.updateProps('leading', { ...sessions[index], index: index });
+    return (
+      <SessionCard
+        handlePress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
+        item={item}
+        handleBookMark={handleBookMark}
+        screen={'sessions'}
+        variant={variant === 'card' ? 'card' : 'list'}
+      />
+    );
+  };
+
   return (
     <View style={styles.list} testID="sessions-list-vertical">
       <Row>
@@ -43,24 +56,15 @@ const SessionsListVertical = ({
       <Space size={16} />
       <FlatList
         data={sessions}
-        renderItem={({ item }: ListRenderItemInfo<SessionForSchedule>) => (
-          <SessionCard
-            handlePress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
-            item={item}
-            handleBookMark={handleBookMark}
-            screen={'sessions'}
-            variant={variant === 'card' ? 'card' : 'list'}
-          />
-        )}
+        renderItem={renderComponentItem}
         keyExtractor={(item: SessionForSchedule) => item.slug + item.id}
         ItemSeparatorComponent={(props) =>
           variant === 'card' ? (
             <Space size={20} />
           ) : (
             <>
-              {console.log(props)}
               <View style={styles.cardContainer}>
-                <SessionListSeparator color={props.leadingItem.id % 2 === 0 ? colors.tertiary : colors.tint} />
+                <SessionListSeparator color={props.index % 2 === 0 ? colors.tertiary : colors.tint} />
               </View>
             </>
           )
