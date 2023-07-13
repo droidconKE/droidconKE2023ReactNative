@@ -64,6 +64,31 @@ export const getSessionTimesAndLocation = (_slug: string) => {
 };
 
 /**
+ * a function that gets the start time and returns it start time in am format
+ * @param startTime
+ * @returns start time
+ * @example getSessionTime('12:30:00') // returns 12:30 PM
+ */
+export const getSessionTime = (startTime: string) => {
+  const [hours, minutes] = startTime.split(':').map(Number);
+
+  let formattedHours;
+  let period;
+  if (hours !== undefined) {
+    formattedHours = hours % 12;
+    if (formattedHours === 0) {
+      formattedHours = 12; // 0 should be displayed as 12 pm
+    }
+
+    period = hours < 12 ? 'am' : 'pm';
+  }
+
+  const formattedMinutes = String(minutes).padStart(2, '0');
+
+  return `${formattedHours}:${formattedMinutes} ${period}`;
+};
+
+/**
  * function that returns twitter_handle of speaker given the twitter url
  * @param url twitter url
  * @returns twitter_handle

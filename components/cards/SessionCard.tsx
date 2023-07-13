@@ -3,7 +3,7 @@ import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Dimensions, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import type { Session, SessionForSchedule } from '../../global';
-import { getSessionTimeAndLocation, truncate } from '../../util/helpers';
+import { getSessionTime, getSessionTimeAndLocation, truncate } from '../../util/helpers';
 import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
@@ -120,16 +120,18 @@ const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
   const { handlePress, item, handleBookMark } = props;
   const { colors } = useTheme();
 
+  console.log(item.start_time);
+  const timeSplitted: Array<string> = getSessionTime(item.start_time).split(' ');
   return (
     <TouchableWithoutFeedback testID="session-card-list" onPress={handlePress}>
       <Row style={[styles.listCard, { backgroundColor: colors.card }]}>
         <Row style={styles.sessionCardRow}>
           <View>
             <StyledText font="medium" size="lg">
-              {item.slug}
+              {timeSplitted[0]}
             </StyledText>
             <StyledText font="medium" size="md" variant="text" style={styles.amOrPm}>
-              {item.slug}
+              {timeSplitted[1]}
             </StyledText>
           </View>
           <View style={styles.listCardDetails}>
