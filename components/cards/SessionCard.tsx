@@ -119,7 +119,6 @@ const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
   const { handlePress, item, handleBookMark } = props;
   const { colors } = useTheme();
 
-  console.log(item.start_time);
   const timeSplitted: Array<string> = getSessionTime(item.start_time).split(' ');
   return (
     <TouchableWithoutFeedback testID="session-card-list" onPress={handlePress}>
@@ -134,34 +133,32 @@ const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
             </StyledText>
           </View>
           <View style={styles.listCardDetails}>
-            <>
-              <StyledText font="bold" size="lg">
-                {truncate(50, item.title)}
-              </StyledText>
-              <Space size={16} />
-              <StyledText font="regular" size="md" variant="text">
-                {truncate(72, item.description)}
-              </StyledText>
-              <Space size={13} />
-              <StyledText size="sm" font="light">
-                {getSessionTimeAndLocation(item.slug)}
-              </StyledText>
-              <Space size={13} />
-              {item.speakers.length > 0 && (
-                <Row style={styles.rowHorizontalStart}>
-                  {item.speakers.map((speaker, index) => (
-                    <Row>
-                      <MaterialCommunityIcons name="android" size={20} color={colors.primary} />
-                      <Space size={10} horizontal />
-                      <StyledText font="regular" size="sm">
-                        {speaker.name}
-                      </StyledText>
-                      {index + 1 !== item.speakers.length ? <Space size={12} horizontal /> : ''}
-                    </Row>
-                  ))}
-                </Row>
-              )}
-            </>
+            <StyledText font="bold" size="lg">
+              {truncate(50, item.title)}
+            </StyledText>
+            <Space size={16} />
+            <StyledText font="regular" size="md" variant="text">
+              {truncate(72, item.description)}
+            </StyledText>
+            <Space size={13} />
+            <StyledText size="sm" font="light">
+              {getSessionTimeAndLocation(item.slug)}
+            </StyledText>
+            <Space size={13} />
+            {item.speakers.length > 0 && (
+              <Row style={styles.rowHorizontalStart}>
+                {item.speakers.map((speaker, index) => (
+                  <Row>
+                    <MaterialCommunityIcons name="android" size={20} color={colors.primary} />
+                    <Space size={10} horizontal />
+                    <StyledText font="regular" size="sm">
+                      {speaker.name}
+                    </StyledText>
+                    {index + 1 !== item.speakers.length && <Space size={12} horizontal />}
+                  </Row>
+                ))}
+              </Row>
+            )}
           </View>
         </Row>
         <AntDesign

@@ -1,4 +1,3 @@
-import { useHeaderHeight } from '@react-navigation/elements';
 import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import React, { useState } from 'react';
@@ -24,7 +23,6 @@ import { Schedule } from '../../../mock/schedule';
  * - consider reusing the session card component from the home page
  */
 
-let HEADERHEIGHT;
 const Sessions = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [listVisible, setListVisible] = useState(true);
@@ -32,11 +30,7 @@ const Sessions = () => {
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const toggleView = () => setListVisible((previousState) => !previousState);
   const { colors } = useTheme();
-  const headerHeight = useHeaderHeight();
 
-  HEADERHEIGHT = headerHeight;
-
-  console.log(HEADERHEIGHT);
   return (
     <MainContainer preset="fixed">
       <Stack.Screen
