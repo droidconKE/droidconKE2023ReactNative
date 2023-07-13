@@ -11,10 +11,10 @@ import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
 type Filters = {
-  level: string;
-  topic: string;
-  room: string;
-  sessionType: string;
+  level: Array<string>;
+  topic: Array<string>;
+  room: Array<string>;
+  sessionType: Array<string>;
 };
 
 type FilterModalProps = {
@@ -27,10 +27,10 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
   const { colors } = useTheme();
   const { primary } = typography;
 
-  const [selectedLevel, setSelectedLevel] = useState<string>('Intermediate');
-  const [selectedTopic, setSelectedTopic] = useState<string>('UI/UX Design');
-  const [selectedRoom, setSelectedRoom] = useState<string>('Room 1');
-  const [selectedSessionType, setSelectedSessionType] = useState<string>('Session');
+  const [selectedLevel, setSelectedLevel] = useState<Array<string>>([]);
+  const [selectedTopic, setSelectedTopic] = useState<Array<string>>([]);
+  const [selectedRoom, setSelectedRoom] = useState<Array<string>>([]);
+  const [selectedSessionType, setSelectedSessionType] = useState<Array<string>>([]);
 
   const handleFilter = () => {
     const filter = {
@@ -42,6 +42,21 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
 
     onFilter(filter);
     onClose();
+  };
+
+  // function to add filter to filter array, e.g add level to selectedLevel
+  const addFilter = (filter: string, filterArray: Array<string>) => {
+    const newFilterArray = [...filterArray];
+    // check if filter is already in filter array
+    const index = newFilterArray.indexOf(filter);
+    if (index === -1) {
+      // if not in array, add to array
+      newFilterArray.push(filter);
+    } else {
+      // if in array, remove from array
+      newFilterArray.splice(index, 1);
+    }
+    return newFilterArray;
   };
 
   return (
@@ -81,21 +96,21 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
               <View style={[styles.rowGroup, { borderColor: colors.text }]}>
                 <FilterButton
                   label="Beginner"
-                  onPress={() => setSelectedLevel('Beginner')}
-                  selected={selectedLevel === 'Beginner'}
+                  onPress={() => setSelectedLevel(addFilter('Beginner', selectedLevel))}
+                  selected={selectedLevel.includes('Beginner')}
                   style={styles.left}
                 />
                 <FilterButton
                   label="Intermediate"
-                  onPress={() => setSelectedLevel('Intermediate')}
-                  selected={selectedLevel === 'Intermediate'}
+                  onPress={() => setSelectedLevel(addFilter('Intermediate', selectedLevel))}
+                  selected={selectedLevel.includes('Intermediate')}
                   isCenter
                   style={{ borderColor: colors.text }}
                 />
                 <FilterButton
                   label="Advanced"
-                  onPress={() => setSelectedLevel('Advanced')}
-                  selected={selectedLevel === 'Advanced'}
+                  onPress={() => setSelectedLevel(addFilter('Advanced', selectedLevel))}
+                  selected={selectedLevel.includes('Advanced')}
                   style={styles.right}
                 />
               </View>
@@ -111,21 +126,21 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
               <View style={[styles.rowGroup, { borderColor: colors.text }]}>
                 <FilterButton
                   label="UI/UX Design"
-                  onPress={() => setSelectedTopic('UI/UX Design')}
-                  selected={selectedTopic === 'UI/UX Design'}
+                  onPress={() => setSelectedTopic(addFilter('UI/UX Design', selectedTopic))}
+                  selected={selectedTopic.includes('UI/UX Design')}
                   style={styles.left}
                 />
                 <FilterButton
                   label="Backend"
-                  onPress={() => setSelectedTopic('Backend')}
-                  selected={selectedTopic === 'Backend'}
+                  onPress={() => setSelectedTopic(addFilter('Backend', selectedTopic))}
+                  selected={selectedTopic.includes('Backend')}
                   isCenter
                   style={{ borderColor: colors.text }}
                 />
                 <FilterButton
                   label="APIs"
-                  onPress={() => setSelectedTopic('APIs')}
-                  selected={selectedTopic === 'APIs'}
+                  onPress={() => setSelectedTopic(addFilter('APIs', selectedTopic))}
+                  selected={selectedTopic.includes('APIs')}
                   style={styles.right}
                 />
               </View>
@@ -141,21 +156,21 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
               <View style={[styles.rowGroup, { borderColor: colors.text }]}>
                 <FilterButton
                   label="Room 1"
-                  onPress={() => setSelectedRoom('Room 1')}
-                  selected={selectedRoom === 'Room 1'}
+                  onPress={() => setSelectedRoom(addFilter('Room 1', selectedRoom))}
+                  selected={selectedRoom.includes('Room 1')}
                   style={styles.left}
                 />
                 <FilterButton
                   label="Room 2"
-                  onPress={() => setSelectedRoom('Room 2')}
-                  selected={selectedRoom === 'Room 2'}
+                  onPress={() => setSelectedRoom(addFilter('Room 2', selectedRoom))}
+                  selected={selectedRoom.includes('Room 2')}
                   isCenter
                   style={{ borderColor: colors.text }}
                 />
                 <FilterButton
                   label="Room 3"
-                  onPress={() => setSelectedRoom('Room 3')}
-                  selected={selectedRoom === 'Room 3'}
+                  onPress={() => setSelectedRoom(addFilter('Room 3', selectedRoom))}
+                  selected={selectedRoom.includes('Room 3')}
                   style={styles.right}
                 />
               </View>
@@ -171,21 +186,21 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
               <View style={[styles.rowGroup, { borderColor: colors.text }]}>
                 <FilterButton
                   label="Keynote"
-                  onPress={() => setSelectedSessionType('Keynote')}
-                  selected={selectedSessionType === 'Keynote'}
+                  onPress={() => setSelectedSessionType(addFilter('Keynote', selectedSessionType))}
+                  selected={selectedSessionType.includes('Keynote')}
                   style={styles.left}
                 />
                 <FilterButton
                   label="Codelab"
-                  onPress={() => setSelectedSessionType('Codelab')}
-                  selected={selectedSessionType === 'Codelab'}
+                  onPress={() => setSelectedSessionType(addFilter('Codelab', selectedSessionType))}
+                  selected={selectedSessionType.includes('Codelab')}
                   isCenter
                   style={{ borderColor: colors.text }}
                 />
                 <FilterButton
                   label="Session"
-                  onPress={() => setSelectedSessionType('Session')}
-                  selected={selectedSessionType === 'Session'}
+                  onPress={() => setSelectedSessionType(addFilter('Session', selectedSessionType))}
+                  selected={selectedSessionType.includes('Session')}
                   style={styles.right}
                 />
               </View>
@@ -193,14 +208,14 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
               <View style={[styles.rowGroup, { borderColor: colors.text }]}>
                 <FilterButton
                   label="Lightining talk"
-                  onPress={() => setSelectedSessionType('Lightining talk')}
-                  selected={selectedSessionType === 'Lightining talk'}
+                  onPress={() => setSelectedSessionType(addFilter('Lightining talk', selectedSessionType))}
+                  selected={selectedSessionType.includes('Lightining talk')}
                   style={styles.left}
                 />
                 <FilterButton
                   label="Panel Discussion"
-                  onPress={() => setSelectedSessionType('Panel Discussion')}
-                  selected={selectedSessionType === 'Panel Discussion'}
+                  onPress={() => setSelectedSessionType(addFilter('Panel Discussion', selectedSessionType))}
+                  selected={selectedSessionType.includes('Panel Discussion')}
                   style={[styles.withborder, { borderColor: colors.text }]}
                 />
               </View>
