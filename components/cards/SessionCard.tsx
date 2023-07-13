@@ -1,4 +1,4 @@
-import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Dimensions, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
@@ -125,7 +125,7 @@ const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
     <TouchableWithoutFeedback testID="session-card-list" onPress={handlePress}>
       <Row style={[styles.listCard, { backgroundColor: colors.card }]}>
         <Row style={styles.sessionCardRow}>
-          <View>
+          <View style={styles.rowVerticalStart}>
             <StyledText font="medium" size="lg">
               {timeSplitted[0]}
             </StyledText>
@@ -138,33 +138,38 @@ const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
               <StyledText font="bold" size="lg">
                 {truncate(50, item.title)}
               </StyledText>
+              <Space size={16} />
               <StyledText font="regular" size="md" variant="text">
                 {truncate(72, item.description)}
               </StyledText>
+              <Space size={13} />
               <StyledText size="sm" font="light">
                 {getSessionTimeAndLocation(item.slug)}
               </StyledText>
-              {item.speakers.length > 0 &&
-                item.speakers.map((speaker, index) => {
-                  <>
+              <Space size={13} />
+              {item.speakers.length > 0 && (
+                <Row style={styles.rowHorizontalStart}>
+                  {item.speakers.map((speaker, index) => (
                     <Row>
-                      <FontAwesome5 name="android" size={17} color={colors.primary} />
-                      <Space size={12} />
+                      <MaterialCommunityIcons name="android" size={20} color={colors.primary} />
+                      <Space size={10} horizontal />
                       <StyledText font="regular" size="sm">
                         {speaker.name}
                       </StyledText>
+                      {index + 1 !== item.speakers.length ? <Space size={12} horizontal /> : ''}
                     </Row>
-                    {index + 1 !== item.speakers.length ? <Space size={4} /> : ''}
-                  </>;
-                })}
+                  ))}
+                </Row>
+              )}
             </>
           </View>
         </Row>
         <AntDesign
           name={item.is_bookmarked ? 'star' : 'staro'}
           size={21}
-          color={colors.primary}
+          color={item.is_bookmarked ? colors.tertiary : colors.primary}
           onPress={handleBookMark}
+          style={styles.rowVerticalStart}
         />
       </Row>
     </TouchableWithoutFeedback>
@@ -243,5 +248,12 @@ const styles = StyleSheet.create({
   },
   amOrPm: {
     textAlign: 'right',
+    textTransform: 'uppercase',
+  },
+  rowVerticalStart: {
+    alignSelf: 'flex-start',
+  },
+  rowHorizontalStart: {
+    justifyContent: 'flex-start',
   },
 });

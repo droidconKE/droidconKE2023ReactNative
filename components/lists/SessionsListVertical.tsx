@@ -45,18 +45,6 @@ const SessionsListVertical = ({
     );
   };
 
-  const renderItemSeparator = ({ index }: ListRenderItemInfo<SessionForSchedule>) => {
-    variant === 'card' ? (
-      <Space size={20} />
-    ) : (
-      <>
-        <View style={styles.cardContainer}>
-          <SessionListSeparator color={index % 2 === 0 ? colors.tertiary : colors.tint} />
-        </View>
-      </>
-    );
-  };
-
   return (
     <View style={styles.list} testID="sessions-list-vertical">
       <Row>
@@ -70,7 +58,17 @@ const SessionsListVertical = ({
         data={sessions}
         renderItem={renderComponentItem}
         keyExtractor={(item: SessionForSchedule) => item.slug + item.id}
-        ItemSeparatorComponent={renderItemSeparator}
+        ItemSeparatorComponent={(props) =>
+          variant === 'card' ? (
+            <Space size={20} />
+          ) : (
+            <>
+              <View style={styles.cardContainer}>
+                <SessionListSeparator color={props.index % 2 === 0 ? colors.tertiary : colors.tint} />
+              </View>
+            </>
+          )
+        }
       />
     </View>
   );
