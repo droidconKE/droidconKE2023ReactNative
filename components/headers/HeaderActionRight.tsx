@@ -1,12 +1,15 @@
-import { useRouter } from 'expo-router';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import ClearButton from '../buttons/ClearButton';
 import IconButton from '../buttons/IconButton';
 import Row from '../common/Row';
 
-const HeaderActionRight = () => {
-  const router = useRouter();
+interface HeaderActionRightProps {
+  toggleView: () => void;
+  listVisible: boolean;
+}
+const HeaderActionRight = (props: HeaderActionRightProps) => {
+  const { toggleView, listVisible } = props;
 
   const openFilterModal = () => {
     // TODO: open filter modal functionality
@@ -15,8 +18,8 @@ const HeaderActionRight = () => {
   return (
     <Row style={styles.row} testID="headerActionRight">
       <Row>
-        <IconButton name="list-alt" isActive={false} onPress={() => router.push('/feedback')} />
-        <IconButton name="view-agenda" isActive onPress={() => router.push('/feedback')} />
+        <IconButton name="list-alt" isActive={listVisible} onPress={toggleView} />
+        <IconButton name="view-agenda" isActive={!listVisible} onPress={toggleView} />
       </Row>
       <View style={styles.gap} />
       <ClearButton label="Filter" iconName="filter" onPress={() => openFilterModal()} />

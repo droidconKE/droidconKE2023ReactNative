@@ -1,6 +1,6 @@
 import { useHeaderHeight } from '@react-navigation/elements';
 import { useTheme } from '@react-navigation/native';
-import { Stack, useRouter } from 'expo-router';
+import { Stack } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import DayButton from '../../../components/buttons/DayButton';
@@ -26,9 +26,11 @@ import { Schedule } from '../../../mock/schedule';
 
 let HEADERHEIGHT;
 const Sessions = () => {
-  const router = useRouter();
   const [isEnabled, setIsEnabled] = useState(false);
+  const [listVisible, setListVisible] = useState(true);
+
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const toggleView = () => setListVisible((previousState) => !previousState);
   const { colors } = useTheme();
   const headerHeight = useHeaderHeight();
 
@@ -39,7 +41,7 @@ const Sessions = () => {
     <MainContainer preset="fixed">
       <Stack.Screen
         options={{
-          headerRight: () => <HeaderActionRight />,
+          headerRight: () => <HeaderActionRight listVisible={listVisible} toggleView={toggleView} />,
         }}
       />
 
@@ -75,7 +77,7 @@ const Sessions = () => {
           </Row>
         </View>
         <SessionsListVertical
-          variant="list"
+          variant={listVisible === true ? 'list' : 'card'}
           bookmarked={false}
           handleBookMark={() => console.log('pressed')}
           sessions={Schedule.data['2022-11-17'] as unknown as Array<SessionForSchedule>}
