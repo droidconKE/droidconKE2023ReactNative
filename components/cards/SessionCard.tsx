@@ -93,14 +93,13 @@ const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
           <Row>
             <Row>
               {item.speakers.map((speaker, index) => (
-                <>
+                <View key={speaker.avatar}>
                   <Image
-                    key={speaker.avatar}
                     source={{ uri: speaker.avatar || '' }}
                     style={[styles.avatar, { borderColor: colors.primary }]}
                   />
                   {index !== item.speakers.length - 1 && <Space size={15} horizontal />}
-                </>
+                </View>
               ))}
             </Row>
             <AntDesign
