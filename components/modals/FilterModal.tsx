@@ -44,7 +44,6 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
     onClose();
   };
 
-  // function to add filter to filter array, e.g add level to selectedLevel
   const addFilter = (filter: string, filterArray: Array<string>) => {
     const newFilterArray = [...filterArray];
     // check if filter is already in filter array
@@ -223,9 +222,8 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
               <Space size={30} />
 
               <PrimaryButton label="Filter" onPress={handleFilter} />
-
-              <Space size={20} />
             </View>
+            <Space size={20} />
           </SafeAreaView>
         </View>
       </Modal>
@@ -252,7 +250,8 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
     paddingHorizontal: 20,
-    paddingVertical: 40,
+    paddingTop: 40,
+    paddingBottom: 20,
     alignItems: 'center',
   },
   modalContent: {
