@@ -2,8 +2,8 @@ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Dimensions, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import type { Session, SessionForSchedule } from '../../global';
-import { getSessionTime, getSessionTimeAndLocation, truncate } from '../../util/helpers';
+import type { Room, Session, SessionForSchedule } from '../../global';
+import { getScheduleTimeAndLocation, getSessionTime, getSessionTimeAndLocation, truncate } from '../../util/helpers';
 import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
@@ -81,7 +81,7 @@ const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
 
         <View style={styles.bottomForSessions}>
           <StyledText size="sm" font="light">
-            {getSessionTimeAndLocation(item.slug)}
+            {getScheduleTimeAndLocation(item.start_date_time, item.end_date_time, item.rooms[0] as Room)}
           </StyledText>
           <Space size={11} />
           <View>
@@ -120,6 +120,7 @@ const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
   const { colors } = useTheme();
 
   const timeSplitted: Array<string> = getSessionTime(item.start_time).split(' ');
+
   return (
     <TouchableWithoutFeedback testID="session-card-list" onPress={handlePress}>
       <Row style={[styles.listCard, { backgroundColor: colors.card }]}>
@@ -142,7 +143,7 @@ const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
             </StyledText>
             <Space size={13} />
             <StyledText size="sm" font="light">
-              {getSessionTimeAndLocation(item.slug)}
+              {getScheduleTimeAndLocation(item.start_date_time, item.end_date_time, item.rooms[0] as Room)}
             </StyledText>
             <Space size={13} />
             {item.speakers.length > 0 && (
