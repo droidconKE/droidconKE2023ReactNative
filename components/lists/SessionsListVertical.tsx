@@ -42,14 +42,17 @@ const SessionsListVertical = ({
           screen={'sessions'}
           variant={variant === 'card' ? 'card' : 'list'}
         />
-        {index !== sessions.length - 1 &&
-          (variant === 'card' ? (
+        {index !== sessions.length - 1 ? (
+          variant === 'card' ? (
             <Space size={20} />
           ) : (
             <View style={styles.cardContainer}>
               <SessionListSeparator color={index % 2 === 0 ? colors.tertiary : colors.tint} />
             </View>
-          ))}
+          )
+        ) : (
+          <Space size={20} />
+        )}
       </>
     );
   };
