@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Animated, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import StarIcon from '../../assets/artworks/StarIcon';
 
 type StyledSwitchProps = {
@@ -35,7 +35,7 @@ const StyledSwitch = (props: StyledSwitchProps) => {
   });
 
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={handleSwitch} testID="styled-switch">
+    <TouchableWithoutFeedback onPress={handleSwitch} testID="styled-switch">
       <View
         testID="track"
         style={[
@@ -63,7 +63,7 @@ const StyledSwitch = (props: StyledSwitchProps) => {
           />
         </Animated.View>
       </View>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   );
 };
 
