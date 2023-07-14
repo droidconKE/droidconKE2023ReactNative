@@ -177,3 +177,9 @@ export interface ISvgProps extends SvgProps {
   xmlnsXlink?: string;
   xmlSpace?: string;
 }
+
+export interface IDateForDayButton {
+  day: string;
+  date: string;
+  key: string;
+}
