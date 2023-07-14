@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import DayButton from '../../../components/buttons/DayButton';
 import CustomSwitch from '../../../components/buttons/StyledSwitch';
@@ -10,8 +10,9 @@ import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
 import SessionsListVertical from '../../../components/lists/SessionsListVertical';
-import type { SessionForSchedule } from '../../../global';
+import type { IDateForDayButton, SessionForSchedule } from '../../../global';
 import { Schedule } from '../../../mock/schedule';
+import { getDaysFromSchedule } from '../../../util/helpers';
 
 // TODO: ALL Sessions page
 
@@ -26,10 +27,22 @@ import { Schedule } from '../../../mock/schedule';
 const Sessions = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [listVisible, setListVisible] = useState(true);
+  const [dates, setDates] = useState<Array<IDateForDayButton>>([]);
+  const [selectedDate, setSelectedDate] = useState<string>('');
 
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const toggleView = () => setListVisible((previousState) => !previousState);
   const { colors } = useTheme();
+
+  useEffect(() => {
+    setDates(getDaysFromSchedule(Schedule));
+    if (dates[0]?.key !== undefined) {
+      setSelectedDate(dates[0]?.key);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleDayButtonPress = (dayButtonKey: string) => setSelectedDate(dayButtonKey);
 
   return (
     <MainContainer preset="fixed">
@@ -43,11 +56,18 @@ const Sessions = () => {
         <View style={styles.dayHeader}>
           <Row style={[styles.row]}>
             <Row>
-              <DayButton date="16th" day="Day 1" handlePress={() => console.log('pressed')} selected />
-              <Space size={20} horizontal />
-              <DayButton date="17th" day="Day 2" handlePress={() => console.log('pressed')} />
-              <Space size={20} horizontal />
-              <DayButton date="18th" day="Day 3" handlePress={() => console.log('pressed')} />
+              {dates?.map((item) => (
+                <Row key={item.key}>
+                  <DayButton
+                    date={item.date}
+                    day={item.day}
+                    handlePress={handleDayButtonPress}
+                    selected={item.key === selectedDate}
+                    dateInfull={item.key}
+                  />
+                  <Space size={20} horizontal />
+                </Row>
+              ))}
             </Row>
             <View style={styles.column}>
               <CustomSwitch
@@ -74,7 +94,7 @@ const Sessions = () => {
           variant={listVisible === true ? 'list' : 'card'}
           bookmarked={false}
           handleBookMark={() => console.log('pressed')}
-          sessions={Schedule.data['2022-11-17'] as unknown as Array<SessionForSchedule>}
+          sessions={Schedule.data[selectedDate] as unknown as Array<SessionForSchedule>}
         />
       </View>
     </MainContainer>
