@@ -1,9 +1,10 @@
 import { Stack, useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
+import FilterModal from '../../../components/modals/FilterModal';
 
 // TODO: ALL Sessions page
 
@@ -35,13 +36,30 @@ const _sessions = [
 ];
 
 const Sessions = () => {
+  const [collapsed, setCollapsed] = useState<boolean>(true);
+  const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
+
   const router = useRouter();
+
+  const showFilterModal = () => {
+    setFilterModalVisible(true);
+  };
+
+  const handleFilter = () => {
+    // TODO: handle filter sessions here
+  };
+
+  const handleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          headerRight: () => <HeaderActionRight />,
+          headerRight: () => (
+            <HeaderActionRight collapsed={collapsed} onCollapse={handleCollapse} handlePress={showFilterModal} />
+          ),
         }}
       />
 
@@ -56,6 +74,14 @@ const Sessions = () => {
             {session.title}
           </StyledText>
         ))}
+      </View>
+
+      <View>
+        <FilterModal
+          visible={filterModalVisible}
+          onClose={() => setFilterModalVisible(false)}
+          onFilter={handleFilter}
+        />
       </View>
     </MainContainer>
   );

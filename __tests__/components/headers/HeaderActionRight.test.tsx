@@ -7,7 +7,13 @@ jest.mock('expo-router', () => ({
 
 describe('<HeaderActionRight/>', () => {
   it('renders HeaderActionRight component.', () => {
-    render(<HeaderActionRight />);
+    render(
+      <HeaderActionRight
+        collapsed
+        onCollapse={() => console.log('collapsed')}
+        handlePress={() => console.log('open filter modal')}
+      />,
+    );
     expect(screen.getByTestId('headerActionRight')).toBeTruthy();
   });
 });
