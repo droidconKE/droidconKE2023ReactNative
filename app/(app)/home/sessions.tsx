@@ -25,12 +25,12 @@ import { getDaysFromSchedule } from '../../../util/helpers';
  */
 
 const Sessions = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [listVisible, setListVisible] = useState(true);
+  const [showsBookmarked, setShowsBookmarked] = useState<boolean>(false);
+  const [listVisible, setListVisible] = useState<boolean>(true);
   const [dates, setDates] = useState<Array<IDateForDayButton>>([]);
   const [selectedDate, setSelectedDate] = useState<string>('');
 
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const toggleSwitch = () => setShowsBookmarked((previousState) => !previousState);
   const toggleView = () => setListVisible((previousState) => !previousState);
   const { colors } = useTheme();
 
@@ -43,6 +43,10 @@ const Sessions = () => {
   }, []);
 
   const handleDayButtonPress = (dayButtonKey: string) => setSelectedDate(dayButtonKey);
+
+  const handleBookMark = (id: number) => {
+    console.log(id);
+  };
 
   return (
     <MainContainer preset="fixed">
@@ -71,7 +75,7 @@ const Sessions = () => {
           </Row>
           <View style={styles.column}>
             <CustomSwitch
-              value={isEnabled}
+              value={showsBookmarked}
               onValueChange={toggleSwitch}
               trackColor={{
                 true: colors.tertiary,
@@ -96,8 +100,8 @@ const Sessions = () => {
         <Space size={14} />
         <SessionsListVertical
           variant={listVisible === true ? 'list' : 'card'}
-          bookmarked={false}
-          handleBookMark={() => console.log('pressed')}
+          bookmarked={showsBookmarked}
+          handleBookMark={handleBookMark}
           sessions={Schedule.data[selectedDate] as unknown as Array<SessionForSchedule>}
         />
       </View>

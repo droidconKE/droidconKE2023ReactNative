@@ -19,7 +19,7 @@ import StyledText from '../common/StyledText';
 interface SessionListProps<T> {
   variant?: 'card' | 'list';
   bookmarked?: boolean;
-  handleBookMark?: () => void;
+  handleBookMark?: (id: number) => void;
   sessions: Array<T>;
 }
 
@@ -34,11 +34,15 @@ const SessionsListVertical = ({
 
   const renderComponentItem = ({ item, index }: ListRenderItemInfo<SessionForSchedule>) => {
     return (
-      <>
+      <View key={item.id}>
         <SessionCard
           handlePress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
           item={item}
-          handleBookMark={handleBookMark}
+          handleBookMark={() => {
+            if (handleBookMark) {
+              handleBookMark(item.id);
+            }
+          }}
           screen={'sessions'}
           variant={variant === 'card' ? 'card' : 'list'}
         />
@@ -53,7 +57,7 @@ const SessionsListVertical = ({
         ) : (
           <Space size={20} />
         )}
-      </>
+      </View>
     );
   };
 
@@ -61,7 +65,7 @@ const SessionsListVertical = ({
     <View style={styles.list} testID="sessions-list-vertical">
       <Row>
         <StyledText font="bold" size="lg" style={{ color: colors.primary }}>
-          {bookmarked ? 'All Sessions' : 'My Sessions'}
+          {bookmarked === true ? 'All Sessions' : 'My Sessions'}
         </StyledText>
       </Row>
 

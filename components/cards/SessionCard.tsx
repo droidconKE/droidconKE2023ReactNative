@@ -22,7 +22,7 @@ const { width } = Dimensions.get('window');
  *
  * @param handlePress: function that returns nothing
  * @param handleBookMark: function that bookmarks and returns nothing
- * @param item: object of type Session
+ * @param item: object of type T
  * @param screen: 'home' | 'sessions', default is 'home'
  * @param variant: 'card' | 'list'
  * @returns SessionCard Component
@@ -67,16 +67,26 @@ const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
   return (
     <TouchableWithoutFeedback testID="session-card-sessions" onPress={handlePress}>
       <View style={[styles.card, styles.cardTertiary, { backgroundColor: colors.card }]}>
-        <Image
-          source={{
-            uri:
-              item.session_image ||
-              'https://res.cloudinary.com/droidconke/image/upload/v1668083311/prod/upload/sessions/pwt9pnojtmng8bymxkls.png',
-          }}
-          style={styles.image}
-          contentFit="cover"
-          contentPosition="left"
-        />
+        {item.session_image !== null ? (
+          <Image
+            source={{
+              uri:
+                item.session_image ||
+                'https://res.cloudinary.com/droidconke/image/upload/v1668083311/prod/upload/sessions/pwt9pnojtmng8bymxkls.png',
+            }}
+            style={styles.image}
+            contentFit="cover"
+            contentPosition="left"
+          />
+        ) : (
+          <Image
+            source={require('../../assets/images/banner.png')}
+            style={styles.image}
+            contentFit="cover"
+            contentPosition="center"
+          />
+        )}
+
         <Space size={4} />
 
         <View style={styles.bottomForSessions}>
@@ -91,21 +101,20 @@ const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
           </View>
           <Space size={16} />
           <Row>
-            <Row>
-              {item.speakers.map((speaker, index) => (
+            <Row style={styles.avatarRow}>
+              {item.speakers.map((speaker) => (
                 <View key={speaker.avatar}>
                   <Image
                     source={{ uri: speaker.avatar || '' }}
                     style={[styles.avatar, { borderColor: colors.primary }]}
                   />
-                  {index !== item.speakers.length - 1 && <Space size={15} horizontal />}
                 </View>
               ))}
             </Row>
             <AntDesign
               name={item.is_bookmarked ? 'star' : 'staro'}
               size={21}
-              color={colors.primary}
+              color={item.is_bookmarked ? colors.tertiary : colors.primary}
               onPress={handleBookMark}
             />
           </Row>
@@ -149,10 +158,10 @@ const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
             {item.speakers.length > 0 && (
               <Row style={styles.rowHorizontalStart}>
                 {item.speakers.map((speaker, index) => (
-                  <Row>
+                  <Row key={speaker.name}>
                     <MaterialCommunityIcons name="android" size={20} color={colors.primary} />
                     <Space size={10} horizontal />
-                    <StyledText font="regular" size="sm">
+                    <StyledText font="regular" size="sm" variant="primary">
                       {speaker.name}
                     </StyledText>
                     {index + 1 !== item.speakers.length && <Space size={12} horizontal />}
@@ -200,7 +209,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   cardTertiary: {
-    width: width - 20,
+    width: width - 30,
   },
   image: {
     width: '100%',
@@ -227,6 +236,9 @@ const styles = StyleSheet.create({
   },
   sessionCardRow: {
     flex: 1,
+  },
+  avatarRow: {
+    flex: 0.235,
   },
   avatar: {
     width: 33,
