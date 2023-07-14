@@ -10,11 +10,16 @@ import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
+type LevelFilter = 'Beginner' | 'Intermediate' | 'Advanced';
+type TopicFilter = 'UI/UX Design' | 'Backend' | 'APIs';
+type RoomFilter = 'Room 1' | 'Room 2' | 'Room 3';
+type SessionTypeFilter = 'Keynote' | 'Codelab' | 'Session' | 'Lightining talk' | 'Panel Discussion';
+
 type Filters = {
-  level: Array<string>;
-  topic: Array<string>;
-  room: Array<string>;
-  sessionType: Array<string>;
+  level: Array<LevelFilter>;
+  topic: Array<TopicFilter>;
+  room: Array<RoomFilter>;
+  sessionType: Array<SessionTypeFilter>;
 };
 
 type FilterModalProps = {
@@ -27,10 +32,10 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
   const { colors } = useTheme();
   const { primary } = typography;
 
-  const [selectedLevel, setSelectedLevel] = useState<Array<string>>([]);
-  const [selectedTopic, setSelectedTopic] = useState<Array<string>>([]);
-  const [selectedRoom, setSelectedRoom] = useState<Array<string>>([]);
-  const [selectedSessionType, setSelectedSessionType] = useState<Array<string>>([]);
+  const [selectedLevel, setSelectedLevel] = useState<Filters['level']>([]);
+  const [selectedTopic, setSelectedTopic] = useState<Filters['topic']>([]);
+  const [selectedRoom, setSelectedRoom] = useState<Filters['room']>([]);
+  const [selectedSessionType, setSelectedSessionType] = useState<Filters['sessionType']>([]);
 
   const handleFilter = () => {
     const filter = {
@@ -44,7 +49,7 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
     onClose();
   };
 
-  const addFilter = (filter: string, filterArray: Array<string>) => {
+  const addFilter = <TFilter extends string>(filter: TFilter, filterArray: Array<TFilter>) => {
     const newFilterArray = [...filterArray];
     // check if filter is already in filter array
     const index = newFilterArray.indexOf(filter);
