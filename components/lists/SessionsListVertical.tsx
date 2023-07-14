@@ -77,6 +77,7 @@ export default SessionsListVertical;
 const styles = StyleSheet.create({
   list: {
     flex: 1,
+    paddingHorizontal: 15,
   },
   listHolder: {
     marginTop: 20,

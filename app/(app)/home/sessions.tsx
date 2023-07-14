@@ -53,43 +53,47 @@ const Sessions = () => {
       />
 
       <View style={[styles.main]}>
-        <View style={styles.dayHeader}>
-          <Row style={[styles.row]}>
-            <Row>
-              {dates?.map((item) => (
-                <Row key={item.key}>
-                  <DayButton
-                    date={item.date}
-                    day={item.day}
-                    handlePress={handleDayButtonPress}
-                    selected={item.key === selectedDate}
-                    dateInfull={item.key}
-                  />
-                  <Space size={20} horizontal />
-                </Row>
-              ))}
-            </Row>
-            <View style={styles.column}>
-              <CustomSwitch
-                value={isEnabled}
-                onValueChange={toggleSwitch}
-                trackColor={{
-                  true: colors.tertiary,
-                  false: colors.bgInverse,
-                }}
-                thumbColor={colors.whiteConstant}
-                iconColor={{
-                  true: colors.tertiary,
-                  false: colors.iconSwitch,
-                }}
-              />
-              <Space size={6} />
-              <StyledText size="xs" font="light">
-                My Sessions
-              </StyledText>
-            </View>
+        <Space size={16} />
+        <Row style={[styles.row, styles.paddingMain]}>
+          <Row>
+            {dates?.map((item) => (
+              <Row key={item.key}>
+                <DayButton
+                  date={item.date}
+                  day={item.day}
+                  handlePress={handleDayButtonPress}
+                  selected={item.key === selectedDate}
+                  dateInfull={item.key}
+                />
+                <Space size={15} horizontal />
+              </Row>
+            ))}
           </Row>
-        </View>
+          <View style={styles.column}>
+            <CustomSwitch
+              value={isEnabled}
+              onValueChange={toggleSwitch}
+              trackColor={{
+                true: colors.tertiary,
+                false: colors.bgInverse,
+              }}
+              thumbColor={colors.whiteConstant}
+              iconColor={{
+                true: colors.tertiary,
+                false: colors.iconSwitch,
+              }}
+            />
+            <Space size={6} />
+            <StyledText size="xs" font="light">
+              My Sessions
+            </StyledText>
+          </View>
+        </Row>
+        <Space size={16} />
+
+        <View style={[styles.separator, { borderColor: colors.card }]} />
+
+        <Space size={14} />
         <SessionsListVertical
           variant={listVisible === true ? 'list' : 'card'}
           bookmarked={false}
@@ -106,8 +110,10 @@ export default Sessions;
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    paddingHorizontal: 10,
     width: '100%',
+  },
+  paddingMain: {
+    paddingHorizontal: 15,
   },
   dayButton: {
     borderRadius: 5,
@@ -120,7 +126,8 @@ const styles = StyleSheet.create({
   column: {
     flexDirection: 'column',
   },
-  dayHeader: {
-    //position: 'absolute',
+  separator: {
+    borderWidth: 1,
+    width: '100%',
   },
 });
