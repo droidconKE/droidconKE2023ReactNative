@@ -4,9 +4,10 @@ import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
 type DayButtonProps = {
-  handlePress: () => void;
+  handlePress: (key: string) => void;
   date: string;
   day: string;
+  dateInfull: string;
   selected?: boolean;
 };
 
@@ -15,16 +16,17 @@ type DayButtonProps = {
  * @param handlePress: () => void
  * @param date: string
  * @param day: string
+ * @param dateInfull: string;
  * @param selected: boolean
  */
 
 const DayButton = (props: DayButtonProps) => {
-  const { handlePress, date, day, selected } = props;
+  const { handlePress, date, day, dateInfull, selected } = props;
 
   const { colors } = useTheme();
   return (
     <Pressable
-      onPress={handlePress}
+      onPress={() => handlePress(dateInfull)}
       style={[styles.dayButton, { backgroundColor: selected ? colors.tertiary : colors.tertiaryTint }]}
       testID="dayButton"
     >
