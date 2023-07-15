@@ -1,7 +1,7 @@
 import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { typography } from '../../config/typography';
 import FilterButton from '../buttons/FilterButton';
@@ -9,6 +9,10 @@ import PrimaryButton from '../buttons/PrimaryButton';
 import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
+
+const { height } = Dimensions.get('window');
+const bottomTabHeight = 80;
+const modalHeight = height - bottomTabHeight;
 
 type LevelFilter = 'Beginner' | 'Intermediate' | 'Advanced';
 type TopicFilter = 'UI/UX Design' | 'Backend' | 'APIs';
@@ -64,10 +68,10 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
   };
 
   return (
-    <View style={styles.centeredView}>
+    <SafeAreaView style={styles.centeredView}>
       <Modal animationType="slide" transparent visible={visible} onRequestClose={onClose}>
         <View style={styles.centeredView}>
-          <SafeAreaView style={[styles.modalView, { backgroundColor: colors.bg }]}>
+          <View style={[styles.modalView, { backgroundColor: colors.bg }]}>
             <Row style={styles.header}>
               <Row>
                 <AntDesign name="filter" size={24} color={colors.primary} />
@@ -224,15 +228,15 @@ const FilterModal = ({ visible, onClose, onFilter }: FilterModalProps) => {
                 />
               </View>
 
-              <Space size={30} />
+              <Space size={20} />
 
               <PrimaryButton label="Filter" onPress={handleFilter} />
             </View>
             <Space size={20} />
-          </SafeAreaView>
+          </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -251,11 +255,11 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: '100%',
-    height: '90%',
+    height: modalHeight,
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: 30,
     paddingBottom: 20,
     alignItems: 'center',
   },
