@@ -65,7 +65,7 @@ const SessionsListVertical = ({
     <View style={styles.list} testID="sessions-list-vertical">
       <Row>
         <StyledText font="bold" size="lg" style={{ color: colors.primary }}>
-          {bookmarked === true ? 'All Sessions' : 'My Sessions'}
+          {bookmarked === true ? 'My Sessions' : 'All Sessions'}
         </StyledText>
       </Row>
 
