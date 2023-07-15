@@ -71,7 +71,7 @@ export default StyledSwitch;
 
 const styles = StyleSheet.create({
   track: {
-    width: 50,
+    width: 55,
     height: 20,
     borderRadius: 30,
     justifyContent: 'center',
