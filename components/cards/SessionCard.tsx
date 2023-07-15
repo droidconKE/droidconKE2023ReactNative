@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   listCardDetails: {
     flex: 1,
-    marginStart: 24,
+    marginHorizontal: 16,
   },
   amOrPm: {
     textAlign: 'right',
