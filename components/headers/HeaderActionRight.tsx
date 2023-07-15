@@ -5,14 +5,12 @@ import IconButton from '../buttons/IconButton';
 import Row from '../common/Row';
 
 type HeaderActionRightProps = {
-  collapsed: boolean;
-  onCollapse: () => void;
   handlePress: () => void;
   toggleView: () => void;
   listVisible: boolean;
 };
 
-const HeaderActionRight = ({ toggleView, listVisible, collapsed, onCollapse, handlePress }: HeaderActionRightProps) => {
+const HeaderActionRight = ({ toggleView, listVisible, handlePress }: HeaderActionRightProps) => {
   const openFilterModal = () => {
     // TODO: open filter modal functionality
   };
@@ -22,8 +20,6 @@ const HeaderActionRight = ({ toggleView, listVisible, collapsed, onCollapse, han
       <Row>
         <IconButton name="list-alt" isActive={listVisible} onPress={toggleView} />
         <IconButton name="view-agenda" isActive={!listVisible} onPress={toggleView} />
-        <IconButton name="list-alt" isActive={collapsed} onPress={onCollapse} />
-        <IconButton name="view-agenda" isActive={!collapsed} onPress={onCollapse} />
       </Row>
       <View style={styles.gap} />
       <ClearButton label="Filter" iconName="filter" onPress={handlePress} />

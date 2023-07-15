@@ -37,18 +37,21 @@ const Sessions = () => {
 
   useEffect(() => {
     setDates(getDaysFromSchedule(Schedule));
+  }, []);
+
+  useEffect(() => {
     if (dates[0]?.key !== undefined) {
       setSelectedDate(dates[0]?.key);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dates]);
 
   const handleDayButtonPress = (dayButtonKey: string) => setSelectedDate(dayButtonKey);
 
   const handleBookMark = (id: number) => {
     console.log(id);
+    // TODO: bookmark a session here
   };
-  const [collapsed, setCollapsed] = useState<boolean>(true);
+
   const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
   const showFilterModal = () => {
@@ -59,22 +62,12 @@ const Sessions = () => {
     // TODO: handle filter sessions here
   };
 
-  const handleCollapse = () => {
-    setCollapsed(!collapsed);
-  };
-
   return (
     <MainContainer preset="fixed">
       <Stack.Screen
         options={{
           headerRight: () => (
-            <HeaderActionRight
-              listVisible={listVisible}
-              toggleView={toggleView}
-              collapsed={collapsed}
-              onCollapse={handleCollapse}
-              handlePress={showFilterModal}
-            />
+            <HeaderActionRight listVisible={listVisible} toggleView={toggleView} handlePress={showFilterModal} />
           ),
         }}
       />
@@ -125,7 +118,13 @@ const Sessions = () => {
           variant={listVisible === true ? 'list' : 'card'}
           bookmarked={showsBookmarked}
           handleBookMark={handleBookMark}
-          sessions={Schedule.data[selectedDate] as unknown as Array<SessionForSchedule>}
+          sessions={
+            showsBookmarked === true
+              ? (Schedule.data[selectedDate]?.filter(
+                  (item) => item.is_bookmarked === true,
+                ) as unknown as Array<SessionForSchedule>)
+              : (Schedule.data[selectedDate] as unknown as Array<SessionForSchedule>)
+          }
         />
       </View>
 
