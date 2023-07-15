@@ -10,6 +10,7 @@ import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
 import SessionsListVertical from '../../../components/lists/SessionsListVertical';
+import FilterModal from '../../../components/modals/FilterModal';
 import type { IDateForDayButton, SessionForSchedule } from '../../../global';
 import { Schedule } from '../../../mock/schedule';
 import { getDaysFromSchedule } from '../../../util/helpers';
@@ -47,12 +48,34 @@ const Sessions = () => {
   const handleBookMark = (id: number) => {
     console.log(id);
   };
+  const [collapsed, setCollapsed] = useState<boolean>(true);
+  const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
+
+  const showFilterModal = () => {
+    setFilterModalVisible(true);
+  };
+
+  const handleFilter = () => {
+    // TODO: handle filter sessions here
+  };
+
+  const handleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
     <MainContainer preset="fixed">
       <Stack.Screen
         options={{
-          headerRight: () => <HeaderActionRight listVisible={listVisible} toggleView={toggleView} />,
+          headerRight: () => (
+            <HeaderActionRight
+              listVisible={listVisible}
+              toggleView={toggleView}
+              collapsed={collapsed}
+              onCollapse={handleCollapse}
+              handlePress={showFilterModal}
+            />
+          ),
         }}
       />
 
@@ -103,6 +126,14 @@ const Sessions = () => {
           bookmarked={showsBookmarked}
           handleBookMark={handleBookMark}
           sessions={Schedule.data[selectedDate] as unknown as Array<SessionForSchedule>}
+        />
+      </View>
+
+      <View>
+        <FilterModal
+          visible={filterModalVisible}
+          onClose={() => setFilterModalVisible(false)}
+          onFilter={handleFilter}
         />
       </View>
     </MainContainer>
