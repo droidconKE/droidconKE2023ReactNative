@@ -6,7 +6,7 @@ import { typography } from '../../config/typography';
 
 type StyledTextProps = {
   children: React.ReactNode;
-  size?: 'xs' | 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'base' | 'md' | 'lg';
   font?: 'bold' | 'regular' | 'medium' | 'semiBold' | 'light';
   variant?: 'text' | 'link';
   style?: StyleProp<TextStyle>;
@@ -35,6 +35,7 @@ const StyledText = ({
   const sizes: Record<NonNullable<StyledTextProps['size']>, number> = {
     xs: 10,
     sm: 12,
+    base: 14,
     md: 16,
     lg: 18,
   };
