@@ -1,5 +1,3 @@
-// Test handleBookMark function
-
 import { render, screen } from '@testing-library/react-native';
 import SessionsListVertical from '../../../components/lists/SessionsListVertical';
 import type { SessionForSchedule } from '../../../global';
