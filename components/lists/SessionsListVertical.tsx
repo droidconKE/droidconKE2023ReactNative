@@ -10,25 +10,25 @@ import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
-/**
- * @param variant: 'card' | 'list'
- * @param bookmarked: boolean
- * @param handleBookMark: () => void
- */
-
-interface SessionListProps<T> {
+interface SessionListVerticalProps<T> {
   variant?: 'card' | 'list';
-  bookmarked?: boolean;
+  bookmarked: boolean;
   handleBookMark?: (id: number) => void;
   sessions: Array<T>;
 }
 
+/**
+ * @param variant: 'card' | 'list'
+ * @param bookmarked: boolean
+ * @param handleBookMark: () => void
+ * @param sessions: Array of type Sessions
+ */
 const SessionsListVertical = ({
   variant = 'card',
   bookmarked = false,
   sessions,
   handleBookMark,
-}: SessionListProps<SessionForSchedule>) => {
+}: SessionListVerticalProps<SessionForSchedule>) => {
   const { colors } = useTheme();
   const router = useRouter();
 

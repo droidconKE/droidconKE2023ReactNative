@@ -1,5 +1,3 @@
-// Test it renders card when you pass variant card
-// Test it renders list component when you pass variant list
 // Test handleBookMark function
 
 import { render, screen } from '@testing-library/react-native';
@@ -11,7 +9,12 @@ jest.mock('expo-router');
 
 describe('SessionsListVertical', () => {
   it('renders SessionsListVertical component', () => {
-    render(<SessionsListVertical sessions={Schedule.data['2022-11-16'] as unknown as Array<SessionForSchedule>} />);
+    render(
+      <SessionsListVertical
+        sessions={Schedule.data['2022-11-16'] as unknown as Array<SessionForSchedule>}
+        bookmarked={false}
+      />,
+    );
     expect(screen.getByTestId('sessions-list-vertical')).toBeDefined();
   });
   it('Renders card component when you pass prop variant card', () => {
@@ -19,9 +22,31 @@ describe('SessionsListVertical', () => {
       <SessionsListVertical
         variant="card"
         sessions={Schedule.data['2022-11-16'] as unknown as Array<SessionForSchedule>}
+        bookmarked={false}
       />,
     );
-    screen.debug();
-    expect(screen.getByTestId('session-card-sessions')).toBeDefined();
+    expect(screen.getAllByTestId('card-sessions')).toBeDefined();
+  });
+
+  it('Renders list item component when you pass prop variant list', () => {
+    render(
+      <SessionsListVertical
+        variant="list"
+        sessions={Schedule.data['2022-11-16'] as unknown as Array<SessionForSchedule>}
+        bookmarked={false}
+      />,
+    );
+    expect(screen.getAllByTestId('card-list')).toBeDefined();
+  });
+
+  it('Shows bookmarked content when prop bookmark is true', () => {
+    const { getAllByText } = render(
+      <SessionsListVertical
+        variant="list"
+        sessions={Schedule.data['2022-11-16'] as unknown as Array<SessionForSchedule>}
+        bookmarked={true}
+      />,
+    );
+    expect(getAllByText('A guide to Abstract writing - Hannah Olukuye')).toBeDefined();
   });
 });

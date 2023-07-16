@@ -15,16 +15,6 @@ import type { IDateForDayButton, SessionForSchedule } from '../../../global';
 import { Schedule } from '../../../mock/schedule';
 import { getDaysFromSchedule } from '../../../util/helpers';
 
-// TODO: ALL Sessions page
-
-/**
- * -  implement a List that displays all sessions
- * - list should either be collapsible or not
- * - Session card component should be either the small card that displays time, title, description, venue and a favorite icon button
- * - session card can also be a full card as seen in the home page, with image and speaker avatars too
- * - consider reusing the session card component from the home page
- */
-
 const Sessions = () => {
   const [showsBookmarked, setShowsBookmarked] = useState<boolean>(false);
   const [listVisible, setListVisible] = useState<boolean>(true);
