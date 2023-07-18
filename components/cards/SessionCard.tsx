@@ -104,10 +104,7 @@ const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
             <Row style={styles.avatarRow}>
               {item.speakers.map((speaker) => (
                 <View key={speaker.avatar}>
-                  <Image
-                    source={{ uri: speaker.avatar || '' }}
-                    style={[styles.avatar, { borderColor: colors.primary }]}
-                  />
+                  <Image source={{ uri: speaker.avatar || '' }} style={[styles.avatar, { borderColor: colors.tint }]} />
                 </View>
               ))}
             </Row>
