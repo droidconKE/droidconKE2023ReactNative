@@ -95,7 +95,7 @@ const Sessions = () => {
             />
             <Space size={6} />
             <StyledText size="xs" font="light">
-              { showsBookmarked ? 'My Sessions' : 'All Sessions' }
+              {showsBookmarked ? 'My Sessions' : 'All Sessions'}
             </StyledText>
           </View>
         </Row>
