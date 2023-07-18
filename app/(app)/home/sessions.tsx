@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import DayButton from '../../../components/buttons/DayButton';
 import CustomSwitch from '../../../components/buttons/StyledSwitch';
@@ -11,29 +11,20 @@ import MainContainer from '../../../components/container/MainContainer';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
 import SessionsListVertical from '../../../components/lists/SessionsListVertical';
 import FilterModal from '../../../components/modals/FilterModal';
-import type { IDateForDayButton, SessionForSchedule } from '../../../global';
+import type { SessionForSchedule } from '../../../global';
 import { Schedule } from '../../../mock/schedule';
 import { getDaysFromSchedule } from '../../../util/helpers';
 
 const Sessions = () => {
   const [showsBookmarked, setShowsBookmarked] = useState<boolean>(false);
   const [listVisible, setListVisible] = useState<boolean>(true);
-  const [dates, setDates] = useState<Array<IDateForDayButton>>([]);
-  const [selectedDate, setSelectedDate] = useState<string>('');
+
+  const dates = getDaysFromSchedule(Schedule);
+  const [selectedDate, setSelectedDate] = useState<string>(dates[0]?.key ?? '');
 
   const toggleSwitch = () => setShowsBookmarked((previousState) => !previousState);
   const toggleView = () => setListVisible((previousState) => !previousState);
   const { colors } = useTheme();
-
-  useEffect(() => {
-    setDates(getDaysFromSchedule(Schedule));
-  }, []);
-
-  useEffect(() => {
-    if (dates[0]?.key !== undefined) {
-      setSelectedDate(dates[0]?.key);
-    }
-  }, [dates]);
 
   const handleDayButtonPress = (dayButtonKey: string) => setSelectedDate(dayButtonKey);
 
