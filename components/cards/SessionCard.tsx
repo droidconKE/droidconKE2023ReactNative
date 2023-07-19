@@ -9,13 +9,21 @@ import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
-interface SessionCardProps<T> {
+type SessionCardHome = {
+  screen: 'home';
+  item: Session;
   handlePress: () => void;
-  handleBookMark?: () => void;
-  item: T;
-  screen?: 'home' | 'sessions';
+};
+
+type SessionCardSessions = {
+  screen: 'sessions';
+  item: SessionForSchedule;
   variant?: 'card' | 'list';
-}
+  handlePress: () => void;
+  handleBookMark: () => void;
+};
+
+type SessionCardProps = SessionCardHome | SessionCardSessions;
 
 const { width } = Dimensions.get('window');
 
@@ -29,7 +37,7 @@ const { width } = Dimensions.get('window');
  * @returns SessionCard Component
  */
 
-const SessionCardOnHome = (props: SessionCardProps<Session>) => {
+const SessionCardOnHome = (props: Omit<SessionCardHome, 'screen'>) => {
   const { handlePress, item } = props;
   const { colors } = useTheme();
 
@@ -61,7 +69,7 @@ const SessionCardOnHome = (props: SessionCardProps<Session>) => {
   );
 };
 
-const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
+const SessionCardOnSessions = (props: Omit<SessionCardSessions, 'screen'>) => {
   const { handlePress, item, handleBookMark } = props;
   const { colors } = useTheme();
   const router = useRouter();
@@ -126,7 +134,7 @@ const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
   );
 };
 
-const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
+const SessionCardList = (props: Omit<SessionCardSessions, 'screen'>) => {
   const { handlePress, item, handleBookMark } = props;
   const { colors } = useTheme();
 
@@ -186,20 +194,15 @@ const SessionCardList = (props: SessionCardProps<SessionForSchedule>) => {
   );
 };
 
-const SessionCard = ({
-  handlePress,
-  handleBookMark,
-  item,
-  screen = 'home',
-  variant = 'card',
-}: SessionCardProps<SessionForSchedule> | SessionCardProps<Session>) => {
-  if (screen === 'sessions' && variant === 'list') {
-    return (
-      <SessionCardList handlePress={handlePress} handleBookMark={handleBookMark} item={item as SessionForSchedule} />
-    );
-  } else if (screen === 'sessions') {
-    return <SessionCardOnSessions item={item as SessionForSchedule} handlePress={handlePress} />;
+const SessionCard = (props: SessionCardProps) => {
+  if (props.screen === 'sessions') {
+    const { handlePress, handleBookMark, item, variant = 'card' } = props;
+    if (variant === 'list') {
+      return <SessionCardList item={item} handleBookMark={handleBookMark} handlePress={handlePress} />;
+    }
+    return <SessionCardOnSessions item={item} handleBookMark={handleBookMark} handlePress={handlePress} />;
   }
+  const { handlePress, item } = props;
   return <SessionCardOnHome item={item} handlePress={handlePress} />;
 };
 
