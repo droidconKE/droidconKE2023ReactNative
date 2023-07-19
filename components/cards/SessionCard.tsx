@@ -1,7 +1,8 @@
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
-import { Dimensions, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Dimensions, Pressable, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import type { Room, Session, SessionForSchedule } from '../../global';
 import { getScheduleTimeAndLocation, getSessionTime, getSessionTimeAndLocation, truncate } from '../../util/helpers';
 import Row from '../common/Row';
@@ -63,7 +64,7 @@ const SessionCardOnHome = (props: SessionCardProps<Session>) => {
 const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
   const { handlePress, item, handleBookMark } = props;
   const { colors } = useTheme();
-
+  const router = useRouter();
   return (
     <TouchableWithoutFeedback testID="card-sessions" onPress={handlePress}>
       <View style={[styles.card, styles.cardTertiary, { backgroundColor: colors.card }]}>
@@ -103,9 +104,12 @@ const SessionCardOnSessions = (props: SessionCardProps<SessionForSchedule>) => {
           <Row>
             <Row style={styles.avatarRow}>
               {item.speakers.map((speaker) => (
-                <View key={speaker.avatar}>
+                <Pressable
+                  key={speaker.avatar}
+                  onPress={() => router.push({ pathname: '../speaker', params: speaker })}
+                >
                   <Image source={{ uri: speaker.avatar || '' }} style={[styles.avatar, { borderColor: colors.tint }]} />
-                </View>
+                </Pressable>
               ))}
             </Row>
             <AntDesign

@@ -11,17 +11,17 @@ import MainContainer from '../../components/container/MainContainer';
 // TODO: Use data from mock/speaker to display speaker  and mock/organizers.ts to display organizer
 
 const Speaker = () => {
-  const { id } = useSearchParams();
+  const { name } = useSearchParams();
 
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          title: `Speaker ${id}`,
+          title: `Speaker ${name}`,
           headerTitleAlign: 'center',
         }}
       />
-      <StyledText>speaker id {id}</StyledText>
+      <StyledText>speaker id {name}</StyledText>
     </MainContainer>
   );
 };
