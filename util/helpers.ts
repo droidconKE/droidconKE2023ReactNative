@@ -139,7 +139,7 @@ const getSuffixForDate = (date: number) => {
  * @returns start time, end time, and room.title
  * @example getScheduleTimesAndLocation('session-1')  // returns 9:00 AM - 10:00 AM  |  Room 1
  */
-export const getScheduleTimeAndLocation = (start_date_time: string, end_date_time: string, room: Room) => {
+export const getScheduleTimeAndLocation = (start_date_time: string, end_date_time: string, room?: Room) => {
   // convert time to 12 hour format and hh:mm aa
   const startTime = new Date(start_date_time).toLocaleTimeString('en-US', {
     hour: 'numeric',
@@ -152,5 +152,5 @@ export const getScheduleTimeAndLocation = (start_date_time: string, end_date_tim
     hour12: true,
   });
 
-  return `${startTime} - ${endTime}  |  Room ${room.title}`;
+  return `${startTime} - ${endTime}  |  Room ${room !== undefined ? room.title : ''}`;
 };

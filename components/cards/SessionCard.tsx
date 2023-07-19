@@ -100,7 +100,7 @@ const SessionCardOnSessions = (props: Omit<SessionCardSessions, 'screen'>) => {
 
         <View style={styles.bottomForSessions}>
           <StyledText size="sm" font="light">
-            {getScheduleTimeAndLocation(item.start_date_time, item.end_date_time, item.rooms[0] as Room)}
+            {getScheduleTimeAndLocation(item.start_date_time, item.end_date_time, item.rooms[0])}
           </StyledText>
           <Space size={11} />
           <View>
