@@ -126,9 +126,8 @@ export const getDaysFromSchedule = (schedule: ISchedule): Array<IDateForDayButto
  * @example 2 returns 2nd
  */
 const getSuffixForDate = (date: number) => {
-  const suffix =
-    date > 0 ? ['th', 'st', 'nd', 'rd'][(date > 3 && date < 21) || date % 10 > 3 ? 0 : date % 10] : ('' as string);
-  return suffix || '';
+  const suffix = date > 0 ? ['th', 'st', 'nd', 'rd'][(date > 3 && date < 21) || date % 10 > 3 ? 0 : date % 10] : '';
+  return suffix;
 };
 
 /**

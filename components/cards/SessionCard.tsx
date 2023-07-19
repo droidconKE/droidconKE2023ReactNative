@@ -2,7 +2,7 @@ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
-import { Dimensions, Pressable, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import type { Room, Session, SessionForSchedule } from '../../global';
 import { getScheduleTimeAndLocation, getSessionTime, getSessionTimeAndLocation, truncate } from '../../util/helpers';
 import Row from '../common/Row';
@@ -42,7 +42,7 @@ const SessionCardOnHome = (props: Omit<SessionCardHome, 'screen'>) => {
   const { colors } = useTheme();
 
   return (
-    <TouchableWithoutFeedback testID="card" onPress={handlePress}>
+    <TouchableWithoutFeedback testID="card" onPress={handlePress} disabled={item.slug.length < 1}>
       <View style={[styles.card, { backgroundColor: colors.card }]}>
         <Image
           source={{ uri: item.session_image || '' }}
@@ -74,7 +74,7 @@ const SessionCardOnSessions = (props: Omit<SessionCardSessions, 'screen'>) => {
   const { colors } = useTheme();
   const router = useRouter();
   return (
-    <TouchableWithoutFeedback testID="card-sessions" onPress={handlePress}>
+    <TouchableWithoutFeedback testID="card-sessions" onPress={handlePress} disabled={item.slug.length < 1}>
       <View style={[styles.card, styles.cardTertiary, { backgroundColor: colors.card }]}>
         {item.session_image !== null ? (
           <Image
@@ -141,7 +141,7 @@ const SessionCardList = (props: Omit<SessionCardSessions, 'screen'>) => {
   const timeSplitted: Array<string> = getSessionTime(item.start_time).split(' ');
 
   return (
-    <TouchableWithoutFeedback testID="card-list" onPress={handlePress}>
+    <TouchableOpacity testID="card-list" onPress={handlePress} disabled={item.slug.length < 1}>
       <Row style={[styles.listCard, { backgroundColor: colors.card }]}>
         <Row style={styles.sessionCardRow}>
           <View style={styles.rowVerticalStart}>
@@ -190,7 +190,7 @@ const SessionCardList = (props: Omit<SessionCardSessions, 'screen'>) => {
           style={styles.rowVerticalStart}
         />
       </Row>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
 
