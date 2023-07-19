@@ -11,7 +11,6 @@ import MainContainer from '../../../components/container/MainContainer';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
 import SessionsListVertical from '../../../components/lists/SessionsListVertical';
 import FilterModal from '../../../components/modals/FilterModal';
-import type { SessionForSchedule } from '../../../global';
 import { Schedule } from '../../../mock/schedule';
 import { getDaysFromSchedule } from '../../../util/helpers';
 
@@ -101,10 +100,8 @@ const Sessions = () => {
           handleBookMark={handleBookMark}
           sessions={
             showsBookmarked === true
-              ? (Schedule.data[selectedDate]?.filter(
-                  (item) => item.is_bookmarked === true,
-                ) as unknown as Array<SessionForSchedule>)
-              : (Schedule.data[selectedDate] as unknown as Array<SessionForSchedule>)
+              ? Schedule.data[selectedDate]?.filter((item) => item.is_bookmarked === true)
+              : Schedule.data[selectedDate]
           }
         />
       </View>

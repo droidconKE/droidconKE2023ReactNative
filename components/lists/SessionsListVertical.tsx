@@ -14,7 +14,7 @@ interface SessionListVerticalProps<T> {
   variant?: 'card' | 'list';
   bookmarked: boolean;
   handleBookMark?: (id: number) => void;
-  sessions: Array<T>;
+  sessions?: Array<T>;
 }
 
 /**
@@ -31,6 +31,16 @@ const SessionsListVertical = ({
 }: SessionListVerticalProps<SessionForSchedule>) => {
   const { colors } = useTheme();
   const router = useRouter();
+
+  if (sessions === undefined) {
+    return (
+      <View style={styles.list} testID="sessions-list-vertical">
+        <StyledText font="bold" size="lg" style={{ color: colors.primary }}>
+          No sessions available.
+        </StyledText>
+      </View>
+    );
+  }
 
   const renderComponentItem = ({ item, index }: ListRenderItemInfo<SessionForSchedule>) => {
     return (
