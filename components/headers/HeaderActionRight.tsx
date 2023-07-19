@@ -11,9 +11,7 @@ type HeaderActionRightProps = {
 };
 
 const HeaderActionRight = ({ toggleView, listVisible, handlePress }: HeaderActionRightProps) => {
-  const openFilterModal = () => {
-    // TODO: open filter modal functionality
-  };
+  // TODO: open filter modal functionality
 
   return (
     <Row style={styles.row} testID="headerActionRight">
