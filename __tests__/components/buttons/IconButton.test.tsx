@@ -20,8 +20,9 @@ describe('<IconButton/>', () => {
   });
 
   it('calls the function provided by onPress prop after pressing the button', () => {
-    render(<IconButton isActive onPress={onPress} name="power-off" />);
-    fireEvent.press(screen.getByTestId('iconButton'));
+    const { getByTestId } = render(<IconButton isActive={false} onPress={onPress} name="power-off" />);
+    const button = getByTestId('iconButton');
+    fireEvent.press(button);
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
