@@ -34,6 +34,7 @@ const SessionsList = () => {
           <SessionCard
             handlePress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
             item={item}
+            screen="home"
           />
         )}
         keyExtractor={(item: Session, index: number) => index.toString()}
