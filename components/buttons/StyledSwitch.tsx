@@ -18,13 +18,12 @@ type StyledSwitchProps = {
 const StyledSwitch = (props: StyledSwitchProps) => {
   const { trackColor, thumbColor, iconColor, onValueChange, value } = props;
 
-  const switchAnimation = useState(new Animated.Value(0))[0];
+  const [switchAnimation] = useState(new Animated.Value(0));
 
   const handleSwitch = () => {
     onValueChange();
-    Animated.timing(switchAnimation, {
+    Animated.spring(switchAnimation, {
       toValue: value ? 0 : 1,
-      duration: 300,
       useNativeDriver: false,
     }).start();
   };
