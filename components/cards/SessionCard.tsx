@@ -111,7 +111,7 @@ const SessionCardOnSessions = (props: Omit<SessionCardSessions, 'screen'>) => {
           <Row>
             <Row style={styles.avatarRow}>
               {item.speakers.map((speaker) => (
-                <Link key={speaker.avatar} href={{ pathname: '/speaker', params: speaker }}>
+                <Link key={speaker.avatar} href={{ pathname: `/${speaker.name}`, params: speaker }}>
                   <Image source={{ uri: speaker.avatar || '' }} style={[styles.avatar, { borderColor: colors.tint }]} />
                 </Link>
               ))}
