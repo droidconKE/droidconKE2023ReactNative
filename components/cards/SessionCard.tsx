@@ -3,7 +3,7 @@ import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { Dimensions, Pressable, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import type { Room, Session, SessionForSchedule } from '../../global';
+import type { Session, SessionForSchedule } from '../../global';
 import { getScheduleTimeAndLocation, getSessionTime, getSessionTimeAndLocation, truncate } from '../../util/helpers';
 import Row from '../common/Row';
 import Space from '../common/Space';
@@ -162,7 +162,7 @@ const SessionCardList = (props: Omit<SessionCardSessions, 'screen'>) => {
             </StyledText>
             <Space size={13} />
             <StyledText size="sm" font="light">
-              {getScheduleTimeAndLocation(item.start_date_time, item.end_date_time, item.rooms[0] as Room)}
+              {getScheduleTimeAndLocation(item.start_date_time, item.end_date_time, item.rooms[0])}
             </StyledText>
             <Space size={13} />
             {item.speakers.length > 0 && (
