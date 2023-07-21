@@ -151,5 +151,5 @@ export const getScheduleTimeAndLocation = (start_date_time: string, end_date_tim
     hour12: true,
   });
 
-  return `${startTime} - ${endTime} ${room !== undefined ? '| '.concat(room.title) : ''}`;
+  return `${startTime} - ${endTime} ${room !== undefined ? `| Room ${room.title}` : ''}`;
 };
