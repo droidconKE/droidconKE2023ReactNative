@@ -1,45 +1,38 @@
-import { Stack, useRouter } from 'expo-router';
+import { useTheme } from '@react-navigation/native';
+import { Stack } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import DayButton from '../../../components/buttons/DayButton';
+import CustomSwitch from '../../../components/buttons/StyledSwitch';
+import Row from '../../../components/common/Row';
+import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
+import SessionsListVertical from '../../../components/lists/SessionsListVertical';
 import FilterModal from '../../../components/modals/FilterModal';
-
-// TODO: ALL Sessions page
-
-/**
- * -  implement a List that displays all sessions
- * - list should either be collapsible or not
- * - Session card component should be either the small card that displays time, title, description, venue and a favorite icon button
- * - session card can also be a full card as seen in the home page, with image and speaker avatars too
- * - consider reusing the session card component from the home page
- */
-
-// TODO: this is dummy data, replace with real data from mock/sessions.ts
-const _sessions = [
-  {
-    id: '1',
-    title: 'React Native',
-    description:
-      'React Native is a JavaScript framework for writing real, natively rendering mobile applications for iOS and Android.',
-    speaker: '1',
-    slug: 'react-native',
-  },
-  {
-    id: '2',
-    title: 'React',
-    description: 'React is a JavaScript library for building user interfaces.',
-    speaker: '2',
-    slug: 'react',
-  },
-];
+import { Schedule } from '../../../mock/schedule';
+import { getDaysFromSchedule } from '../../../util/helpers';
 
 const Sessions = () => {
-  const [collapsed, setCollapsed] = useState<boolean>(true);
-  const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
+  const [showsBookmarked, setShowsBookmarked] = useState<boolean>(false);
+  const [listVisible, setListVisible] = useState<boolean>(true);
 
-  const router = useRouter();
+  const dates = getDaysFromSchedule(Schedule);
+  const [selectedDate, setSelectedDate] = useState<string>(dates[0]?.key ?? '');
+
+  const toggleSwitch = () => setShowsBookmarked((previousState) => !previousState);
+  const toggleView = () => setListVisible((previousState) => !previousState);
+  const { colors } = useTheme();
+
+  const handleDayButtonPress = (dayButtonKey: string) => setSelectedDate(dayButtonKey);
+
+  const handleBookMark = (id: number) => {
+    console.log(id);
+    // TODO: bookmark a session here
+  };
+
+  const [filterModalVisible, setFilterModalVisible] = useState<boolean>(false);
 
   const showFilterModal = () => {
     setFilterModalVisible(true);
@@ -49,31 +42,68 @@ const Sessions = () => {
     // TODO: handle filter sessions here
   };
 
-  const handleCollapse = () => {
-    setCollapsed(!collapsed);
-  };
-
   return (
-    <MainContainer preset="scroll">
+    <MainContainer preset="fixed">
       <Stack.Screen
         options={{
           headerRight: () => (
-            <HeaderActionRight collapsed={collapsed} onCollapse={handleCollapse} handlePress={showFilterModal} />
+            <HeaderActionRight listVisible={listVisible} toggleView={toggleView} handlePress={showFilterModal} />
           ),
         }}
       />
 
-      <View style={styles.main}>
-        <StyledText>sessions</StyledText>
+      <View style={[styles.main]}>
+        <Space size={16} />
+        <Row style={[styles.row, styles.paddingMain]}>
+          <Row>
+            {dates?.map((item) => (
+              <Row key={item.key}>
+                <DayButton
+                  date={item.date}
+                  day={item.day}
+                  handlePress={handleDayButtonPress}
+                  selected={item.key === selectedDate}
+                  dateInfull={item.key}
+                />
+                <Space size={15} horizontal />
+              </Row>
+            ))}
+          </Row>
+          <View style={styles.column}>
+            <CustomSwitch
+              value={showsBookmarked}
+              onValueChange={toggleSwitch}
+              trackColor={{
+                true: colors.tertiary,
+                false: colors.bgInverse,
+              }}
+              thumbColor={colors.whiteConstant}
+              iconColor={{
+                true: colors.tertiary,
+                false: colors.iconSwitch,
+              }}
+            />
+            <Space size={6} />
+            <StyledText size="xs" font="light">
+              {showsBookmarked ? 'My Sessions' : 'All Sessions'}
+            </StyledText>
+          </View>
+        </Row>
+        <Space size={16} />
 
-        {_sessions.map((session) => (
-          <StyledText
-            key={session.id}
-            onPress={() => router.push({ pathname: `/session/${session.slug}`, params: { slug: session.slug } })}
-          >
-            {session.title}
-          </StyledText>
-        ))}
+        <View style={[styles.separator, { borderColor: colors.card }]} />
+
+        <Space size={14} />
+        <SessionsListVertical
+          variant={listVisible === true ? 'list' : 'card'}
+          bookmarked={showsBookmarked}
+          handleBookMark={handleBookMark}
+          sessions={
+            showsBookmarked === true
+              ? Schedule.data[selectedDate]?.filter((item) => item.is_bookmarked === true)
+              : Schedule.data[selectedDate]
+          }
+        />
       </View>
 
       <View>
@@ -92,6 +122,24 @@ export default Sessions;
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    paddingHorizontal: 10,
+    width: '100%',
+  },
+  paddingMain: {
+    paddingHorizontal: 15,
+  },
+  dayButton: {
+    borderRadius: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 8,
+  },
+  row: {
+    alignItems: 'center',
+  },
+  column: {
+    flexDirection: 'column',
+  },
+  separator: {
+    borderWidth: 1,
+    width: '100%',
   },
 });

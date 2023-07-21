@@ -9,8 +9,8 @@ describe('<HeaderActionRight/>', () => {
   it('renders HeaderActionRight component.', () => {
     render(
       <HeaderActionRight
-        collapsed
-        onCollapse={() => console.log('collapsed')}
+        listVisible
+        toggleView={() => console.log('collapsed')}
         handlePress={() => console.log('open filter modal')}
       />,
     );

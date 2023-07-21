@@ -8,7 +8,7 @@ type StyledTextProps = {
   children: React.ReactNode;
   size?: 'xs' | 'sm' | 'base' | 'md' | 'lg';
   font?: 'bold' | 'regular' | 'medium' | 'semiBold' | 'light';
-  variant?: 'text' | 'link';
+  variant?: 'text' | 'link' | 'primary';
   style?: StyleProp<TextStyle>;
 };
 
@@ -49,6 +49,7 @@ const StyledText = ({
   const variants: Record<NonNullable<StyledTextProps['variant']>, string> = {
     text: colors.text,
     link: colors.link,
+    primary: colors.primary,
   };
 
   return (

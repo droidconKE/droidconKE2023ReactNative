@@ -1,12 +1,6 @@
 import * as React from 'react';
-import type { SvgProps } from 'react-native-svg';
 import Svg, { ClipPath, Defs, Path, Use } from 'react-native-svg';
-
-export interface ISvgProps extends SvgProps {
-  xmlns?: string;
-  xmlnsXlink?: string;
-  xmlSpace?: string;
-}
+import type { ISvgProps } from '../../global';
 
 const GoogleIcon = (props: ISvgProps) => (
   <Svg viewBox="0 0 48 48" width={24} height={24} {...props}>

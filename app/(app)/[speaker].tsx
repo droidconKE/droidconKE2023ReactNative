@@ -2,7 +2,6 @@ import { Stack, useSearchParams } from 'expo-router';
 import React from 'react';
 import StyledText from '../../components/common/StyledText';
 import MainContainer from '../../components/container/MainContainer';
-
 // TODO: implement speaker page
 /**
  * -  Should display information about the speaker or organizing team member
@@ -11,17 +10,17 @@ import MainContainer from '../../components/container/MainContainer';
 // TODO: Use data from mock/speaker to display speaker  and mock/organizers.ts to display organizer
 
 const Speaker = () => {
-  const { id } = useSearchParams();
+  const { name } = useSearchParams();
 
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          title: `Speaker ${id}`,
+          title: `Speaker ${name}`,
           headerTitleAlign: 'center',
         }}
       />
-      <StyledText>speaker id {id}</StyledText>
+      <StyledText>speaker id {name}</StyledText>
     </MainContainer>
   );
 };

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import type { SvgProps } from 'react-native-svg';
 import Svg, { ClipPath, Defs, G, Path } from 'react-native-svg';
+import type { ISvgProps } from '../../global';
 
-const Logo = (props: SvgProps) => (
+const Logo = (props: ISvgProps) => (
   <Svg width={137} height={25.489} {...props}>
     <Defs>
       <ClipPath id="prefix__a">

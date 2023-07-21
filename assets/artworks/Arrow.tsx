@@ -1,12 +1,6 @@
 import * as React from 'react';
-import type { SvgProps } from 'react-native-svg';
 import Svg, { G, Path } from 'react-native-svg';
-
-export interface ISvgProps extends SvgProps {
-  xmlns?: string;
-  xmlnsXlink?: string;
-  xmlSpace?: string;
-}
+import type { ISvgProps } from '../../global';
 
 const Arrow = (props: ISvgProps) => (
   <Svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width={12} height={12.317} {...props}>
