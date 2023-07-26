@@ -26,38 +26,40 @@ const SpeakerCard = (props: SpeakerCardProps) => {
 
       <Space size={16} />
 
-      <Link href={{ pathname: `/${name}`, params: { name: name } }}>
-        <StyledText font="bold" size="base" variant="primary">
-          {name}
-        </StyledText>
-      </Link>
-
-      <Space size={8} />
-
-      <View style={styles.tagline}>
-        <StyledText size="sm" variant="text" style={{ color: colors.textLight }}>
-          {truncate(50, tagline)}
-        </StyledText>
-      </View>
-
-      <Space size={16} />
-
-      {sessions.length > 0 && (
-        <TouchableOpacity
-          style={[styles.button, { borderColor: colors.tint }]}
-          onPress={() =>
-            router.push({
-              pathname: `/session/${sessions[0]?.slug}`,
-              params: { slug: sessions[0]?.slug },
-            })
-          }
-          testID="sessionButton"
-        >
-          <StyledText size="base" font="semiBold" style={[styles.buttonText, { color: colors.tint }]}>
-            Session
+      <View style={styles.details}>
+        <Link href={{ pathname: `/${name}`, params: { name: name } }}>
+          <StyledText font="bold" size="base" variant="primary">
+            {name}
           </StyledText>
-        </TouchableOpacity>
-      )}
+        </Link>
+
+        <Space size={8} />
+
+        <View style={styles.tagline}>
+          <StyledText size="sm" variant="text" style={[styles.text, { color: colors.textLight }]} numberOfLines={3}>
+            {truncate(60, tagline)}
+          </StyledText>
+        </View>
+
+        <Space size={16} />
+
+        {sessions.length > 0 && (
+          <TouchableOpacity
+            style={[styles.button, { borderColor: colors.tint }]}
+            onPress={() =>
+              router.push({
+                pathname: `/session/${sessions[0]?.slug}`,
+                params: { slug: sessions[0]?.slug },
+              })
+            }
+            testID="sessionButton"
+          >
+            <StyledText size="base" font="semiBold" style={[styles.buttonText, { color: colors.tint }]}>
+              Session
+            </StyledText>
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 };
@@ -79,10 +81,23 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
   },
+  details: {
+    width: '100%',
+    flex: 1,
+    alignItems: 'center',
+  },
   tagline: {
     width: '100%',
-    height: 60,
+    flex: 1,
+    height: 50,
+  },
+  text: {
+    textAlign: 'center',
+  },
+  bottom: {
+    width: '100%',
     alignItems: 'center',
+    flex: 1,
   },
   button: {
     width: '90%',

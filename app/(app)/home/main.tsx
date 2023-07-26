@@ -102,7 +102,7 @@ export default Main;
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    // paddingHorizontal: 10,
+    paddingHorizontal: 10,
   },
   section: {
     flex: 1,
