@@ -1,21 +1,22 @@
+import { useTheme } from '@react-navigation/native';
+import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import type { ListRenderItemInfo } from 'react-native';
+import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
+import { blurhash } from '../../../config/constants';
+import type { Speaker } from '../../../global';
+import { Speakers } from '../../../mock/speakers';
 
-// TODO: About page - implement about event page
-/**
- * -  should display an image, description and a grid view of organizing team, and an organizers card
- * -  consider reusing the image component that was used in the speakers list
- * -  clicking on the team member image should navigate to the [speaker] page
- */
-
-// TODO: Use data from mock/organizers.ts
+const { width } = Dimensions.get('window');
 
 const About = () => {
+  const { colors } = useTheme();
   const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
 
   const showSignInModal = () => {
@@ -28,7 +29,79 @@ const About = () => {
           headerRight: () => <HeaderRight handlePress={showSignInModal} />,
         }}
       />
-      <StyledText>about</StyledText>
+      <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source="https://res.cloudinary.com/khariokitony/image/upload/v1690514752/Droidcon-organizers.png"
+          placeholder={blurhash}
+          contentFit="contain"
+        />
+
+        <View style={styles.content}>
+          <StyledText font="bold" size="xl" variant="primary">
+            About
+          </StyledText>
+
+          <Space size={16} />
+
+          <StyledText font="regular" size="md">
+            Droidcon is a global conference focused on the engineering of Android applications. Droidcon provides a
+            forum for developers to network with other developers, share techniques, announce apps and products, and to
+            learn and teach.
+          </StyledText>
+
+          <Space size={8} />
+
+          <StyledText font="regular" size="md">
+            This two-day developer focused gathering will be held in Nairobi Kenya on November 8th to 10th 2023 and will
+            be the largest of its kind in Africa.
+          </StyledText>
+
+          <Space size={8} />
+
+          <StyledText font="regular" size="md">
+            It will have workshops and codelabs focused on the building of Android applications and will give
+            participants an excellent chance to learn about the local Android development ecosystem, opportunities and
+            services as well as meet the engineers and companies who work on them.
+          </StyledText>
+
+          <Space size={30} />
+
+          <StyledText font="bold" size="xl" variant="primary">
+            Organizing Team
+          </StyledText>
+
+          <Space size={20} />
+
+          <FlatList
+            data={Speakers.data}
+            numColumns={3}
+            renderItem={({ item }: ListRenderItemInfo<Speaker>) => (
+              <View style={styles.item}>
+                <Image
+                  source={{ uri: item.avatar }}
+                  style={[styles.avatar, { borderColor: colors.tint }]}
+                  contentFit="cover"
+                  placeholder={blurhash}
+                />
+                <StyledText size="sm" font="medium" style={styles.description} numberOfLines={2}>
+                  {item.name}
+                </StyledText>
+                {/**
+                 * TODO: Add a descriptive text here - from organizers endpoint
+                 */}
+              </View>
+            )}
+            keyExtractor={(item: Speaker, index: number) => index.toString()}
+            scrollEnabled={false}
+          />
+
+          {/**
+           * TODO: Add an organizers card
+           */}
+        </View>
+      </View>
+
       <View>
         <GoogleSignInModal visible={signInModalVisible} onClose={() => setSignInModalVisible(false)} />
       </View>
@@ -37,3 +110,35 @@ const About = () => {
 };
 
 export default About;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%',
+  },
+  image: {
+    width: '100%',
+    height: 225,
+  },
+  content: {
+    padding: 16,
+  },
+  item: {
+    flex: 1,
+    marginHorizontal: 16,
+    marginBottom: 8,
+    alignItems: 'center',
+    width: width / 3,
+    paddingVertical: 8,
+  },
+  avatar: {
+    width: '100%',
+    height: 100,
+    borderRadius: 12,
+    borderWidth: 2,
+  },
+  description: {
+    textAlign: 'center',
+    marginVertical: 8,
+  },
+});

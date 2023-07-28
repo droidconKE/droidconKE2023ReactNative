@@ -2,6 +2,7 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import React from 'react';
+import CogIcon from '../../../assets/artworks/CogIcon';
 import MainHeader from '../../../components/headers/MainHeader';
 
 export default () => {
@@ -77,7 +78,7 @@ export default () => {
         name="about"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="settings" size={24} color={focused ? colors.primary : color} />
+            <CogIcon width={24} height={24} color={focused ? colors.primary : color} />
           ),
           tabBarLabel: 'About',
           headerTintColor: colors.text,
