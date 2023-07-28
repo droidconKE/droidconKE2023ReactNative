@@ -22,6 +22,7 @@ const About = () => {
   const showSignInModal = () => {
     setSignInModalVisible(true);
   };
+  const OrganizingIndividuals = OrganizingTeam.data.filter((item) => item.type === 'individual');
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
@@ -74,7 +75,7 @@ const About = () => {
           <Space size={20} />
 
           <FlatList
-            data={OrganizingTeam.data}
+            data={OrganizingIndividuals}
             numColumns={3}
             renderItem={({ item }: ListRenderItemInfo<OrganizingTeamMember>) => (
               <View style={styles.item}>
