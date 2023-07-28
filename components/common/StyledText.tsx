@@ -8,7 +8,7 @@ type StyledTextProps = {
   children: React.ReactNode;
   size?: 'xs' | 'sm' | 'base' | 'md' | 'lg' | 'xl';
   font?: 'bold' | 'regular' | 'medium' | 'semiBold' | 'light';
-  variant?: 'text' | 'link' | 'primary';
+  variant?: 'text' | 'link' | 'primary' | 'secondary';
   style?: StyleProp<TextStyle>;
 };
 
@@ -51,6 +51,7 @@ const StyledText = ({
     text: colors.text,
     link: colors.link,
     primary: colors.primary,
+    secondary: colors.secondary,
   };
 
   return (

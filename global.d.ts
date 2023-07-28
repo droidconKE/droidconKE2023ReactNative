@@ -183,7 +183,8 @@ export interface IDateForDayButton {
   date: string;
   key: string;
 }
-type OrganizingTeam = {
+
+export type OrganizingTeamMember = {
   name: string;
   tagline: string;
   link: string;
@@ -195,5 +196,5 @@ type OrganizingTeam = {
   created_at: string;
 };
 export interface IOrganizingTeam {
-  data: Array<OrganizingTeam>;
+  data: Array<OrganizingTeamMember>;
 }

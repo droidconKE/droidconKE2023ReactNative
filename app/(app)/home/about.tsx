@@ -10,8 +10,8 @@ import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
 import { blurhash } from '../../../config/constants';
-import type { Speaker } from '../../../global';
-import { Speakers } from '../../../mock/speakers';
+import type { OrganizingTeamMember } from '../../../global';
+import { OrganizingTeam } from '../../../mock/organizingTeam';
 
 const { width } = Dimensions.get('window');
 
@@ -74,25 +74,25 @@ const About = () => {
           <Space size={20} />
 
           <FlatList
-            data={Speakers.data}
+            data={OrganizingTeam.data}
             numColumns={3}
-            renderItem={({ item }: ListRenderItemInfo<Speaker>) => (
+            renderItem={({ item }: ListRenderItemInfo<OrganizingTeamMember>) => (
               <View style={styles.item}>
                 <Image
-                  source={{ uri: item.avatar }}
+                  source={{ uri: item.photo }}
                   style={[styles.avatar, { borderColor: colors.tint }]}
                   contentFit="cover"
                   placeholder={blurhash}
                 />
-                <StyledText size="sm" font="medium" style={styles.description} numberOfLines={2}>
+                <StyledText size="base" font="medium" style={styles.name} numberOfLines={2}>
                   {item.name}
                 </StyledText>
-                {/**
-                 * TODO: Add a descriptive text here - from organizers endpoint
-                 */}
+                <StyledText size="sm" font="regular" variant="secondary" style={styles.description} numberOfLines={2}>
+                  {item.tagline}
+                </StyledText>
               </View>
             )}
-            keyExtractor={(item: Speaker, index: number) => index.toString()}
+            keyExtractor={(item: OrganizingTeamMember, index: number) => index.toString()}
             scrollEnabled={false}
           />
 
@@ -137,8 +137,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
   },
-  description: {
+  name: {
     textAlign: 'center',
     marginVertical: 8,
+  },
+  description: {
+    textAlign: 'center',
   },
 });
