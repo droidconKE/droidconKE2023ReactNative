@@ -1,15 +1,15 @@
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import type { ListRenderItemInfo } from 'react-native';
-import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import { Dimensions, FlatList, Pressable, StyleSheet, View } from 'react-native';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
-import { blurhash } from '../../../config/constants';
+import { blurhash, WIDE_BLURHASH } from '../../../config/constants';
 import type { OrganizingTeamMember } from '../../../global';
 import { OrganizingTeam } from '../../../mock/organizingTeam';
 
@@ -17,6 +17,8 @@ const { width } = Dimensions.get('window');
 
 const About = () => {
   const { colors } = useTheme();
+  const router = useRouter();
+
   const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
 
   const showSignInModal = () => {
@@ -34,7 +36,7 @@ const About = () => {
         <Image
           style={styles.image}
           source="https://res.cloudinary.com/khariokitony/image/upload/v1690514752/Droidcon-organizers.png"
-          placeholder={blurhash}
+          placeholder={WIDE_BLURHASH}
           contentFit="contain"
         />
 
@@ -79,12 +81,12 @@ const About = () => {
             numColumns={3}
             renderItem={({ item }: ListRenderItemInfo<OrganizingTeamMember>) => (
               <View style={styles.item}>
-                <Image
-                  source={{ uri: item.photo }}
-                  style={[styles.avatar, { borderColor: colors.tint }]}
-                  contentFit="cover"
-                  placeholder={blurhash}
-                />
+                <Pressable
+                  style={[styles.pressable, { borderColor: colors.tint }]}
+                  onPress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
+                >
+                  <Image source={{ uri: item.photo }} style={styles.avatar} contentFit="cover" placeholder={blurhash} />
+                </Pressable>
                 <StyledText size="base" font="medium" style={styles.name} numberOfLines={2}>
                   {item.name}
                 </StyledText>
@@ -115,7 +117,7 @@ export default About;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
+    width: width,
   },
   image: {
     width: '100%',
@@ -132,11 +134,16 @@ const styles = StyleSheet.create({
     width: width / 3,
     paddingVertical: 8,
   },
-  avatar: {
+  pressable: {
     width: '100%',
     height: 100,
     borderRadius: 12,
     borderWidth: 2,
+  },
+  avatar: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
   },
   name: {
     textAlign: 'center',
