@@ -1,22 +1,21 @@
-import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Stack, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import type { ListRenderItemInfo } from 'react-native';
-import { Dimensions, FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import OrganizerCard from '../../../components/cards/OrganizerCard';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
-import { blurhash, WIDE_BLURHASH } from '../../../config/constants';
+import { WIDE_BLURHASH } from '../../../config/constants';
 import type { OrganizingTeamMember } from '../../../global';
 import { OrganizingTeam } from '../../../mock/organizingTeam';
 
 const { width } = Dimensions.get('window');
 
 const About = () => {
-  const { colors } = useTheme();
   const router = useRouter();
 
   const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
@@ -80,20 +79,12 @@ const About = () => {
             data={OrganizingIndividuals}
             numColumns={3}
             renderItem={({ item }: ListRenderItemInfo<OrganizingTeamMember>) => (
-              <View style={styles.item}>
-                <Pressable
-                  style={[styles.pressable, { borderColor: colors.tint }]}
-                  onPress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
-                >
-                  <Image source={{ uri: item.photo }} style={styles.avatar} contentFit="cover" placeholder={blurhash} />
-                </Pressable>
-                <StyledText size="base" font="medium" style={styles.name} numberOfLines={2}>
-                  {item.name}
-                </StyledText>
-                <StyledText size="sm" font="regular" variant="secondary" style={styles.description} numberOfLines={2}>
-                  {item.tagline}
-                </StyledText>
-              </View>
+              <OrganizerCard
+                name={item.name}
+                photo={item.photo}
+                tagline={item.tagline}
+                handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
+              />
             )}
             keyExtractor={(item: OrganizingTeamMember, index: number) => index.toString()}
             scrollEnabled={false}
@@ -120,36 +111,10 @@ const styles = StyleSheet.create({
     width: width,
   },
   image: {
-    width: '100%',
+    width: width,
     height: 225,
   },
   content: {
     padding: 16,
-  },
-  item: {
-    flex: 1,
-    marginHorizontal: 16,
-    marginBottom: 8,
-    alignItems: 'center',
-    width: width / 3,
-    paddingVertical: 8,
-  },
-  pressable: {
-    width: '100%',
-    height: 100,
-    borderRadius: 12,
-    borderWidth: 2,
-  },
-  avatar: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 10,
-  },
-  name: {
-    textAlign: 'center',
-    marginVertical: 8,
-  },
-  description: {
-    textAlign: 'center',
   },
 });

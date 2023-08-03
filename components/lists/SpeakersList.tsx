@@ -1,13 +1,12 @@
 import { useTheme } from '@react-navigation/native';
-import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import type { ListRenderItemInfo } from 'react-native';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { blurhash } from '../../config/constants';
 import type { Speaker } from '../../global';
 import { Speakers } from '../../mock/speakers';
 import ViewAllButton from '../buttons/ViewAllButton';
+import OrganizerCard from '../cards/OrganizerCard';
 import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
@@ -27,25 +26,22 @@ const SpeakersList = () => {
         <ViewAllButton onPress={() => router.push('/speakers')} label={`+${speakersCount}`} />
       </Row>
       <Space size={16} />
-      <FlatList
-        data={speakers}
-        renderItem={({ item }: ListRenderItemInfo<Speaker>) => (
-          <View style={styles.item}>
-            <Image
-              source={{ uri: item.avatar }}
-              style={[styles.image, { borderColor: colors.tint }]}
-              contentFit="contain"
-              placeholder={blurhash}
+
+      <View style={styles.listContainer}>
+        <FlatList
+          data={speakers}
+          renderItem={({ item }: ListRenderItemInfo<Speaker>) => (
+            <OrganizerCard
+              name={item.name}
+              photo={item.avatar}
+              handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
             />
-            <StyledText size="sm" font="medium" style={styles.description} numberOfLines={2}>
-              {item.name}
-            </StyledText>
-          </View>
-        )}
-        keyExtractor={(item: Speaker, index: number) => index.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      />
+          )}
+          keyExtractor={(item: Speaker, index: number) => index.toString()}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
     </View>
   );
 };
@@ -56,23 +52,9 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     paddingHorizontal: 16,
-    marginBottom: 16,
   },
-  item: {
+  listContainer: {
     flex: 1,
-    marginHorizontal: 8,
-    alignItems: 'center',
-    width: 80,
-    paddingVertical: 8,
-  },
-  image: {
-    width: 80,
-    height: 80,
-    borderRadius: 12,
-    borderWidth: 2,
-  },
-  description: {
-    textAlign: 'center',
-    marginVertical: 8,
+    height: 180,
   },
 });
