@@ -17,6 +17,7 @@ export const theme_colors: ThemeColors = {
     bgInverse: '#20201E',
     whiteConstant: '#FFFFFF',
     iconSwitch: '#20201E',
+    placeHolder: '#C3C3C3',
   },
   dark: {
     primary: '#00E2C3',
@@ -34,5 +35,6 @@ export const theme_colors: ThemeColors = {
     bgInverse: '#F5F5F5',
     whiteConstant: '#FFFFFF',
     iconSwitch: '#20201E',
+    placeHolder: '#C3C3C3',
   },
 };

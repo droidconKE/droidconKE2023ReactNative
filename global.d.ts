@@ -23,6 +23,7 @@ declare module '@react-navigation/native' {
       bgInverse: string;
       whiteConstant: string;
       iconSwitch: string;
+      placeHolder: string;
     };
   };
 
