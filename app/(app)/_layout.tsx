@@ -33,10 +33,7 @@ export default () => {
       <Stack.Screen
         name="feedback"
         options={{
-          headerTintColor: colors.text,
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
+          headerShown: false,
         }}
       />
       <Stack.Screen
