@@ -2,8 +2,8 @@ import { AntDesign } from '@expo/vector-icons';
 import type { ExtendedTheme } from '@react-navigation/native';
 import { useTheme } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
-import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import FeedBackBanner from '../../assets/artworks/FeedBackBanner';
 import StyledText from '../../components/common/StyledText';
@@ -20,8 +20,38 @@ import { typography } from '../../config/typography';
 const Feedback = () => {
   const { colors } = useTheme();
   const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
   return (
     <MainContainer preset="scroll" safeAreaEdges={['top']}>
+      <Modal visible={showModal} transparent>
+        <View
+          style={{
+            justifyContent: 'center',
+            backgroundColor: 'hsla(60, 3%, 12%, 0.52)',
+            flex: 1,
+            alignItems: 'center',
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: colors.whiteConstant,
+              opacity: 1,
+              width: '90%',
+              borderRadius: 10,
+              minHeight: 367,
+              paddingHorizontal: 75,
+              paddingTop: 45,
+            }}
+          >
+            <StyledText font="bold" size="lg">
+              Thank you for your feedback
+            </StyledText>
+            <Pressable style={coloredStyles(colors).pressableSubmit} onPress={() => setShowModal(false)}>
+              <StyledText style={coloredStyles(colors).pressableSubmitText}>OKAY</StyledText>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.FeedBackBannerParent}>
         <FeedBackBanner />
         <Pressable style={styles.headerTitle} onPress={() => router.back()}>
@@ -63,7 +93,7 @@ const Feedback = () => {
             placeholderTextColor={colors.placeHolder}
           />
         </View>
-        <Pressable style={coloredStyles(colors).pressableSubmit}>
+        <Pressable style={coloredStyles(colors).pressableSubmit} onPress={() => setShowModal(true)}>
           <StyledText style={coloredStyles(colors).pressableSubmitText}>SUBMIT FEEDBACK</StyledText>
         </Pressable>
       </View>
@@ -129,7 +159,6 @@ const coloredStyles = (colors: ExtendedTheme['colors']) =>
     pressableSubmit: {
       marginTop: 26,
       backgroundColor: colors.primary,
-      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 10,
