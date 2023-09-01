@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { Stack, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import type { ListRenderItemInfo } from 'react-native';
-import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import OrganizerCard from '../../../components/cards/OrganizerCard';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
@@ -12,8 +12,6 @@ import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
 import { WIDE_BLURHASH } from '../../../config/constants';
 import type { OrganizingTeamMember } from '../../../global';
 import { OrganizingTeam } from '../../../mock/organizingTeam';
-
-const { width } = Dimensions.get('window');
 
 const About = () => {
   const router = useRouter();
@@ -108,11 +106,12 @@ export default About;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: width,
+    width: '100%',
   },
   image: {
-    width: width,
+    width: '100%',
     height: 225,
+    backgroundColor: '#0553',
   },
   content: {
     padding: 16,
