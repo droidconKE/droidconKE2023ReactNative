@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { Stack, useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import type { ListRenderItemInfo } from 'react-native';
 import { FlatList, StyleSheet, View } from 'react-native';
 import OrganizerCard from '../../../components/cards/OrganizerCard';
@@ -21,7 +21,22 @@ const About = () => {
   const showSignInModal = () => {
     setSignInModalVisible(true);
   };
+
   const OrganizingIndividuals = OrganizingTeam.data.filter((item) => item.type === 'individual');
+
+  const renderOrganizingTeam = useCallback(
+    ({ item }: ListRenderItemInfo<OrganizingTeamMember>) => (
+      <OrganizerCard
+        name={item.name}
+        photo={item.photo}
+        tagline={item.tagline}
+        handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
+      />
+    ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
@@ -77,16 +92,11 @@ const About = () => {
           <FlatList
             data={OrganizingIndividuals}
             numColumns={3}
-            renderItem={({ item }: ListRenderItemInfo<OrganizingTeamMember>) => (
-              <OrganizerCard
-                name={item.name}
-                photo={item.photo}
-                tagline={item.tagline}
-                handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
-              />
-            )}
+            renderItem={renderOrganizingTeam}
             keyExtractor={(item: OrganizingTeamMember, index: number) => index.toString()}
             scrollEnabled={false}
+            removeClippedSubviews
+            initialNumToRender={12}
           />
 
           {/**

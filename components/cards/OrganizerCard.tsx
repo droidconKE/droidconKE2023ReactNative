@@ -1,5 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
+import { memo } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { blurhash } from '../../config/constants';
 import { truncate } from '../../util/helpers';
@@ -34,7 +35,7 @@ const OrganizerCard = ({ name, photo, tagline, handlePress }: OrganizerCardProps
   );
 };
 
-export default OrganizerCard;
+export default memo(OrganizerCard);
 
 const styles = StyleSheet.create({
   item: {
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     alignItems: 'center',
     width: 108,
-    paddingVertical: 8,
+    height: 180,
+    paddingVertical: 4,
   },
   pressable: {
     width: '100%',
