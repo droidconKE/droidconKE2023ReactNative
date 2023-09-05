@@ -27,12 +27,13 @@ const About = () => {
       <Stack.Screen
         options={{
           headerRight: () => <HeaderRight handlePress={showSignInModal} />,
+          animation: 'none',
         }}
       />
       <View style={styles.container}>
         <Image
           style={styles.image}
-          source="https://res.cloudinary.com/khariokitony/image/upload/v1690514752/Droidcon-organizers.png"
+          source={require('../../../assets/images/about.jpg')}
           placeholder={WIDE_BLURHASH}
           contentFit="contain"
         />
@@ -111,7 +112,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 225,
-    backgroundColor: '#0553',
   },
   content: {
     padding: 16,
