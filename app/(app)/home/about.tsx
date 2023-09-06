@@ -1,8 +1,8 @@
+import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 import { Stack, useRouter } from 'expo-router';
-import React, { useCallback, useState } from 'react';
-import type { ListRenderItemInfo } from 'react-native';
-import { FlatList, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import OrganizerCard from '../../../components/cards/OrganizerCard';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
@@ -23,19 +23,6 @@ const About = () => {
   };
 
   const OrganizingIndividuals = OrganizingTeam.data.filter((item) => item.type === 'individual');
-
-  const renderOrganizingTeam = useCallback(
-    ({ item }: ListRenderItemInfo<OrganizingTeamMember>) => (
-      <OrganizerCard
-        name={item.name}
-        photo={item.photo}
-        tagline={item.tagline}
-        handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
-      />
-    ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
 
   return (
     <MainContainer preset="scroll">
@@ -88,21 +75,28 @@ const About = () => {
           </StyledText>
 
           <Space size={20} />
+        </View>
 
-          <FlatList
+        <View style={styles.listContainer}>
+          <FlashList
             data={OrganizingIndividuals}
             numColumns={3}
-            renderItem={renderOrganizingTeam}
+            renderItem={({ item }) => (
+              <OrganizerCard
+                name={item.name}
+                photo={item.photo}
+                tagline={item.tagline}
+                handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
+              />
+            )}
             keyExtractor={(item: OrganizingTeamMember, index: number) => index.toString()}
-            scrollEnabled={false}
-            removeClippedSubviews
-            initialNumToRender={12}
+            estimatedItemSize={50}
           />
-
-          {/**
-           * TODO: Add an organizers card
-           */}
         </View>
+
+        {/**
+         * TODO: Add an organizers card
+         */}
       </View>
 
       <View>
@@ -125,5 +119,10 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 16,
+  },
+  listContainer: {
+    width: '100%',
+    height: '100%',
+    paddingHorizontal: 12,
   },
 });

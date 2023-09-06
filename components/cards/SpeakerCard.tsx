@@ -69,6 +69,7 @@ export default SpeakerCard;
 const styles = StyleSheet.create({
   card: {
     width: width / 2 - 24,
+    height: 280,
     borderRadius: 10,
     paddingVertical: 16,
     paddingHorizontal: 8,
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   tagline: {
     width: '100%',
     flex: 1,
-    height: 50,
+    height: 40,
   },
   text: {
     textAlign: 'center',

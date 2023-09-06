@@ -22,15 +22,18 @@ const OrganizerCard = ({ name, photo, tagline, handlePress }: OrganizerCardProps
         <Image source={{ uri: photo }} style={styles.avatar} contentFit="cover" placeholder={blurhash} />
       </Pressable>
       <View style={styles.textContainer}>
-        <StyledText size="base" font="medium" style={styles.name} numberOfLines={2}>
-          {name}
-        </StyledText>
+        <View style={styles.title}>
+          <StyledText size="base" font="medium" style={styles.name} numberOfLines={2}>
+            {name}
+          </StyledText>
+        </View>
+
+        {tagline && (
+          <StyledText size="sm" font="regular" variant="secondary" style={styles.description} numberOfLines={2}>
+            {truncate(50, tagline)}
+          </StyledText>
+        )}
       </View>
-      {tagline && (
-        <StyledText size="sm" font="regular" variant="secondary" style={styles.description} numberOfLines={2}>
-          {truncate(50, tagline)}
-        </StyledText>
-      )}
     </View>
   );
 };
@@ -39,12 +42,11 @@ export default memo(OrganizerCard);
 
 const styles = StyleSheet.create({
   item: {
-    flex: 1,
     marginHorizontal: 8,
     marginBottom: 8,
     alignItems: 'center',
     width: 108,
-    height: 180,
+    height: 200,
     paddingVertical: 4,
   },
   pressable: {
@@ -63,11 +65,16 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 10,
   },
+  title: {
+    marginTop: 4,
+    height: 40,
+    textAlign: 'center',
+  },
   name: {
     textAlign: 'center',
-    marginVertical: 8,
   },
   description: {
+    flex: 1,
     textAlign: 'center',
   },
 });

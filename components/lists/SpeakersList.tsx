@@ -1,8 +1,8 @@
 import { useTheme } from '@react-navigation/native';
+import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import type { ListRenderItemInfo } from 'react-native';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import type { Speaker } from '../../global';
 import { Speakers } from '../../mock/speakers';
 import ViewAllButton from '../buttons/ViewAllButton';
@@ -10,6 +10,8 @@ import OrganizerCard from '../cards/OrganizerCard';
 import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
+
+const { width } = Dimensions.get('window');
 
 const SpeakersList = () => {
   const { colors } = useTheme();
@@ -25,12 +27,13 @@ const SpeakersList = () => {
         </StyledText>
         <ViewAllButton onPress={() => router.push('/speakers')} label={`+${speakersCount}`} />
       </Row>
+
       <Space size={16} />
 
       <View style={styles.listContainer}>
-        <FlatList
+        <FlashList
           data={speakers}
-          renderItem={({ item }: ListRenderItemInfo<Speaker>) => (
+          renderItem={({ item }) => (
             <OrganizerCard
               name={item.name}
               photo={item.avatar}
@@ -40,6 +43,7 @@ const SpeakersList = () => {
           keyExtractor={(item: Speaker, index: number) => index.toString()}
           horizontal
           showsHorizontalScrollIndicator={false}
+          estimatedItemSize={25}
         />
       </View>
     </View>
@@ -51,10 +55,10 @@ export default SpeakersList;
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-    paddingHorizontal: 16,
   },
   listContainer: {
     flex: 1,
-    height: 180,
+    height: 200,
+    width: width - 32,
   },
 });
