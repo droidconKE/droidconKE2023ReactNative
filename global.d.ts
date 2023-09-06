@@ -183,3 +183,18 @@ export interface IDateForDayButton {
   date: string;
   key: string;
 }
+
+export type OrganizingTeamMember = {
+  name: string;
+  tagline: string;
+  link: string;
+  type: string;
+  bio: string;
+  twitter_handle: string;
+  designation: string;
+  photo: string;
+  created_at: string;
+};
+export interface IOrganizingTeam {
+  data: Array<OrganizingTeamMember>;
+}

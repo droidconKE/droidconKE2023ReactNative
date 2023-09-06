@@ -1,34 +1,104 @@
-import { Stack } from 'expo-router';
+import { FlashList } from '@shopify/flash-list';
+import { Image } from 'expo-image';
+import { Stack, useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import OrganizerCard from '../../../components/cards/OrganizerCard';
+import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
-
-// TODO: About page - implement about event page
-/**
- * -  should display an image, description and a grid view of organizing team, and an organizers card
- * -  consider reusing the image component that was used in the speakers list
- * -  clicking on the team member image should navigate to the [speaker] page
- */
-
-// TODO: Use data from mock/organizers.ts
+import { WIDE_BLURHASH } from '../../../config/constants';
+import type { OrganizingTeamMember } from '../../../global';
+import { OrganizingTeam } from '../../../mock/organizingTeam';
 
 const About = () => {
+  const router = useRouter();
+
   const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
 
   const showSignInModal = () => {
     setSignInModalVisible(true);
   };
+
+  const OrganizingIndividuals = OrganizingTeam.data.filter((item) => item.type === 'individual');
+
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
           headerRight: () => <HeaderRight handlePress={showSignInModal} />,
+          animation: 'none',
         }}
       />
-      <StyledText>about</StyledText>
+      <View style={styles.container}>
+        <Image
+          style={styles.image}
+          source={require('../../../assets/images/about.jpg')}
+          placeholder={WIDE_BLURHASH}
+          contentFit="contain"
+        />
+
+        <View style={styles.content}>
+          <StyledText font="bold" size="xl" variant="primary">
+            About
+          </StyledText>
+
+          <Space size={16} />
+
+          <StyledText font="regular" size="md">
+            Droidcon is a global conference focused on the engineering of Android applications. Droidcon provides a
+            forum for developers to network with other developers, share techniques, announce apps and products, and to
+            learn and teach.
+          </StyledText>
+
+          <Space size={8} />
+
+          <StyledText font="regular" size="md">
+            This two-day developer focused gathering will be held in Nairobi Kenya on November 8th to 10th 2023 and will
+            be the largest of its kind in Africa.
+          </StyledText>
+
+          <Space size={8} />
+
+          <StyledText font="regular" size="md">
+            It will have workshops and codelabs focused on the building of Android applications and will give
+            participants an excellent chance to learn about the local Android development ecosystem, opportunities and
+            services as well as meet the engineers and companies who work on them.
+          </StyledText>
+
+          <Space size={30} />
+
+          <StyledText font="bold" size="xl" variant="primary">
+            Organizing Team
+          </StyledText>
+
+          <Space size={20} />
+        </View>
+
+        <View style={styles.listContainer}>
+          <FlashList
+            data={OrganizingIndividuals}
+            numColumns={3}
+            renderItem={({ item }) => (
+              <OrganizerCard
+                name={item.name}
+                photo={item.photo}
+                tagline={item.tagline}
+                handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
+              />
+            )}
+            keyExtractor={(item: OrganizingTeamMember, index: number) => index.toString()}
+            estimatedItemSize={50}
+          />
+        </View>
+
+        {/**
+         * TODO: Add an organizers card
+         */}
+      </View>
+
       <View>
         <GoogleSignInModal visible={signInModalVisible} onClose={() => setSignInModalVisible(false)} />
       </View>
@@ -37,3 +107,22 @@ const About = () => {
 };
 
 export default About;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%',
+  },
+  image: {
+    width: '100%',
+    height: 225,
+  },
+  content: {
+    padding: 16,
+  },
+  listContainer: {
+    width: '100%',
+    height: '100%',
+    paddingHorizontal: 12,
+  },
+});
