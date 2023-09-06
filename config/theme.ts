@@ -18,6 +18,8 @@ export const theme_colors: ThemeColors = {
     whiteConstant: '#FFFFFF',
     iconSwitch: '#20201E',
     placeHolder: '#C3C3C3',
+    borderColor: '#F5F5F5',
+    assetAccent: '#000CEB',
   },
   dark: {
     primary: '#00E2C3',
@@ -36,5 +38,7 @@ export const theme_colors: ThemeColors = {
     whiteConstant: '#FFFFFF',
     iconSwitch: '#20201E',
     placeHolder: '#C3C3C3',
+    borderColor: '#707070',
+    assetAccent: '#000000',
   },
 };

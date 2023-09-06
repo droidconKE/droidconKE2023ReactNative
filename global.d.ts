@@ -24,6 +24,8 @@ declare module '@react-navigation/native' {
       whiteConstant: string;
       iconSwitch: string;
       placeHolder: string;
+      borderColor: string;
+      assetAccent: string;
     };
   };
 
