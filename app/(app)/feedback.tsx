@@ -1,100 +1,79 @@
 import { AntDesign } from '@expo/vector-icons';
-import type { ExtendedTheme } from '@react-navigation/native';
 import { useTheme } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import FeedBackBanner from '../../assets/artworks/FeedBackBanner';
+import FeedBackRatingButton from '../../components/buttons/FeedBackRatingButton';
 import StyledText from '../../components/common/StyledText';
 import MainContainer from '../../components/container/MainContainer';
+import FeedbackSentModal from '../../components/modals/FeedbackSentModal';
 import { typography } from '../../config/typography';
 
-// TODO: implement feedback page
-/**
- * TASKS:
- * Implement feedback page
- * Should include a reactions component, a textarea and button
- */
+export type TypeRatingStates = {
+  icon: string;
+  text: string;
+  value: number;
+};
 
 const Feedback = () => {
   const { colors } = useTheme();
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [_selectedRating, setSelectedRating] = useState(2);
+  const [description, setDescription] = useState('');
+  const ratingStates: Array<TypeRatingStates> = [
+    { icon: '😔', text: 'Bad', value: 0 },
+    { icon: '😐', text: 'Okay', value: 1 },
+    { icon: '😊', text: 'Great', value: 2 },
+  ];
+
   return (
     <MainContainer preset="scroll" safeAreaEdges={['top']}>
-      <Modal visible={showModal} transparent>
-        <View
-          style={{
-            justifyContent: 'center',
-            backgroundColor: 'hsla(60, 3%, 12%, 0.52)',
-            flex: 1,
-            alignItems: 'center',
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: colors.whiteConstant,
-              opacity: 1,
-              width: '90%',
-              borderRadius: 10,
-              minHeight: 367,
-              paddingHorizontal: 75,
-              paddingTop: 45,
-            }}
-          >
-            <StyledText font="bold" size="lg">
-              Thank you for your feedback
-            </StyledText>
-            <Pressable style={coloredStyles(colors).pressableSubmit} onPress={() => setShowModal(false)}>
-              <StyledText style={coloredStyles(colors).pressableSubmitText}>OKAY</StyledText>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
+      <FeedbackSentModal showModal={showModal} />
       <View style={styles.FeedBackBannerParent}>
         <FeedBackBanner />
         <Pressable style={styles.headerTitle} onPress={() => router.back()}>
           <AntDesign name="arrowleft" size={24} color={'white'} />
-          <StyledText style={coloredStyles(colors).headerText}>Feedback</StyledText>
+          <StyledText style={[{ color: colors.whiteConstant }]} size="lg">
+            Feedback
+          </StyledText>
         </Pressable>
       </View>
       <View style={styles.FeedBackFormContainer}>
-        <StyledText size="lg" font="bold" variant="text" style={coloredStyles(colors).FeedBackFormTitle}>
+        <StyledText size="lg" font="bold" variant="text" style={[styles.FeedBackFormTitle, { color: colors.primary }]}>
           Your feedback helps us improve
         </StyledText>
-        <View style={styles.FeedBackForm}>
+        <View style={[styles.FeedBackForm, { backgroundColor: colors.background, borderColor: colors.border }]}>
           <StyledText style={styles.FeedBackFormLabel} size="md">
             How is/was the event
           </StyledText>
           <View style={styles.FeedBackFormRatingContainer}>
-            <Pressable style={coloredStyles(colors).pressableEmoji}>
-              <Text style={styles.FormRatingText}>😔</Text>
-              <StyledText font="bold" size="sm">
-                Bad
-              </StyledText>
-            </Pressable>
-            <Pressable style={coloredStyles(colors).pressableEmoji}>
-              <Text style={styles.FormRatingText}>😐</Text>
-              <StyledText font="bold" size="sm">
-                Ok
-              </StyledText>
-            </Pressable>
-            <Pressable style={coloredStyles(colors).pressableEmoji}>
-              <Text style={styles.FormRatingText}>😊</Text>
-              <StyledText font="bold" size="sm">
-                Great
-              </StyledText>
-            </Pressable>
+            {ratingStates.map((rating, index) => {
+              return <FeedBackRatingButton rating={rating} key={index} onPress={setSelectedRating} />;
+            })}
           </View>
-          <TextInput
-            style={coloredStyles(colors).feedbackInput}
-            placeholder="Type message here"
-            placeholderTextColor={colors.placeHolder}
-          />
         </View>
-        <Pressable style={coloredStyles(colors).pressableSubmit} onPress={() => setShowModal(true)}>
-          <StyledText style={coloredStyles(colors).pressableSubmitText}>SUBMIT FEEDBACK</StyledText>
+        <TextInput
+          style={[
+            styles.feedbackInput,
+            { backgroundColor: colors.bg, borderColor: colors.borderColor, color: colors.bgInverse },
+          ]}
+          placeholder="Type message here"
+          placeholderTextColor={colors.placeHolder}
+          value={description}
+          onChangeText={setDescription}
+        />
+        <Pressable
+          style={[styles.pressableSubmit, { backgroundColor: colors.assetAccent }]}
+          onPress={() => {
+            setShowModal(true);
+          }}
+        >
+          <StyledText style={[styles.pressableSubmitText]} font="bold">
+            SUBMIT FEEDBACK
+          </StyledText>
         </Pressable>
       </View>
     </MainContainer>
@@ -116,13 +95,16 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     position: 'relative',
   },
+  FeedBackForm: {
+    flex: 1,
+    marginTop: 29,
+    paddingTop: 17,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
   FeedBackFormContainer: {
     paddingTop: 30,
     width: '90%',
-  },
-  FeedBackForm: {
-    flex: 1,
-    paddingTop: 46,
   },
   FeedBackFormLabel: {
     textAlign: 'center',
@@ -134,47 +116,29 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     paddingBottom: 57,
   },
-  FormRatingText: {
-    fontSize: 30,
+  FeedBackFormTitle: {
+    textAlign: 'center',
+  },
+  pressableSubmit: {
+    marginTop: 26,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    height: 45,
+  },
+  pressableSubmitText: {
+    color: 'white',
+  },
+  feedbackInput: {
+    marginTop: 30,
+    paddingLeft: 20,
+    paddingTop: 12,
+    minHeight: 115,
+    textAlignVertical: 'top',
+    borderRadius: 7,
+    borderWidth: 1,
+    fontFamily: typography.primary.light,
   },
 });
 
-const coloredStyles = (colors: ExtendedTheme['colors']) =>
-  StyleSheet.create({
-    FeedBackFormTitle: {
-      color: colors.primary,
-      textAlign: 'center',
-    },
-    headerText: {
-      color: colors.whiteConstant,
-    },
-    pressableEmoji: {
-      minWidth: 67,
-      minHeight: 67,
-      backgroundColor: colors.bg,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 4,
-    },
-    pressableSubmit: {
-      marginTop: 26,
-      backgroundColor: colors.primary,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 10,
-      height: 45,
-    },
-    pressableSubmitText: {
-      color: 'white',
-    },
-    feedbackInput: {
-      paddingLeft: 20,
-      paddingTop: 12,
-      backgroundColor: colors.bg,
-      minHeight: 115,
-      textAlignVertical: 'top',
-      borderRadius: 7,
-      fontFamily: typography.primary.light,
-    },
-  });
 export default Feedback;
