@@ -1,5 +1,5 @@
 import { useTheme } from '@react-navigation/native';
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { ClipPath, Defs, G, Path } from 'react-native-svg';
@@ -10,7 +10,7 @@ export interface ISvgProps extends SvgProps {
   xmlSpace?: string;
 }
 
-function FeedBackBanner(props: ISvgProps) {
+const FeedBackBanner = (props: ISvgProps) => {
   const { colors } = useTheme();
   const originalWidth = 412;
   const originalHeight = 179;
@@ -26,12 +26,17 @@ function FeedBackBanner(props: ISvgProps) {
       >
         <Defs>
           <ClipPath id="a">
-            <Path data-name="Rectangle 693" transform="translate(232 -402)" fill={colors.primary} d="M0 0H412V179H0z" />
+            <Path
+              data-name="Rectangle 693"
+              transform="translate(232 -402)"
+              fill={colors.assetAccent}
+              d="M0 0H412V179H0z"
+            />
           </ClipPath>
         </Defs>
         <G data-name="Group 383">
           <G data-name="Group 382">
-            <Path data-name="Rectangle 691" fill={colors.primary} d="M0 0H412V179H0z" />
+            <Path data-name="Rectangle 691" fill={colors.assetAccent} d="M0 0H412V179H0z" />
             <G data-name="Mask Group 1" transform="translate(-232 402)" clipPath="url(#a)">
               <G transform="translate(338.688 -465.155)">
                 <Path
@@ -53,7 +58,7 @@ function FeedBackBanner(props: ISvgProps) {
       </Svg>
     </View>
   );
-}
+};
 const styles = (aspectRatio: number) => {
   return StyleSheet.create({
     svgContainer: {
