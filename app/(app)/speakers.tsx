@@ -1,8 +1,9 @@
 import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
+import { FlashList } from '@shopify/flash-list';
 import { Stack, useRouter } from 'expo-router';
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import SpeakerCard from '../../components/cards/SpeakerCard';
 import Space from '../../components/common/Space';
 import MainContainer from '../../components/container/MainContainer';
@@ -42,12 +43,15 @@ const SpeakersPage = () => {
       <View style={styles.main}>
         <Space size={16} />
 
-        <FlatList
-          data={data}
-          numColumns={2}
-          renderItem={({ item }) => <SpeakerCard {...item} />}
-          keyExtractor={(_, index) => index.toString()}
-        />
+        <View style={styles.listContainer}>
+          <FlashList
+            data={data}
+            renderItem={({ item }) => <SpeakerCard {...item} />}
+            keyExtractor={(_, index: number) => index.toString()}
+            numColumns={2}
+            estimatedItemSize={100}
+          />
+        </View>
 
         <Space size={16} />
       </View>
@@ -61,5 +65,9 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     paddingHorizontal: 10,
+  },
+  listContainer: {
+    flex: 1,
+    width: '100%',
   },
 });
