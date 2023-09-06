@@ -2,7 +2,6 @@ import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { memo } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import { blurhash } from '../../config/constants';
 import { truncate } from '../../util/helpers';
 import StyledText from '../common/StyledText';
 
@@ -19,7 +18,7 @@ const OrganizerCard = ({ name, photo, tagline, handlePress }: OrganizerCardProps
   return (
     <View style={styles.item}>
       <Pressable style={[styles.pressable, { borderColor: colors.tint }]} onPress={handlePress}>
-        <Image source={{ uri: photo }} style={styles.avatar} contentFit="cover" placeholder={blurhash} />
+        <Image source={{ uri: photo }} style={styles.avatar} contentFit="cover" />
       </Pressable>
       <View style={styles.textContainer}>
         <View style={styles.title}>
