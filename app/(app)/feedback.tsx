@@ -2,10 +2,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import FeedBackBanner from '../../assets/artworks/FeedBackBanner';
+import BackNavigationButton from '../../components/buttons/BackNavigationButton';
 import FeedBackRatingButton from '../../components/buttons/FeedBackRatingButton';
+import SubmitFeedbackButton from '../../components/buttons/SubmitFeedbackButton';
 import StyledText from '../../components/common/StyledText';
 import MainContainer from '../../components/container/MainContainer';
 import FeedbackSentModal from '../../components/modals/FeedbackSentModal';
@@ -34,12 +36,7 @@ const Feedback = () => {
       <FeedbackSentModal showModal={showModal} />
       <View style={styles.FeedBackBannerParent}>
         <FeedBackBanner />
-        <Pressable style={styles.headerTitle} onPress={() => router.back()}>
-          <AntDesign name="arrowleft" size={24} color={'white'} />
-          <StyledText style={[{ color: colors.whiteConstant }]} size="lg">
-            Feedback
-          </StyledText>
-        </Pressable>
+        <BackNavigationButton text="Feedback" onPress={() => router.back()} />
       </View>
       <View style={styles.FeedBackFormContainer}>
         <StyledText size="lg" font="bold" variant="text" style={[styles.FeedBackFormTitle, { color: colors.primary }]}>
@@ -65,16 +62,7 @@ const Feedback = () => {
           value={description}
           onChangeText={setDescription}
         />
-        <Pressable
-          style={[styles.pressableSubmit, { backgroundColor: colors.assetAccent }]}
-          onPress={() => {
-            setShowModal(true);
-          }}
-        >
-          <StyledText style={[styles.pressableSubmitText]} font="bold">
-            SUBMIT FEEDBACK
-          </StyledText>
-        </Pressable>
+        <SubmitFeedbackButton openModal={openModal} text="SUBMIT FEEDBACK" />
       </View>
     </MainContainer>
   );
