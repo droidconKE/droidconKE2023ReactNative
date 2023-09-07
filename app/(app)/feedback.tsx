@@ -24,7 +24,7 @@ const Feedback = () => {
   const { colors } = useTheme();
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
-  const [_selectedRating, setSelectedRating] = useState(2);
+  const [selectedRating, setSelectedRating] = useState(2);
   const [description, setDescription] = useState('');
   const ratingStates: Array<TypeRatingStates> = [
     { icon: '😔', text: 'Bad', value: 0 },
@@ -50,7 +50,14 @@ const Feedback = () => {
           </StyledText>
           <View style={styles.FeedBackFormRatingContainer}>
             {ratingStates.map((rating, index) => {
-              return <FeedBackRatingButton rating={rating} key={index} onPress={setSelectedRating} />;
+              return (
+                <FeedBackRatingButton
+                  rating={rating}
+                  key={index}
+                  onPress={setSelectedRating}
+                  onSelected={rating.value === selectedRating}
+                />
+              );
             })}
           </View>
         </View>
