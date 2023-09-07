@@ -8,6 +8,7 @@ import FeedBackBanner from '../../assets/artworks/FeedBackBanner';
 import BackNavigationButton from '../../components/buttons/BackNavigationButton';
 import FeedBackRatingButton from '../../components/buttons/FeedBackRatingButton';
 import SubmitFeedbackButton from '../../components/buttons/SubmitFeedbackButton';
+import Space from '../../components/common/Space';
 import StyledText from '../../components/common/StyledText';
 import MainContainer from '../../components/container/MainContainer';
 import FeedbackSentModal from '../../components/modals/FeedbackSentModal';
@@ -42,6 +43,7 @@ const Feedback = () => {
         <StyledText size="lg" font="bold" variant="text" style={[styles.FeedBackFormTitle, { color: colors.primary }]}>
           Your feedback helps us improve
         </StyledText>
+        <Space size={29} />
         <View style={[styles.FeedBackForm, { backgroundColor: colors.background, borderColor: colors.border }]}>
           <StyledText style={styles.FeedBackFormLabel} size="base">
             How is/was the event
@@ -52,6 +54,7 @@ const Feedback = () => {
             })}
           </View>
         </View>
+        <Space size={30} />
         <TextInput
           style={[
             styles.feedbackInput,
@@ -62,6 +65,7 @@ const Feedback = () => {
           value={description}
           onChangeText={setDescription}
         />
+        <Space size={26} />
         <SubmitFeedbackButton openModal={openModal} text="SUBMIT FEEDBACK" />
       </View>
     </MainContainer>
