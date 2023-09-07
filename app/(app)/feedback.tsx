@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    paddingBottom: 57,
+    paddingBottom: 27,
   },
   FeedBackFormTitle: {
     textAlign: 'center',
