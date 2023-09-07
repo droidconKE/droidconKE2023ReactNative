@@ -7,15 +7,23 @@ import StyledText from '../common/StyledText';
 type Props = {
   onPress: (value: number) => void;
   rating: TypeRatingStates;
+  onSelected: boolean;
   testID?: string;
 };
 
-const FeedBackRatingButton = ({ onPress, rating }: Props) => {
+const FeedBackRatingButton = ({ onPress, rating, onSelected }: Props) => {
   const { colors } = useTheme();
   const { icon, text, value } = rating;
 
   return (
-    <Pressable style={[styles.pressableEmoji, { backgroundColor: colors.bg }]} onPress={() => onPress(value)}>
+    <Pressable
+      style={[
+        styles.pressableEmoji,
+        { backgroundColor: colors.bg, borderColor: colors.bg },
+        onSelected && { borderColor: colors.primary },
+      ]}
+      onPress={() => onPress(value)}
+    >
       <Text style={styles.FormRatingText}>{icon}</Text>
       <StyledText font="bold" size="sm">
         {text}
@@ -33,6 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 4,
+    borderWidth: 1,
   },
 });
 
