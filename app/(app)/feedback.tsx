@@ -43,7 +43,7 @@ const Feedback = () => {
           Your feedback helps us improve
         </StyledText>
         <View style={[styles.FeedBackForm, { backgroundColor: colors.background, borderColor: colors.border }]}>
-          <StyledText style={styles.FeedBackFormLabel} size="md">
+          <StyledText style={styles.FeedBackFormLabel} size="base">
             How is/was the event
           </StyledText>
           <View style={styles.FeedBackFormRatingContainer}>
