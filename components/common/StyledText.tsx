@@ -6,9 +6,9 @@ import { typography } from '../../config/typography';
 
 type StyledTextProps = {
   children: React.ReactNode;
-  size?: 'xs' | 'sm' | 'base' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'base' | 'md' | 'lg' | 'xl';
   font?: 'bold' | 'regular' | 'medium' | 'semiBold' | 'light';
-  variant?: 'text' | 'link' | 'primary';
+  variant?: 'text' | 'link' | 'primary' | 'secondary';
   style?: StyleProp<TextStyle>;
 };
 
@@ -38,6 +38,7 @@ const StyledText = ({
     base: 14,
     md: 16,
     lg: 18,
+    xl: 22,
   };
   const fonts: Record<NonNullable<StyledTextProps['font']>, string> = {
     bold: primary.bold,
@@ -50,6 +51,7 @@ const StyledText = ({
     text: colors.text,
     link: colors.link,
     primary: colors.primary,
+    secondary: colors.secondary,
   };
 
   return (
