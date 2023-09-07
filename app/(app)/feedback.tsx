@@ -1,4 +1,3 @@
-import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
@@ -31,6 +30,9 @@ const Feedback = () => {
     { icon: '😐', text: 'Okay', value: 1 },
     { icon: '😊', text: 'Great', value: 2 },
   ];
+  const openModal = () => {
+    setShowModal(true);
+  };
 
   return (
     <MainContainer preset="scroll" safeAreaEdges={['top']}>
@@ -80,15 +82,6 @@ const Feedback = () => {
 };
 
 const styles = StyleSheet.create({
-  headerTitle: {
-    paddingLeft: 23,
-    flexDirection: 'row',
-    columnGap: 22,
-    position: 'absolute',
-    width: '100%',
-    paddingTop: 26,
-    paddingBottom: 20,
-  },
   FeedBackBannerParent: {
     maxHeight: 179,
     overflow: 'hidden',
@@ -96,7 +89,6 @@ const styles = StyleSheet.create({
   },
   FeedBackForm: {
     flex: 1,
-    marginTop: 29,
     paddingTop: 17,
     borderRadius: 10,
     borderWidth: 1,
@@ -118,18 +110,7 @@ const styles = StyleSheet.create({
   FeedBackFormTitle: {
     textAlign: 'center',
   },
-  pressableSubmit: {
-    marginTop: 26,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    height: 45,
-  },
-  pressableSubmitText: {
-    color: 'white',
-  },
   feedbackInput: {
-    marginTop: 30,
     paddingLeft: 20,
     paddingTop: 12,
     minHeight: 115,
