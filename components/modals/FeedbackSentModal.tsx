@@ -1,7 +1,8 @@
 import { useTheme } from '@react-navigation/native';
+import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { Image, Modal, Pressable, StyleSheet, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, View } from 'react-native';
 import StyledText from '../common/StyledText';
 
 const FeedbackSentModal = (props: { showModal: boolean }) => {
