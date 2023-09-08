@@ -37,20 +37,16 @@ const Feedback = () => {
   return (
     <MainContainer preset="scroll" safeAreaEdges={['top']}>
       <FeedbackSentModal showModal={showModal} />
-      <View style={styles.FeedBackBannerParent}>
-        <FeedBackBanner />
-        <BackNavigationButton text="Feedback" onPress={() => router.back()} />
-      </View>
-      <View style={styles.FeedBackFormContainer}>
+      <View style={styles.feedBackFormContainer}>
         <StyledText size="lg" font="bold" variant="text" style={[styles.FeedBackFormTitle, { color: colors.primary }]}>
           Your feedback helps us improve
         </StyledText>
         <Space size={29} />
-        <View style={[styles.FeedBackForm, { backgroundColor: colors.background, borderColor: colors.border }]}>
-          <StyledText style={styles.FeedBackFormLabel} size="base">
+        <View style={[styles.feedBackForm, { backgroundColor: colors.background, borderColor: colors.border }]}>
+          <StyledText style={styles.feedBackFormLabel} size="base">
             How is/was the event
           </StyledText>
-          <View style={styles.FeedBackFormRatingContainer}>
+          <View style={styles.feedBackFormRatingContainer}>
             {ratingStates.map((rating, index) => {
               return (
                 <FeedBackRatingButton
@@ -82,7 +78,7 @@ const Feedback = () => {
 };
 
 const styles = StyleSheet.create({
-  FeedBackBannerParent: {
+  feedBackBannerParent: {
     maxHeight: 179,
     overflow: 'hidden',
     position: 'relative',
@@ -93,15 +89,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
   },
-  FeedBackFormContainer: {
-    paddingTop: 30,
+  feedBackFormContainer: {
     width: '90%',
   },
-  FeedBackFormLabel: {
+  feedBackFormLabel: {
     textAlign: 'center',
     paddingBottom: 30,
   },
-  FeedBackFormRatingContainer: {
+  feedBackFormRatingContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',

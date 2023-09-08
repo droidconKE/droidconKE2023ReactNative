@@ -24,7 +24,7 @@ const FeedBackRatingButton = ({ onPress, rating, onSelected }: Props) => {
       ]}
       onPress={() => onPress(value)}
     >
-      <Text style={styles.FormRatingText}>{icon}</Text>
+      <Text style={styles.formRatingText}>{icon}</Text>
       <StyledText font="bold" size="sm">
         {text}
       </StyledText>
@@ -32,7 +32,7 @@ const FeedBackRatingButton = ({ onPress, rating, onSelected }: Props) => {
   );
 };
 const styles = StyleSheet.create({
-  FormRatingText: {
+  formRatingText: {
     fontSize: 30,
   },
   pressableEmoji: {
