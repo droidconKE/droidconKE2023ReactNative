@@ -1,10 +1,8 @@
 import { useTheme } from '@react-navigation/native';
-import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import FeedBackBanner from '../../assets/artworks/FeedBackBanner';
-import BackNavigationButton from '../../components/buttons/BackNavigationButton';
 import FeedBackRatingButton from '../../components/buttons/FeedBackRatingButton';
 import SubmitFeedbackButton from '../../components/buttons/SubmitFeedbackButton';
 import Space from '../../components/common/Space';
@@ -21,7 +19,6 @@ export type TypeRatingStates = {
 
 const Feedback = () => {
   const { colors } = useTheme();
-  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [selectedRating, setSelectedRating] = useState(2);
   const [description, setDescription] = useState('');
@@ -37,6 +34,8 @@ const Feedback = () => {
   return (
     <MainContainer preset="scroll" safeAreaEdges={['top']}>
       <FeedbackSentModal showModal={showModal} />
+      <FeedBackBanner />
+      <Space size={30} />
       <View style={styles.feedBackFormContainer}>
         <StyledText size="lg" font="bold" variant="text" style={[styles.FeedBackFormTitle, { color: colors.primary }]}>
           Your feedback helps us improve
@@ -83,7 +82,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     position: 'relative',
   },
-  FeedBackForm: {
+  feedBackBanner: {
+    height: 179,
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%',
+  },
+  feedBackForm: {
     flex: 1,
     paddingTop: 17,
     borderRadius: 10,

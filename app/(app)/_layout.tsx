@@ -33,7 +33,12 @@ export default () => {
       <Stack.Screen
         name="feedback"
         options={{
-          headerShown: false,
+          headerTintColor: colors.whiteConstant,
+          title: 'Feedback',
+          headerTransparent: true,
+          headerTitleStyle: {
+            fontWeight: 'normal',
+          },
         }}
       />
       <Stack.Screen
