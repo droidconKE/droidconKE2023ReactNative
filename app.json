@@ -6,6 +6,11 @@
       "bundler": "metro"
     },
     "name": "ke.droidcon.reactnative",
-    "slug": "ke.droidcon.reactnative"
+    "slug": "ke.droidcon.reactnative",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    }
   }
 }
