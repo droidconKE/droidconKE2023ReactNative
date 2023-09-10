@@ -1,6 +1,7 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Slot, SplashScreen } from 'expo-router';
+import { Slot } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import type { ColorSchemeName } from 'react-native';
 import { Appearance } from 'react-native';
@@ -62,10 +63,11 @@ export default () => {
   useLayoutEffect(() => {
     setTimeout(() => {
       setIsReady(true);
+      SplashScreen.hideAsync();
     }, 500);
   }, []);
 
-  if (!fontsLoaded || !isReady) return <SplashScreen />;
+  if (!fontsLoaded || !isReady) return;
 
   return (
     <ThemeProvider value={theme.mode === 'light' ? _lightTheme : _darkTheme}>
