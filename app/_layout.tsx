@@ -14,6 +14,8 @@ type Theme = {
   system: boolean;
 };
 
+SplashScreen.preventAutoHideAsync();
+
 export default () => {
   const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
   const [isReady, setIsReady] = useState(false);
