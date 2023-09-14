@@ -1,8 +1,7 @@
 import { useTheme } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import FeedBackBanner from '../../assets/artworks/FeedBackBanner';
 import FeedBackRatingButton from '../../components/buttons/FeedBackRatingButton';
 import SubmitFeedbackButton from '../../components/buttons/SubmitFeedbackButton';
 import Space from '../../components/common/Space';
@@ -18,7 +17,7 @@ export type TypeRatingStates = {
 };
 
 const Feedback = () => {
-  const { colors } = useTheme();
+  const { colors, dark } = useTheme();
   const [showModal, setShowModal] = useState(false);
   const [selectedRating, setSelectedRating] = useState(2);
   const [description, setDescription] = useState('');
@@ -34,7 +33,12 @@ const Feedback = () => {
   return (
     <MainContainer preset="scroll" safeAreaEdges={['top']}>
       <FeedbackSentModal showModal={showModal} />
-      <FeedBackBanner />
+
+      <ImageBackground
+        source={dark ? require('../../assets/images/bannerDark.png') : require('../../assets/images/bannerLight.png')}
+        style={[styles.feedBackBanner]}
+        resizeMode="cover"
+      />
       <Space size={30} />
       <View style={styles.feedBackFormContainer}>
         <StyledText size="lg" font="bold" variant="text" style={[styles.FeedBackFormTitle, { color: colors.primary }]}>
