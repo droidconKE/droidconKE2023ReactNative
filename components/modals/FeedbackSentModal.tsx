@@ -3,6 +3,7 @@ import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Modal, Pressable, StyleSheet, View } from 'react-native';
+import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
 const FeedbackSentModal = (props: { showModal: boolean }) => {
@@ -12,9 +13,14 @@ const FeedbackSentModal = (props: { showModal: boolean }) => {
   const { showModal } = props;
   return (
     <Modal visible={showModal} transparent animationType="fade">
-      <View style={styles.modalView}>
+      <View style={[styles.modalView, { backgroundColor: colors.modalTint }]}>
         <View style={[styles.container, { backgroundColor: colors.background }]}>
-          <Image style={styles.confetti} source={require('../../assets/images/confetti.gif')} />
+          <Image
+            style={styles.confetti}
+            source={require('../../assets/images/confetti.gif')}
+            contentFit="contain"
+            contentPosition={'center'}
+          />
           <StyledText font="bold" size="lg">
             Thank you for your feedback
           </StyledText>
@@ -26,6 +32,7 @@ const FeedbackSentModal = (props: { showModal: boolean }) => {
           >
             <StyledText style={[{ color: colors.whiteConstant }]}>OKAY</StyledText>
           </Pressable>
+          <Space size={39} />
         </View>
       </View>
     </Modal>
@@ -36,10 +43,10 @@ const styles = StyleSheet.create({
     width: 166,
     height: 166,
     justifyContent: 'center',
+    flex: 1,
   },
   modalView: {
     justifyContent: 'center',
-    backgroundColor: 'hsla(60, 3%, 12%, 0.52)',
     flex: 1,
     alignItems: 'center',
   },
