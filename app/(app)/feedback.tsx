@@ -33,7 +33,6 @@ const Feedback = () => {
   return (
     <MainContainer preset="scroll" safeAreaEdges={['top']}>
       <FeedbackSentModal showModal={showModal} />
-
       <ImageBackground
         source={dark ? require('../../assets/images/bannerDark.png') : require('../../assets/images/bannerLight.png')}
         style={[styles.feedBackBanner]}
