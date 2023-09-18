@@ -13,6 +13,8 @@ type Theme = {
   system: boolean;
 };
 
+SplashScreen.preventAutoHideAsync();
+
 export default () => {
   const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
   const [isReady, setIsReady] = useState(false);
@@ -62,10 +64,11 @@ export default () => {
   useLayoutEffect(() => {
     setTimeout(() => {
       setIsReady(true);
+      SplashScreen.hideAsync();
     }, 500);
   }, []);
 
-  if (!fontsLoaded || !isReady) return <SplashScreen />;
+  if (!fontsLoaded || !isReady) return;
 
   return (
     <ThemeProvider value={theme.mode === 'light' ? _lightTheme : _darkTheme}>
