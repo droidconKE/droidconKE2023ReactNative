@@ -3,10 +3,21 @@ import { useFonts } from 'expo-font';
 import { Slot, SplashScreen } from 'expo-router';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import type { ColorSchemeName } from 'react-native';
-import { Appearance } from 'react-native';
+import { Appearance, LogBox } from 'react-native';
 import { theme_colors } from '../config/theme';
 import { customFontsToLoad } from '../config/typography';
 import { AuthProvider } from '../context/auth';
+
+LogBox.ignoreLogs([
+  /**
+   * This warning keeps showing up because of a bug in expo.
+   * The PR fixing the bug has been merged but not released yet.
+   * This line removes the warning from the app but it will still show up in the console.
+   * TODO: Remove this code when upgrading to Expo SDK 50.
+   * More info: https://github.com/expo/expo/pull/23932
+   */
+  'The `redirect` prop on <Screen /> is deprecated and will be removed. Please use `router.redirect` instead',
+]);
 
 type Theme = {
   mode: ColorSchemeName;
