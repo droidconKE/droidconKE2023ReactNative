@@ -1,11 +1,15 @@
 {
   "expo": {
     "userInterfaceStyle": "automatic",
-    "scheme": "acme",
+    "scheme": "droidconke-reactnative",
     "web": {
       "bundler": "metro"
     },
-    "name": "ke.droidcon.reactnative",
-    "slug": "ke.droidcon.reactnative"
+    "name": "droidconke-reactnative",
+    "slug": "droidconke-reactnative",
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    }
   }
 }

@@ -1,6 +1,10 @@
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
 import StyledSwitch from '../../../components/buttons/StyledSwitch';
+import { setup, teardown, travel } from '../../../util/time-travel';
+
+beforeEach(setup);
+afterEach(teardown);
 
 describe('<StyledSwitch/>', () => {
   const onPress = jest.fn();
@@ -66,7 +70,7 @@ describe('<StyledSwitch/>', () => {
     });
   });
 
-  it('renders icon color orange when value is true', () => {
+  it('renders purple thumbColor', () => {
     render(
       <StyledSwitch
         value={true}
@@ -145,7 +149,11 @@ describe('<StyledSwitch/>', () => {
         }}
       />,
     );
+    expect(screen.getByTestId('track')).toHaveStyle({
+      backgroundColor: 'blue',
+    });
     fireEvent.press(screen.getByTestId('styled-switch'));
+    act(() => travel(500));
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 });

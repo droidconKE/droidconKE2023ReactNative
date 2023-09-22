@@ -49,7 +49,7 @@ const SpeakerCard = (props: SpeakerCardProps) => {
             onPress={() =>
               router.push({
                 pathname: `/session/${sessions[0]?.slug}`,
-                params: { slug: sessions[0]?.slug },
+                params: { slug: sessions[0]?.slug ?? '' },
               })
             }
             testID="sessionButton"

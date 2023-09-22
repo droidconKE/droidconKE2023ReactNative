@@ -1,4 +1,4 @@
-import { Stack, useSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import StyledText from '../../components/common/StyledText';
 import MainContainer from '../../components/container/MainContainer';
@@ -10,7 +10,7 @@ import MainContainer from '../../components/container/MainContainer';
 // TODO: Use data from mock/speaker to display speaker  and mock/organizers.ts to display organizer
 
 const Speaker = () => {
-  const { name } = useSearchParams();
+  const { name } = useLocalSearchParams();
 
   return (
     <MainContainer preset="scroll">
