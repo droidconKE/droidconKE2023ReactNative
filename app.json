@@ -13,11 +13,12 @@
         "resizeMode": "cover",
         "backgroundColor": "#ffffff",
         "dark": {
-            "image": "./assets/images/splash.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#000000"
+          "image": "./assets/images/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#000000"
         }
-      }
+      },
+      "package": "com.anonymous.ke.droidcon.reactnative"
     },
     "ios": {
       "splash": {
@@ -25,9 +26,9 @@
         "resizeMode": "cover",
         "backgroundColor": "#ffffff",
         "dark": {
-            "image": "./assets/images/splash.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#000000"
+          "image": "./assets/images/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#000000"
         }
       }
     }
