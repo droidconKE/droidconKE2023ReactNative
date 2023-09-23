@@ -5,7 +5,7 @@ import React from 'react';
 import type { KeyboardAvoidingViewProps, ScrollViewProps } from 'react-native';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import type { Edge, SafeAreaViewProps } from 'react-native-safe-area-context';
-import { initialWindowMetrics, SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView, initialWindowMetrics } from 'react-native-safe-area-context';
 
 interface BaseScreenProps {
   children?: React.ReactNode;

@@ -1,7 +1,7 @@
 import { AntDesign, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
-import { Stack, useRouter, useSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Row from '../../../components/common/Row';
@@ -13,7 +13,7 @@ import { getSessionTimesAndLocation, getTwitterHandle, truncate } from '../../..
 
 const Session = () => {
   const { colors, dark } = useTheme();
-  const { slug } = useSearchParams();
+  const { slug } = useLocalSearchParams();
   const router = useRouter();
 
   // filter session by slug

@@ -25,7 +25,7 @@ export default function Share() {
           <View style={styles.gap} />
           <StyledText size="md">Share</StyledText>
         </Row>
-        <Link href="/home/feed">
+        <Link href="/home/feed/">
           <StyledText>CANCEL</StyledText>
         </Link>
       </Row>

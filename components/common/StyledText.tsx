@@ -1,7 +1,7 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import type { StyleProp, TextStyle } from 'react-native';
-import { StyleSheet, Text as NativeText } from 'react-native';
+import { Text as NativeText, StyleSheet } from 'react-native';
 import { typography } from '../../config/typography';
 
 type StyledTextProps = {
