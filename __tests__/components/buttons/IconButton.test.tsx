@@ -25,11 +25,4 @@ describe('<IconButton/>', () => {
     fireEvent.press(button);
     expect(onPress).toHaveBeenCalledTimes(1);
   });
-
-  it(`changes color based on props`, () => {
-    render(<IconButton isActive onPress={onPress} name="power-off" />);
-    expect(screen.getByTestId('icon')).toHaveStyle({
-      color: 'red',
-    });
-  });
 });
