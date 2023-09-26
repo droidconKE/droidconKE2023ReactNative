@@ -15,12 +15,7 @@ const FeedbackSentModal = (props: { showModal: boolean }) => {
     <Modal visible={showModal} transparent animationType="fade">
       <View style={[styles.modalView, { backgroundColor: colors.modalTint }]}>
         <View style={[styles.container, { backgroundColor: colors.background }]}>
-          <Image
-            style={styles.confetti}
-            source={require('../../assets/images/confetti.gif')}
-            contentFit="contain"
-            contentPosition={'center'}
-          />
+          <Image style={styles.confetti} source={require('../../assets/images/confetti.gif')} contentFit="contain" />
           <StyledText font="bold" size="lg">
             Thank you for your feedback
           </StyledText>

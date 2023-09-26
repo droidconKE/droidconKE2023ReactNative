@@ -31,64 +31,70 @@ const Feedback = () => {
   };
 
   return (
-    <MainContainer preset="scroll" safeAreaEdges={['top']}>
-      <FeedbackSentModal showModal={showModal} />
-      <ImageBackground
-        source={dark ? require('../../assets/images/bannerDark.png') : require('../../assets/images/bannerLight.png')}
-        style={[styles.feedBackBanner]}
-        resizeMode="cover"
-      />
-      <Space size={30} />
-      <View style={styles.feedBackFormContainer}>
-        <StyledText size="lg" font="bold" variant="text" style={[styles.FeedBackFormTitle, { color: colors.primary }]}>
-          Your feedback helps us improve
-        </StyledText>
-        <Space size={29} />
-        <View style={[styles.feedBackForm, { backgroundColor: colors.background, borderColor: colors.border }]}>
-          <StyledText style={styles.feedBackFormLabel} size="base">
-            How is/was the event
-          </StyledText>
-          <View style={styles.feedBackFormRatingContainer}>
-            {ratingStates.map((rating, index) => {
-              return (
-                <FeedBackRatingButton
-                  rating={rating}
-                  key={index}
-                  onPress={setSelectedRating}
-                  onSelected={rating.value === selectedRating}
-                />
-              );
-            })}
-          </View>
-        </View>
-        <Space size={30} />
-        <TextInput
-          style={[
-            styles.feedbackInput,
-            { backgroundColor: colors.bg, borderColor: colors.borderColor, color: colors.bgInverse },
-          ]}
-          placeholder="Type message here"
-          placeholderTextColor={colors.placeHolder}
-          value={description}
-          onChangeText={setDescription}
+    <MainContainer preset="scroll">
+      <View style={styles.main}>
+        <ImageBackground
+          source={dark ? require('../../assets/images/bannerDark.png') : require('../../assets/images/bannerLight.png')}
+          style={styles.feedBackBanner}
+          resizeMode="cover"
         />
-        <Space size={26} />
-        <SubmitFeedbackButton openModal={openModal} text="SUBMIT FEEDBACK" />
+        <Space size={10} />
+        <View style={styles.feedBackFormContainer}>
+          <StyledText
+            size="lg"
+            font="bold"
+            variant="text"
+            style={[styles.FeedBackFormTitle, { color: colors.primary }]}
+          >
+            Your feedback helps us improve
+          </StyledText>
+          <Space size={29} />
+          <View style={[styles.feedBackForm, { backgroundColor: colors.background, borderColor: colors.border }]}>
+            <StyledText style={styles.feedBackFormLabel} size="base">
+              How is/was the event
+            </StyledText>
+            <View style={styles.feedBackFormRatingContainer}>
+              {ratingStates.map((rating, index) => {
+                return (
+                  <FeedBackRatingButton
+                    rating={rating}
+                    key={index}
+                    onPress={setSelectedRating}
+                    onSelected={rating.value === selectedRating}
+                  />
+                );
+              })}
+            </View>
+          </View>
+          <Space size={30} />
+          <TextInput
+            style={[
+              styles.feedbackInput,
+              { backgroundColor: colors.bg, borderColor: colors.borderColor, color: colors.bgInverse },
+            ]}
+            placeholder="Type message here"
+            placeholderTextColor={colors.placeHolder}
+            value={description}
+            onChangeText={setDescription}
+          />
+          <Space size={26} />
+          <SubmitFeedbackButton openModal={openModal} text="SUBMIT FEEDBACK" />
+        </View>
+
+        <FeedbackSentModal showModal={showModal} />
       </View>
     </MainContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  feedBackBannerParent: {
-    maxHeight: 179,
-    overflow: 'hidden',
-    position: 'relative',
+  main: {
+    flex: 1,
+    width: '100%',
   },
   feedBackBanner: {
     height: 179,
     flex: 1,
-    justifyContent: 'center',
     width: '100%',
   },
   feedBackForm: {
@@ -98,7 +104,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   feedBackFormContainer: {
-    width: '90%',
+    flex: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
   },
   feedBackFormLabel: {
     textAlign: 'center',
