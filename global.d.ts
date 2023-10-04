@@ -13,6 +13,7 @@ declare module '@react-navigation/native' {
       tint: string;
       secondaryTint: string;
       tertiaryTint: string;
+      modalTint: string;
       link: string;
       bg: string;
       background: string;
@@ -23,6 +24,9 @@ declare module '@react-navigation/native' {
       bgInverse: string;
       whiteConstant: string;
       iconSwitch: string;
+      placeHolder: string;
+      borderColor: string;
+      assetAccent: string;
     };
   };
 
