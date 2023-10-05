@@ -4,9 +4,7 @@ import React from 'react';
 import FeedList from '../../../components/lists/FeedList';
 import { Feed as FeedData } from '../../../mock/feed';
 
-jest.mock('expo-router', () => ({
-  Link: ({ children }: any) => children, // Mock Link component to render its children directly
-}));
+jest.mock('expo-router');
 
 describe('FeedList', () => {
   it('renders the feed list correctly', () => {
