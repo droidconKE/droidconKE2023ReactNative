@@ -4119,6 +4119,11 @@ date-fns@^2.30.0:
   dependencies:
     "@babel/runtime" "^7.21.0"
 
+dayjs@^1.11.10:
+  version "1.11.10"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.10.tgz#68acea85317a6e164457d6d6947564029a6a16a0"
+  integrity sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==
+
 dayjs@^1.8.15:
   version "1.11.10"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.10.tgz#68acea85317a6e164457d6d6947564029a6a16a0"
@@ -4910,10 +4915,22 @@ expo-font@~11.4.0:
   dependencies:
     fontfaceobserver "^2.1.0"
 
-expo-keep-awake@~12.0.1:
-  version "12.0.1"
-  resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-12.0.1.tgz"
-  integrity sha512-hqeCnb4033TyuZaXs93zTK7rjVJ3bywXATyMmKmKkLEsH2PKBAl/VmjlCOPQL/2Ncqz6aj7Wo//tjeJTARBD4g==
+expo-head@0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/expo-head/-/expo-head-0.0.14.tgz#52405647a779b4b86fa714d43de36b95f7557d64"
+  integrity sha512-NvG6dwzi06F2hlYuz1rW/O8B/Us/2lDHTHZv0DJJmSWjAuT3Ja04WtS0QI9Yn5n0bSKKPrEGl4515q1zJ9MI0A==
+  dependencies:
+    react-helmet-async "^1.3.0"
+
+expo-image@~1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/expo-image/-/expo-image-1.3.4.tgz#50f8468b118972698a4382853773db2f39e46190"
+  integrity sha512-2N6etMJA5OWbbvL9IdPVchNoJd18kVo5gcN4uC9Xtv1VM/ik6PRB3Tz+qP/0Uglkzh/yyJjw7aDTqWozj5nLZw==
+
+expo-keep-awake@~12.3.0:
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-12.3.0.tgz#c42449ae19c993274ddc43aafa618792b6aec408"
+  integrity sha512-ujiJg1p9EdCOYS05jh5PtUrfiZnK0yyLy+UewzqrjUqIT8eAGMQbkfOn3C3fHE7AKd5AefSMzJnS3lYZcZYHDw==
 
 expo-linking@~5.0.2:
   version "5.0.2"
