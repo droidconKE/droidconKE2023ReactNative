@@ -67,11 +67,26 @@ const FeedListItem = ({ item }: FeedListItemProps) => {
 };
 
 const FeedList = () => {
+  const recentFirst = (data: Array<Feed>) => {
+    return data.sort((a, b) => {
+      const dateA = new Date(a.created_at);
+      const dateB = new Date(b.created_at);
+
+      if (dateA > dateB) {
+        return -1;
+      } else if (dateA < dateB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  };
+
   return (
     <View style={styles.main}>
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={FeedData.data}
+        data={recentFirst(FeedData.data)}
         keyExtractor={(item) => item.title}
         renderItem={({ item }: { item: Feed }) => {
           return <FeedListItem item={item} key={item.title} />;
