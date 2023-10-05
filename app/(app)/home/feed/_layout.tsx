@@ -12,5 +12,5 @@ export default function Layout() {
   const { BottomSheet } =
     require('../../../../bottomsheet/bottom-sheet') as typeof import('../../../../bottomsheet/bottom-sheet');
 
-  return <BottomSheet />;
+  return <BottomSheet screenOptions={{ snapPoints: [200, '100%'] }} />;
 }

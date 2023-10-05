@@ -7,6 +7,7 @@ import { Link } from 'expo-router';
 import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { blurhash } from '../../config/constants';
 import { Feed as FeedData } from '../../mock/feed';
 import Row from '../common/Row';
 import StyledText from '../common/StyledText';
@@ -36,7 +37,13 @@ const FeedListItem = ({ item }: FeedListItemProps) => {
         {item.body}
       </StyledText>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: item.image }} transition={1000} />
+        <Image
+          style={styles.image}
+          source={{ uri: item.image }}
+          transition={1000}
+          contentFit="cover"
+          placeholder={blurhash}
+        />
       </View>
 
       <Row>
@@ -88,7 +95,6 @@ const styles = StyleSheet.create({
   image: {
     height: height * 0.23,
     borderRadius: 8,
-    resizeMode: 'cover',
   },
   imageContainer: {
     borderRadius: 8,
