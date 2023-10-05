@@ -7,7 +7,6 @@ import { Link } from 'expo-router';
 import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import type { Feed } from '../../global';
 import { Feed as FeedData } from '../../mock/feed';
 import Row from '../common/Row';
 import StyledText from '../common/StyledText';
@@ -17,6 +16,15 @@ dayjs.extend(relativeTime);
 interface FeedListItemProps {
   item: Feed;
 }
+
+type Feed = {
+  title: string;
+  body: string;
+  topic: string;
+  url: string;
+  image: string;
+  created_at: string;
+};
 
 const { height } = Dimensions.get('screen');
 
@@ -35,7 +43,6 @@ const FeedListItem = ({ item }: FeedListItemProps) => {
         <Link
           href={{
             pathname: '/home/feed/share',
-            params: { feed: item },
           }}
         >
           <View style={styles.share}>

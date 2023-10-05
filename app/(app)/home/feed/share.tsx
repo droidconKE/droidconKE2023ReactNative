@@ -1,6 +1,6 @@
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
-import { Link, useLocalSearchParams } from 'expo-router';
+import { Link } from 'expo-router';
 import React from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import SocialShareButton from '../../../../components/buttons/SocialShareButton';
@@ -16,15 +16,11 @@ import BottomSheetContainer from '../../../../components/container/BottomSheetCo
 
 export default function Share() {
   const { colors } = useTheme();
-  const params = useLocalSearchParams();
-
-  console.log(params, 'params');
-
   return (
     <BottomSheetContainer style={[styles.main, { backgroundColor: colors.background }]}>
       <Row>
         <Row>
-          <FontAwesome name="share" size={20} color={colors.text} />
+          <MaterialCommunityIcons name="share" size={20} color={colors.text} />
           <View style={styles.gap} />
           <StyledText size="md">Share</StyledText>
         </Row>
