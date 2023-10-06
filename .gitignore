@@ -22,3 +22,12 @@ ios/
 
 expo-env.d.ts
 # @end expo-cli
+
+# env
+.env*.local
+.env*.development
+.env
+
+# debug files
+yarn-debug.*
+yarn-error.*
