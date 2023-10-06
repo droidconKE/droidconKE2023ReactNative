@@ -1,15 +1,55 @@
+import { useTheme } from '@react-navigation/native';
+import { Image } from 'expo-image';
 import React from 'react';
-import { View } from 'react-native';
-
-// TODO:- implement a card that displays the event organizers
-/**
- * - render logo images of organizers  and use necessary flex wrap to handle displaying many organizers in one card
- * - card should have good paddings
- * - write tests for the component
- */
+import { StyleSheet, View } from 'react-native';
+import { Organizers } from '../../mock/organizers';
+import Space from '../common/Space';
+import StyledText from '../common/StyledText';
 
 const OrganizersCard = () => {
-  return <View />;
+  const { colors } = useTheme();
+
+  const renderOrganizers = () => {
+    return Organizers?.data.map((organizer, index) => (
+      <Image key={index} source={{ uri: organizer.logo }} style={styles.logo} transition={1000} contentFit="contain" />
+    ));
+  };
+
+  return (
+    <View style={[styles.card, { backgroundColor: colors.card }]}>
+      <StyledText size="xl" font="bold" variant="link">
+        Organised by:
+      </StyledText>
+      <Space size={16} />
+      <View style={styles.row}>{renderOrganizers()}</View>
+    </View>
+  );
 };
 
 export default OrganizersCard;
+
+const styles = StyleSheet.create({
+  card: {
+    flex: 1,
+    width: '90%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 8,
+    paddingVertical: 16,
+    borderRadius: 16,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap',
+    marginVertical: 4,
+  },
+  logo: {
+    width: '30%',
+    height: 60,
+    marginHorizontal: 4,
+    marginVertical: 4,
+    borderRadius: 8,
+  },
+});
