@@ -67,22 +67,24 @@ export interface IFeed {
   meta: Meta;
 }
 
+export interface IOrganizer {
+  id: number;
+  name: string;
+  email: string;
+  description: string;
+  facebook: string;
+  twitter: string;
+  instagram: null | string;
+  logo: string;
+  slug: string;
+  status: string;
+  created_at: string;
+  upcoming_events_count: number;
+  total_events_count: number;
+}
+
 export interface IOrganizers {
-  data: Array<{
-    id: number;
-    name: string;
-    email: string;
-    description: string;
-    facebook: string;
-    twitter: string;
-    instagram: null | string;
-    logo: string;
-    slug: string;
-    status: string;
-    created_at: string;
-    upcoming_events_count: number;
-    total_events_count: number;
-  }>;
+  data: Array<IOrganizer>;
   meta: Meta;
 }
 
@@ -144,15 +146,18 @@ export interface ISpeaker {
   meta: Meta;
 }
 
+export interface ISponsor {
+  name: string;
+  tagline: string;
+  link: string;
+  sponsor_type: string;
+  logo: string;
+  created_at: string;
+}
+
 export interface ISponsors {
-  data: Array<{
-    name: string;
-    tagline: string;
-    link: string;
-    sponsor_type: string;
-    logo: string;
-    created_at: string;
-  }>;
+  // filter(arg0: (sponsor: ISponsor) => boolean): Array<ISponsor>;
+  data: Array<ISponsor>;
 }
 
 export interface Meta {
