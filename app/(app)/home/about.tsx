@@ -4,6 +4,7 @@ import { Stack, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import OrganizerCard from '../../../components/cards/OrganizerCard';
+import OrganizersCard from '../../../components/cards/OrganizersCard';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
@@ -93,11 +94,9 @@ const About = () => {
             estimatedItemSize={50}
           />
         </View>
-
-        {/**
-         * TODO: Add an organizers card
-         */}
       </View>
+
+      <OrganizersCard />
 
       <View>
         <GoogleSignInModal visible={signInModalVisible} onClose={() => setSignInModalVisible(false)} />

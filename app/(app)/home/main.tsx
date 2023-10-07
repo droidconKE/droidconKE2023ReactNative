@@ -45,22 +45,22 @@ const Main = () => {
 
           <Space size={16} />
 
-          <View style={styles.section}>
-            <Image source={require('../../../assets/images/banner.png')} style={styles.image} contentFit="contain" />
-          </View>
+          <Image source={require('../../../assets/images/banner.png')} style={styles.image} contentFit="contain" />
 
           <Space size={16} />
 
-          <View style={styles.section}>
-            <CallForSpeakersCard />
-          </View>
+          <CallForSpeakersCard />
+
+          <Space size={20} />
+
+          <SponsorsCard />
 
           <Space size={16} />
         </View>
       )}
 
       {user && (
-        <>
+        <View style={styles.main}>
           <Space size={10} />
 
           <VideoPlayer />
@@ -86,7 +86,7 @@ const Main = () => {
           <Pressable onPress={() => signOut()}>
             <StyledText style={{ color: colors.tertiary }}>Sign Out</StyledText>
           </Pressable>
-        </>
+        </View>
       )}
 
       <View>
@@ -100,8 +100,8 @@ export default Main;
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
-    paddingHorizontal: 10,
+    width: '100%',
+    alignItems: 'center',
   },
   section: {
     flex: 1,
