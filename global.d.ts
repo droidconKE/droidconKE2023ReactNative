@@ -63,14 +63,7 @@ export type Typography = {
 };
 
 export interface IFeed {
-  data: Array<{
-    title: string;
-    body: string;
-    topic: string;
-    url: string;
-    image: string;
-    created_at: string;
-  }>;
+  data: Array<Feed>;
   meta: Meta;
 }
 

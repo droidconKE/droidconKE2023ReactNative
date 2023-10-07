@@ -3,6 +3,7 @@ import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import CogIcon from '../../../assets/artworks/CogIcon';
+import HeaderRight from '../../../components/headers/HeaderRight';
 import MainHeader from '../../../components/headers/MainHeader';
 
 export default () => {
@@ -57,6 +58,7 @@ export default () => {
           },
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
+          headerRight: () => <HeaderRight handlePress={() => {}} />,
         }}
       />
       <Tabs.Screen

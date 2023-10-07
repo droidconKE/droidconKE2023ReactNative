@@ -2,7 +2,7 @@ import { useTheme } from '@react-navigation/native';
 import type { StatusBarProps } from 'expo-status-bar';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import type { KeyboardAvoidingViewProps, ScrollViewProps } from 'react-native';
+import type { KeyboardAvoidingViewProps, ScrollViewProps, StyleProp, ViewStyle } from 'react-native';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import type { Edge, SafeAreaViewProps } from 'react-native-safe-area-context';
 import { SafeAreaProvider, SafeAreaView, initialWindowMetrics } from 'react-native-safe-area-context';
@@ -14,6 +14,7 @@ interface BaseScreenProps {
   keyboardOffset?: number;
   KeyboardAvoidingViewProps?: KeyboardAvoidingViewProps;
   safeAreaEdges?: Array<Edge>;
+  style?: StyleProp<ViewStyle>;
 }
 
 interface FixedScreenProps extends BaseScreenProps {
@@ -62,7 +63,14 @@ function ScreenWithScrolling(props: ScreenProps) {
 const MainContainer = (props: ScreenProps) => {
   const { colors, dark } = useTheme();
 
-  const { SafeAreaViewProps, StatusBarProps, safeAreaEdges, keyboardOffset = 0, KeyboardAvoidingViewProps } = props;
+  const {
+    SafeAreaViewProps,
+    StatusBarProps,
+    safeAreaEdges,
+    keyboardOffset = 0,
+    KeyboardAvoidingViewProps,
+    style,
+  } = props;
 
   const backgroundColor = dark ? colors.bg : colors.background;
 
@@ -70,9 +78,11 @@ const MainContainer = (props: ScreenProps) => {
 
   const Wrapper = safeAreaEdges?.length ? SafeAreaView : View;
 
+  const wrapperStyles = StyleSheet.compose(styles.container, style);
+
   return (
     <SafeAreaProvider testID="main-container" initialMetrics={initialWindowMetrics}>
-      <Wrapper edges={safeAreaEdges} {...SafeAreaViewProps} style={[{ backgroundColor }, styles.container]}>
+      <Wrapper edges={safeAreaEdges} {...SafeAreaViewProps} style={[{ backgroundColor }, wrapperStyles]}>
         <StatusBar style={statusBarStyle} {...StatusBarProps} />
 
         <KeyboardAvoidingView

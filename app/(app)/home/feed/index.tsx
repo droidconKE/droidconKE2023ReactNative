@@ -1,25 +1,20 @@
-import { Link } from 'expo-router';
 import React from 'react';
-import { View } from 'react-native';
-import StyledText from '../../../../components/common/StyledText';
+import { StyleSheet, View } from 'react-native';
 import MainContainer from '../../../../components/container/MainContainer';
-
-// TODO: implement feed page
-/**
- * TASKS:
- * - should render the feed list component. Check out the starter code component in components/list folder.
- * - use data from mock/feed.ts
- */
+import FeedList from '../../../../components/lists/FeedList';
 
 export default function Page() {
   return (
-    <MainContainer>
+    <MainContainer style={styles.main}>
       <View>
-        <StyledText>Sheet</StyledText>
-        <Link href="/home/feed/share">
-          <StyledText>Open Share bottomsheet</StyledText>
-        </Link>
+        <FeedList />
       </View>
     </MainContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  main: {
+    paddingHorizontal: 0,
+  },
+});
