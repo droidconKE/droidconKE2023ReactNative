@@ -98,6 +98,8 @@ const About = () => {
 
       <OrganizersCard />
 
+      <Space size={16} />
+
       <View>
         <GoogleSignInModal visible={signInModalVisible} onClose={() => setSignInModalVisible(false)} />
       </View>

@@ -55,6 +55,10 @@ const Main = () => {
 
           <SponsorsCard />
 
+          <Space size={20} />
+
+          <OrganizersCard />
+
           <Space size={16} />
         </View>
       )}
