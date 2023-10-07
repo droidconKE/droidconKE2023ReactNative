@@ -31,7 +31,7 @@ export default CallForSpeakersCard;
 
 const styles = StyleSheet.create({
   card: {
-    width: '100%',
+    width: '90%',
     borderRadius: 8,
     paddingHorizontal: 18,
     paddingVertical: 24,

@@ -4,6 +4,8 @@ import { Stack } from 'expo-router';
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import CallForSpeakersCard from '../../../components/cards/CallForSpeakersCard';
+import OrganizersCard from '../../../components/cards/OrganizersCard';
+import SponsorsCard from '../../../components/cards/SponsorsCard';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
@@ -13,17 +15,6 @@ import SpeakersList from '../../../components/lists/SpeakersList';
 import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
 import VideoPlayer from '../../../components/player/VideoPlayer';
 import { useAuth } from '../../../context/auth';
-
-// TODO: Home page
-/**
- * - Implement a home page that displays all the components listed below:
- * - Should display VideoPlayer component, Sessions list component, Speakers list component, Sponsors card, Organizers card.
- * - Check out components folder for the starter code for all those components
- * - For Sponsors card, use mock/sponsors.ts data
- * - For Organizers card, use mock/organizers.ts data
- * - use the components you’ve implemented in the previous tasks
- *
- */
 
 const Main = () => {
   const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
@@ -54,22 +45,26 @@ const Main = () => {
 
           <Space size={16} />
 
-          <View style={styles.section}>
-            <Image source={require('../../../assets/images/banner.png')} style={styles.image} contentFit="contain" />
-          </View>
+          <Image source={require('../../../assets/images/banner.png')} style={styles.image} contentFit="contain" />
 
           <Space size={16} />
 
-          <View style={styles.section}>
-            <CallForSpeakersCard />
-          </View>
+          <CallForSpeakersCard />
+
+          <Space size={20} />
+
+          <SponsorsCard />
+
+          <Space size={20} />
+
+          <OrganizersCard />
 
           <Space size={16} />
         </View>
       )}
 
       {user && (
-        <>
+        <View style={styles.main}>
           <Space size={10} />
 
           <VideoPlayer />
@@ -82,12 +77,20 @@ const Main = () => {
 
           <SpeakersList />
 
+          <Space size={6} />
+
+          <SponsorsCard />
+
+          <Space size={16} />
+
+          <OrganizersCard />
+
           <Space size={16} />
 
           <Pressable onPress={() => signOut()}>
             <StyledText style={{ color: colors.tertiary }}>Sign Out</StyledText>
           </Pressable>
-        </>
+        </View>
       )}
 
       <View>
@@ -101,8 +104,8 @@ export default Main;
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
-    paddingHorizontal: 10,
+    width: '100%',
+    alignItems: 'center',
   },
   section: {
     flex: 1,
