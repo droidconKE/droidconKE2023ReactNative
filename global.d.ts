@@ -156,7 +156,6 @@ export interface ISponsor {
 }
 
 export interface ISponsors {
-  // filter(arg0: (sponsor: ISponsor) => boolean): Array<ISponsor>;
   data: Array<ISponsor>;
 }
 
