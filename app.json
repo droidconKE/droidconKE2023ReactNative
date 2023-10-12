@@ -5,8 +5,8 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "droidconke-reactnative",
-    "slug": "droidconke-reactnative",
+    "name": "ke.droidcon.reactnative",
+    "slug": "ke.droidcon.reactnative",
     "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true
@@ -22,6 +22,20 @@
           "backgroundColor": "#000000"
         }
       },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "*.ke.droidcon.reactnative.io",
+              "pathPrefix": "/records"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
       "package": "com.anonymous.ke.droidcon.reactnative"
     },
     "ios": {

@@ -3,7 +3,7 @@ import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View, Alert, Share } from 'react-native';
 import Row from '../../../components/common/Row';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
@@ -20,6 +20,25 @@ const Session = () => {
   const session = Sessions.data.filter((_session) => _session.slug === slug)[0];
 
   const [showMoreBio, setShowMoreBio] = useState(false);
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: 'React Native | A framework for building native apps using React',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
 
   return (
     <View style={styles.main}>
@@ -174,7 +193,7 @@ const Session = () => {
       </MainContainer>
 
       {/** Floating action button. TODO: Add share functionality */}
-      <Pressable style={[styles.fab, { backgroundColor: colors.tertiary }]}>
+      <Pressable style={[styles.fab, { backgroundColor: colors.tertiary }]} onPress={onShare}>
         <MaterialCommunityIcons name="share" size={30} color="white" />
       </Pressable>
     </View>
