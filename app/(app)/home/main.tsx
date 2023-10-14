@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import CallForSpeakersCard from '../../../components/cards/CallForSpeakersCard';
 import OrganizersCard from '../../../components/cards/OrganizersCard';
@@ -11,21 +11,11 @@ import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import SessionsList from '../../../components/lists/SessionsList';
 import SpeakersList from '../../../components/lists/SpeakersList';
-import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
 import VideoPlayer from '../../../components/player/VideoPlayer';
 import { useAuth } from '../../../context/auth';
 
 const Main = () => {
-  const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
-
   const { user } = useAuth();
-
-  //TODO: To be uncommented when auth flow development resumes
-  /*
-    const showSignInModal = () => {
-      setSignInModalVisible(true);
-    };
-  */
 
   return (
     <MainContainer preset="scroll">
@@ -88,10 +78,6 @@ const Main = () => {
           <Space size={16} />
         </View>
       )}
-
-      <View>
-        <GoogleSignInModal visible={signInModalVisible} onClose={() => setSignInModalVisible(false)} />
-      </View>
     </MainContainer>
   );
 };
