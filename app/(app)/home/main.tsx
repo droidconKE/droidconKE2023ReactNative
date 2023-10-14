@@ -23,15 +23,18 @@ const Main = () => {
 
   const { colors } = useTheme();
 
-  const showSignInModal = () => {
-    setSignInModalVisible(true);
-  };
+  // To be uncommented when auth flow development resumes
+  /*
+    const showSignInModal = () => {
+      setSignInModalVisible(true);
+    };
+  */
 
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          headerRight: () => <HeaderRight handlePress={showSignInModal} />,
+          headerRight: () => <HeaderRight />,
         }}
       />
 

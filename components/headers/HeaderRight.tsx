@@ -1,14 +1,13 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useAuth } from '../../context/auth';
+import { StyleSheet } from 'react-native';
 import Avatar from '../buttons/Avatar';
 import FeedbackButton from '../buttons/FeedbackButton';
 import Row from '../common/Row';
 
-const HeaderRight = ({ handlePress }: { handlePress: () => void }) => {
+// To be uncommented when auth flow development resumes
+/*
+const HeaderRightWithAuth = ({ handlePress }: { handlePress: () => void }) => {
   const router = useRouter();
 
   const { user } = useAuth();
@@ -29,6 +28,18 @@ const HeaderRight = ({ handlePress }: { handlePress: () => void }) => {
 
   return (
     <Row style={styles.row} testID="headerRightWithUser">
+      <FeedbackButton testID="feedbackButton" onPress={() => router.push('/feedback')} />
+      <Avatar />
+    </Row>
+  );
+};
+*/
+
+const HeaderRight = () => {
+  const router = useRouter();
+
+  return (
+    <Row style={styles.row} testID="headerRight">
       <FeedbackButton testID="feedbackButton" onPress={() => router.push('/feedback')} />
       <Avatar />
     </Row>
