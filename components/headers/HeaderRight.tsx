@@ -5,7 +5,7 @@ import Avatar from '../buttons/Avatar';
 import FeedbackButton from '../buttons/FeedbackButton';
 import Row from '../common/Row';
 
-// To be uncommented when auth flow development resumes
+//TODO: To be uncommented when auth flow development resumes
 /*
 const HeaderRightWithAuth = ({ handlePress }: { handlePress: () => void }) => {
   const router = useRouter();

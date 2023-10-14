@@ -1,8 +1,7 @@
-import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import CallForSpeakersCard from '../../../components/cards/CallForSpeakersCard';
 import OrganizersCard from '../../../components/cards/OrganizersCard';
 import SponsorsCard from '../../../components/cards/SponsorsCard';
@@ -19,11 +18,9 @@ import { useAuth } from '../../../context/auth';
 const Main = () => {
   const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
 
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
 
-  const { colors } = useTheme();
-
-  // To be uncommented when auth flow development resumes
+  //TODO: To be uncommented when auth flow development resumes
   /*
     const showSignInModal = () => {
       setSignInModalVisible(true);
@@ -89,10 +86,6 @@ const Main = () => {
           <OrganizersCard />
 
           <Space size={16} />
-
-          <Pressable onPress={() => signOut()}>
-            <StyledText style={{ color: colors.tertiary }}>Sign Out</StyledText>
-          </Pressable>
         </View>
       )}
 
