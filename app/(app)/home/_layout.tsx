@@ -58,7 +58,7 @@ export default () => {
           },
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
-          headerRight: () => <HeaderRight handlePress={() => {}} />,
+          headerRight: () => <HeaderRight />,
         }}
       />
       <Tabs.Screen

@@ -1,7 +1,7 @@
 import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 import { Stack, useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import OrganizerCard from '../../../components/cards/OrganizerCard';
 import OrganizersCard from '../../../components/cards/OrganizersCard';
@@ -9,7 +9,6 @@ import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
-import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
 import { WIDE_BLURHASH } from '../../../config/constants';
 import type { OrganizingTeamMember } from '../../../global';
 import { OrganizingTeam } from '../../../mock/organizingTeam';
@@ -17,19 +16,13 @@ import { OrganizingTeam } from '../../../mock/organizingTeam';
 const About = () => {
   const router = useRouter();
 
-  const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
-
-  const showSignInModal = () => {
-    setSignInModalVisible(true);
-  };
-
   const OrganizingIndividuals = OrganizingTeam.data.filter((item) => item.type === 'individual');
 
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          headerRight: () => <HeaderRight handlePress={showSignInModal} />,
+          headerRight: () => <HeaderRight />,
           animation: 'none',
         }}
       />
@@ -99,10 +92,6 @@ const About = () => {
       <OrganizersCard />
 
       <Space size={16} />
-
-      <View>
-        <GoogleSignInModal visible={signInModalVisible} onClose={() => setSignInModalVisible(false)} />
-      </View>
     </MainContainer>
   );
 };
