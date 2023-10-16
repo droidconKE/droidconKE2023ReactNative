@@ -1,8 +1,7 @@
-import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
-import React, { useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import CallForSpeakersCard from '../../../components/cards/CallForSpeakersCard';
 import OrganizersCard from '../../../components/cards/OrganizersCard';
 import SponsorsCard from '../../../components/cards/SponsorsCard';
@@ -12,26 +11,17 @@ import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import SessionsList from '../../../components/lists/SessionsList';
 import SpeakersList from '../../../components/lists/SpeakersList';
-import GoogleSignInModal from '../../../components/modals/GoogleSignInModal';
 import VideoPlayer from '../../../components/player/VideoPlayer';
 import { useAuth } from '../../../context/auth';
 
 const Main = () => {
-  const [signInModalVisible, setSignInModalVisible] = useState<boolean>(false);
-
-  const { user, signOut } = useAuth();
-
-  const { colors } = useTheme();
-
-  const showSignInModal = () => {
-    setSignInModalVisible(true);
-  };
+  const { user } = useAuth();
 
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          headerRight: () => <HeaderRight handlePress={showSignInModal} />,
+          headerRight: () => <HeaderRight />,
         }}
       />
 
@@ -86,16 +76,8 @@ const Main = () => {
           <OrganizersCard />
 
           <Space size={16} />
-
-          <Pressable onPress={() => signOut()}>
-            <StyledText style={{ color: colors.tertiary }}>Sign Out</StyledText>
-          </Pressable>
         </View>
       )}
-
-      <View>
-        <GoogleSignInModal visible={signInModalVisible} onClose={() => setSignInModalVisible(false)} />
-      </View>
     </MainContainer>
   );
 };
