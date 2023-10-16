@@ -33,7 +33,7 @@ const SessionsList = () => {
           data={sessions}
           renderItem={({ item }) => (
             <SessionCard
-              handlePress={() => router.replace({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
+              handlePress={() => router.push({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
               item={item}
               screen="home"
             />
