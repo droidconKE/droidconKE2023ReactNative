@@ -10,6 +10,7 @@ import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import { Sessions } from '../../../mock/sessions';
 import { getSessionTimesAndLocation, getTwitterHandle, truncate } from '../../../util/helpers';
+import * as Linking from 'expo-linking';
 
 const Session = () => {
   const { colors, dark } = useTheme();
@@ -23,21 +24,24 @@ const Session = () => {
 
   const onShare = async () => {
     try {
-      const result = await Share.share({
-        message: 'React Native | A framework for building native apps using React',
+      const redirectUrl = Linking.createURL(`/session/${session?.slug}`);
+
+      await Share.share({
+        message: `check out ${session?.title} on ${redirectUrl}`,
       });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
     } catch (error) {
-      Alert.alert(error.message);
+      Alert.alert(JSON.stringify(error));
     }
+  };
+
+  const handleTwitterProfile = (link: string | null | undefined) => {
+    if (link) {
+      Linking.openURL(`${link}`);
+    }
+  };
+
+  const handleBookmark = () => {
+    /** Bookmark session button. TODO: Add bookmark functionality, theres an endpoint for this. */
   };
 
   return (
@@ -76,10 +80,9 @@ const Session = () => {
                   {session?.speakers.map((speaker) => speaker.name).join(', ')}
                 </StyledText>
               </View>
-              {/** Bookmark session button. TODO: Add bookmark functionality */}
               <View>
                 <Space size={14} />
-                <FontAwesome5 name="star" size={24} color={colors.primary} />
+                <FontAwesome5 name="star" size={24} color={colors.primary} onPress={handleBookmark} />
               </View>
             </Row>
 
@@ -152,7 +155,6 @@ const Session = () => {
           </View>
 
           <View style={styles.withPadding}>
-            {/** TODO: Add twitter redirect functionality */}
             {session?.speakers && session?.speakers.length > 1 ? (
               <View>
                 <StyledText font="medium">Twitter Handles</StyledText>
@@ -164,6 +166,8 @@ const Session = () => {
                     <Pressable
                       key={index.toString()}
                       style={[styles.button, { borderColor: colors.primary, backgroundColor: colors.background }]}
+                      onPress={() => handleTwitterProfile(speaker.twitter)}
+                      disabled={speaker.twitter ? false : true}
                     >
                       <FontAwesome5 name="twitter" size={20} color={colors.primary} />
                       <Space size={4} horizontal />
@@ -178,7 +182,11 @@ const Session = () => {
               <Row>
                 <StyledText font="medium">Twitter Handle</StyledText>
 
-                <Pressable style={[styles.button, { borderColor: colors.primary, backgroundColor: colors.background }]}>
+                <Pressable
+                  style={[styles.button, { borderColor: colors.primary, backgroundColor: colors.background }]}
+                  onPress={() => handleTwitterProfile(session?.speakers[0]?.twitter)}
+                  disabled={session?.speakers[0]?.twitter ? false : true}
+                >
                   <FontAwesome5 name="twitter" size={20} color={colors.primary} />
                   <Space size={4} horizontal />
                   <StyledText font="medium" style={{ color: colors.primary }}>
@@ -192,7 +200,6 @@ const Session = () => {
         </View>
       </MainContainer>
 
-      {/** Floating action button. TODO: Add share functionality */}
       <Pressable style={[styles.fab, { backgroundColor: colors.tertiary }]} onPress={onShare}>
         <MaterialCommunityIcons name="share" size={30} color="white" />
       </Pressable>
