@@ -1,22 +1,16 @@
-import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import CallForSpeakersCard from '../../../components/cards/CallForSpeakersCard';
 import OrganizersCard from '../../../components/cards/OrganizersCard';
 import SponsorsCard from '../../../components/cards/SponsorsCard';
 import Space from '../../../components/common/Space';
-import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import SessionsList from '../../../components/lists/SessionsList';
 import SpeakersList from '../../../components/lists/SpeakersList';
 import VideoPlayer from '../../../components/player/VideoPlayer';
-import { useAuth } from '../../../context/auth';
 
 const Main = () => {
-  const { user } = useAuth();
-
   return (
     <MainContainer preset="scroll">
       <Stack.Screen
@@ -27,57 +21,29 @@ const Main = () => {
 
       <Space size={16} />
 
-      {!user && (
-        <View style={styles.main}>
-          <StyledText font="semiBold" size="md">
-            Welcome to the largest Focussed Android Developer community in Africa
-          </StyledText>
+      <View style={styles.main}>
+        <Space size={10} />
 
-          <Space size={16} />
+        <VideoPlayer />
 
-          <Image source={require('../../../assets/images/banner.png')} style={styles.image} contentFit="contain" />
+        <Space size={30} />
 
-          <Space size={16} />
+        <SessionsList />
 
-          <CallForSpeakersCard />
+        <Space size={30} />
 
-          <Space size={20} />
+        <SpeakersList />
 
-          <SponsorsCard />
+        <Space size={6} />
 
-          <Space size={20} />
+        <SponsorsCard />
 
-          <OrganizersCard />
+        <Space size={16} />
 
-          <Space size={16} />
-        </View>
-      )}
+        <OrganizersCard />
 
-      {user && (
-        <View style={styles.main}>
-          <Space size={10} />
-
-          <VideoPlayer />
-
-          <Space size={30} />
-
-          <SessionsList />
-
-          <Space size={30} />
-
-          <SpeakersList />
-
-          <Space size={6} />
-
-          <SponsorsCard />
-
-          <Space size={16} />
-
-          <OrganizersCard />
-
-          <Space size={16} />
-        </View>
-      )}
+        <Space size={16} />
+      </View>
     </MainContainer>
   );
 };
