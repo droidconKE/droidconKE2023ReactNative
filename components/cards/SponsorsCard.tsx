@@ -2,16 +2,19 @@ import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { ISponsor } from '../../global';
-import { Sponsors } from '../../mock/sponsors';
+import type { ISponsor, ISponsors } from '../../global';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
-const SponsorsCard = () => {
+type Props = {
+  sponsors: ISponsors;
+};
+
+const SponsorsCard = ({ sponsors }: Props) => {
   const { colors } = useTheme();
 
   const renderSponsors = (sponsorType: string) => {
-    return Sponsors?.data
+    return sponsors?.data
       .filter((sponsor: ISponsor) => sponsor.sponsor_type === sponsorType)
       .map((sponsor, index) => (
         <Image

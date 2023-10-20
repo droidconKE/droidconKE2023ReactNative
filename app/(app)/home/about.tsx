@@ -1,8 +1,10 @@
+import { useTheme } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
+import { useQuery } from '@tanstack/react-query';
 import { Image } from 'expo-image';
 import { Stack, useRouter } from 'expo-router';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import OrganizerCard from '../../../components/cards/OrganizerCard';
 import OrganizersCard from '../../../components/cards/OrganizersCard';
 import Space from '../../../components/common/Space';
@@ -11,12 +13,20 @@ import MainContainer from '../../../components/container/MainContainer';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import { WIDE_BLURHASH } from '../../../config/constants';
 import type { OrganizingTeamMember } from '../../../global';
-import { OrganizingTeam } from '../../../mock/organizingTeam';
+import { getOrganizingTeam, usePrefetchedEventData } from '../../../services/api';
 
 const About = () => {
   const router = useRouter();
+  const { colors } = useTheme();
 
-  const OrganizingIndividuals = OrganizingTeam.data.filter((item) => item.type === 'individual');
+  const { organizers } = usePrefetchedEventData();
+
+  const { isLoading, data: organizingTeam } = useQuery({
+    queryKey: ['organizingTeam'],
+    queryFn: getOrganizingTeam,
+  });
+
+  const organizingIndividuals = organizingTeam?.data.filter((item: OrganizingTeamMember) => item.type === 'individual');
 
   return (
     <MainContainer preset="scroll">
@@ -71,25 +81,29 @@ const About = () => {
           <Space size={20} />
         </View>
 
-        <View style={styles.listContainer}>
-          <FlashList
-            data={OrganizingIndividuals}
-            numColumns={3}
-            renderItem={({ item }) => (
-              <OrganizerCard
-                name={item.name}
-                photo={item.photo}
-                tagline={item.tagline}
-                handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
-              />
-            )}
-            keyExtractor={(item: OrganizingTeamMember, index: number) => index.toString()}
-            estimatedItemSize={50}
-          />
-        </View>
+        {isLoading ? (
+          <ActivityIndicator size="large" color={colors.tertiary} />
+        ) : (
+          <View style={styles.listContainer}>
+            <FlashList
+              data={organizingIndividuals}
+              numColumns={3}
+              renderItem={({ item }) => (
+                <OrganizerCard
+                  name={item.name}
+                  photo={item.photo}
+                  tagline={item.tagline}
+                  handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
+                />
+              )}
+              keyExtractor={(item: OrganizingTeamMember, index: number) => index.toString()}
+              estimatedItemSize={50}
+            />
+          </View>
+        )}
       </View>
 
-      <OrganizersCard />
+      <OrganizersCard organizers={organizers} />
 
       <Space size={16} />
     </MainContainer>

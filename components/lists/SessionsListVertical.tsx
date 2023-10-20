@@ -5,6 +5,8 @@ import type { ListRenderItemInfo } from 'react-native';
 import { FlatList, StyleSheet, View } from 'react-native';
 import SessionListSeparator from '../../assets/artworks/ListSeparator';
 import type { SessionForSchedule } from '../../global';
+import { usePrefetchedEventData } from '../../services/api';
+import { getSessionTimeAndLocation } from '../../util/helpers';
 import SessionCard from '../cards/SessionCard';
 import Row from '../common/Row';
 import Space from '../common/Space';
@@ -31,6 +33,7 @@ const SessionsListVertical = ({
 }: SessionListVerticalProps<SessionForSchedule>) => {
   const { colors } = useTheme();
   const router = useRouter();
+  const { schedule } = usePrefetchedEventData();
 
   if (sessions === undefined) {
     return (
@@ -55,6 +58,7 @@ const SessionsListVertical = ({
           }}
           screen={'sessions'}
           variant={variant === 'card' ? 'card' : 'list'}
+          time={getSessionTimeAndLocation(item.slug, schedule)}
         />
         {index !== sessions.length - 1 ? (
           variant === 'card' ? (

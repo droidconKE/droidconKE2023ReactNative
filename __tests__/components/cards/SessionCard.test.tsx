@@ -64,17 +64,17 @@ describe('<SessionCard/>', () => {
   const onPress = jest.fn();
 
   it('renders SessionCard component', () => {
-    render(<SessionCard handlePress={onPress} item={session} screen="home" />);
+    render(<SessionCard handlePress={onPress} item={session} screen="home" time="2023-08-16" />);
     expect(screen.getByTestId('card')).toBeDefined();
   });
 
   it('renders session details', () => {
-    const { getByText } = render(<SessionCard handlePress={onPress} item={session} screen="home" />);
+    const { getByText } = render(<SessionCard handlePress={onPress} item={session} screen="home" time="2023-08-16" />);
     expect(getByText('The Apache Way: Doing Community like Apache')).toBeDefined();
   });
 
   it('fires onPress function when pressed', () => {
-    render(<SessionCard handlePress={onPress} item={session} screen="home" />);
+    render(<SessionCard handlePress={onPress} item={session} screen="home" time="2023-08-16" />);
     fireEvent.press(screen.getByText('The Apache Way: Doing Community like Apache'));
 
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -82,14 +82,28 @@ describe('<SessionCard/>', () => {
 
   it('renders SessionCardOnSessions when you pass sessions to screen prop', () => {
     render(
-      <SessionCard screen="sessions" handlePress={onPress} handleBookMark={onPress} item={schedule} variant="card" />,
+      <SessionCard
+        screen="sessions"
+        handlePress={onPress}
+        handleBookMark={onPress}
+        item={schedule}
+        variant="card"
+        time="2023-08-16"
+      />,
     );
     expect(screen.getByTestId('card-sessions')).toBeDefined();
   });
 
   it('renders SessionCardList when you pass sessions and list to screen prop', () => {
     render(
-      <SessionCard variant="list" handleBookMark={onPress} screen="sessions" handlePress={onPress} item={schedule} />,
+      <SessionCard
+        variant="list"
+        handleBookMark={onPress}
+        screen="sessions"
+        handlePress={onPress}
+        item={schedule}
+        time="2023-08-16"
+      />,
     );
     expect(screen.getByTestId('card-list')).toBeDefined();
   });

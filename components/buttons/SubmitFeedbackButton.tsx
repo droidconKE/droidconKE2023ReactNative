@@ -3,15 +3,15 @@ import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import StyledText from '../common/StyledText';
 
-type SubmitFeedbackButtonProps = {
-  openModal: () => void;
+type Props = {
   text: string;
+  handlePress: () => void;
 };
 
-const SubmitFeedbackButton = ({ openModal, text }: SubmitFeedbackButtonProps) => {
+const SubmitFeedbackButton = ({ handlePress, text }: Props) => {
   const { colors } = useTheme();
   return (
-    <Pressable style={[styles.pressableSubmit, { backgroundColor: colors.assetAccent }]} onPress={openModal}>
+    <Pressable style={[styles.pressableSubmit, { backgroundColor: colors.assetAccent }]} onPress={handlePress}>
       <StyledText style={[{ color: colors.whiteConstant }]} font="semiBold">
         {text}
       </StyledText>

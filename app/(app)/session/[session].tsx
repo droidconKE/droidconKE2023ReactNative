@@ -1,24 +1,29 @@
 import { AntDesign, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
+import { useQuery } from '@tanstack/react-query';
 import { Image } from 'expo-image';
+import * as Linking from 'expo-linking';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, View, Alert, Share } from 'react-native';
+import { Alert, Pressable, Share, StyleSheet, View } from 'react-native';
 import Row from '../../../components/common/Row';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
-import { Sessions } from '../../../mock/sessions';
+import type { SessionForSchedule, Speaker } from '../../../global';
+import { getSessions, usePrefetchedEventData } from '../../../services/api';
 import { getSessionTimesAndLocation, getTwitterHandle, truncate } from '../../../util/helpers';
-import * as Linking from 'expo-linking';
 
 const Session = () => {
   const { colors, dark } = useTheme();
   const { slug } = useLocalSearchParams();
   const router = useRouter();
 
+  const { data: sessions } = useQuery({ queryKey: ['sessions'], queryFn: () => getSessions(50) });
+  const { schedule } = usePrefetchedEventData();
+
   // filter session by slug
-  const session = Sessions.data.filter((_session) => _session.slug === slug)[0];
+  const session = sessions?.data.filter((_session: SessionForSchedule) => _session.slug === slug)[0];
 
   const [showMoreBio, setShowMoreBio] = useState(false);
 
@@ -77,7 +82,7 @@ const Session = () => {
                   </StyledText>
                 </View>
                 <StyledText size="lg" font="bold" style={{ color: dark ? colors.text : colors.primary }}>
-                  {session?.speakers.map((speaker) => speaker.name).join(', ')}
+                  {session?.speakers.map((speaker: Speaker) => speaker.name).join(', ')}
                 </StyledText>
               </View>
               <View>
@@ -95,7 +100,7 @@ const Session = () => {
             <Space size={16} />
 
             {session?.speakers && session?.speakers.length > 1 ? (
-              session?.speakers.map((speaker, index) => (
+              session?.speakers.map((speaker: Speaker, index: number) => (
                 <View key={index.toString()}>
                   <StyledText font="regular" style={{ color: colors.primary }}>
                     {speaker.name} - {''}
@@ -143,7 +148,7 @@ const Session = () => {
           </View>
 
           <View style={[styles.centered, { borderColor: dark ? colors.background : colors.border }]}>
-            <StyledText font="light">{getSessionTimesAndLocation(session?.slug || '')}</StyledText>
+            <StyledText font="light">{getSessionTimesAndLocation(session?.slug || '', schedule)}</StyledText>
 
             <Space size={16} />
 
@@ -162,7 +167,7 @@ const Session = () => {
                 <Space size={16} />
 
                 <Row>
-                  {session?.speakers.map((speaker, index) => (
+                  {session?.speakers.map((speaker: Speaker, index: number) => (
                     <Pressable
                       key={index.toString()}
                       style={[styles.button, { borderColor: colors.primary, backgroundColor: colors.background }]}

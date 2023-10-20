@@ -6,11 +6,11 @@ jest.mock('expo-router');
 
 describe('SpeakersList', () => {
   it('renders the SpeakersList correctly', () => {
-    const { getByText } = render(<SpeakersList />);
+    const { getByText } = render(<SpeakersList speakers={Speakers} />);
 
     expect(getByText('Speakers')).toBeDefined();
 
-    const speakersCount = (Speakers.data.length - 5).toString();
+    const speakersCount = (Speakers.meta.paginator.count - 5).toString();
 
     expect(getByText(`+${speakersCount}`)).toBeDefined();
   });
