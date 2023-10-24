@@ -8,29 +8,19 @@ import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { blurhash } from '../../config/constants';
-import type { IFeed } from '../../global';
+import type { Feed, IFeed } from '../../global';
 import Row from '../common/Row';
 import StyledText from '../common/StyledText';
-
-dayjs.extend(relativeTime);
 
 interface FeedListItemProps {
   item: Feed;
 }
 
-type Feed = {
-  title: string;
-  body: string;
-  topic: string;
-  url: string;
-  image: string;
-  created_at: string;
-};
-
 type Props = {
   feed: IFeed;
 };
 
+dayjs.extend(relativeTime);
 const { height } = Dimensions.get('screen');
 
 const FeedListItem = ({ item }: FeedListItemProps) => {

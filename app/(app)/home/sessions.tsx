@@ -23,8 +23,8 @@ const Sessions = () => {
 
   const { schedule: scheduleData } = usePrefetchedEventData();
 
-  const dates = getDaysFromSchedule(scheduleData);
-  const [selectedDate, setSelectedDate] = useState<string>(dates[0]?.key ?? '');
+  const dates = scheduleData && getDaysFromSchedule(scheduleData);
+  const [selectedDate, setSelectedDate] = useState<string>((dates && dates[0]?.key) ?? '');
 
   const toggleSwitch = () => setShowsBookmarked((previousState) => !previousState);
   const toggleView = () => setListVisible((previousState) => !previousState);

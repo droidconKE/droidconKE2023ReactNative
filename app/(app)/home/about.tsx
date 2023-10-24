@@ -103,7 +103,7 @@ const About = () => {
         )}
       </View>
 
-      <OrganizersCard organizers={organizers} />
+      {organizers && <OrganizersCard organizers={organizers} />}
 
       <Space size={16} />
     </MainContainer>

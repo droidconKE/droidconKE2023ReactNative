@@ -9,10 +9,7 @@ import { getEventFeed } from '../../../../services/api';
 export default function Page() {
   const { colors } = useTheme();
 
-  const { isLoading, data } = useQuery({
-    queryKey: ['feed'],
-    queryFn: getEventFeed,
-  });
+  const { isLoading, data } = useQuery({ queryKey: ['feed'], queryFn: getEventFeed });
 
   return (
     <MainContainer style={styles.main}>
@@ -21,9 +18,7 @@ export default function Page() {
           <ActivityIndicator size="large" color={colors.tertiary} />
         </View>
       ) : (
-        <View>
-          <FeedList feed={data} />
-        </View>
+        <View>{data && <FeedList feed={data} />}</View>
       )}
     </MainContainer>
   );

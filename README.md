@@ -1,6 +1,6 @@
 # droidconKE2023ReactNative
 
-React Native App for Kenya's 4rd Android Developer Conference - droidcon to be held in Nairobi from November 8-10th 2023.
+React Native App for Kenya's 4th Android Developer Conference - droidcon to be held in Nairobi from November 8-10th 2023.
 
 ## Run the published app on your phone
 

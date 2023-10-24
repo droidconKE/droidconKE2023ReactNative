@@ -58,7 +58,7 @@ const SessionsListVertical = ({
           }}
           screen={'sessions'}
           variant={variant === 'card' ? 'card' : 'list'}
-          time={getSessionTimeAndLocation(item.slug, schedule)}
+          time={(schedule && getSessionTimeAndLocation(item.slug, schedule)) ?? ''}
         />
         {index !== sessions.length - 1 ? (
           variant === 'card' ? (

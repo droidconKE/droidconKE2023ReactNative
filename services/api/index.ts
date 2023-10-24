@@ -1,42 +1,57 @@
 import type { UseQueryOptions } from '@tanstack/react-query';
 import { useQueries } from '@tanstack/react-query';
 import { EVENT_SLUG, ORG_SLUG } from '../../config/constants';
-import type { IOrganizers, ISessions, ISpeaker, ISponsors } from '../../global';
+import type {
+  IFeed,
+  IOrganizers,
+  IOrganizingTeam,
+  ISchedule,
+  ISessions,
+  ISpeaker,
+  ISponsors,
+  ScheduleSession,
+} from '../../global';
 import { axiosInstance } from './axios';
 import { queryClient } from './react-query';
 
 export const getSessions = async (count: number) => {
-  const { data } = await axiosInstance.get(`/events/${EVENT_SLUG}/sessions`, { params: { per_page: count } });
+  const { data } = await axiosInstance.get<ISessions>(`/events/${EVENT_SLUG}/sessions`, {
+    params: { per_page: count },
+  });
   return data;
 };
 
 export const getSpeakers = async (count: number) => {
-  const { data } = await axiosInstance.get(`/events/${EVENT_SLUG}/speakers`, { params: { per_page: count } });
+  const { data } = await axiosInstance.get<ISpeaker>(`/events/${EVENT_SLUG}/speakers`, {
+    params: { per_page: count },
+  });
   return data;
 };
 
 export const getSponsors = async () => {
-  const { data } = await axiosInstance.get(`/events/${EVENT_SLUG}/sponsors`);
+  const { data } = await axiosInstance.get<ISponsors>(`/events/${EVENT_SLUG}/sponsors`);
   return data;
 };
 
 export const getOrganizers = async () => {
-  const { data } = await axiosInstance.get(`/organizers`);
+  const { data } = await axiosInstance.get<IOrganizers>(`/organizers`);
   return data;
 };
 
 export const getOrganizingTeam = async () => {
-  const { data } = await axiosInstance.get(`/organizers/${ORG_SLUG}/team`);
+  const { data } = await axiosInstance.get<IOrganizingTeam>(`/organizers/${ORG_SLUG}/team`);
   return data;
 };
 
 export const getEventFeed = async () => {
-  const { data } = await axiosInstance.get(`/events/${EVENT_SLUG}/feeds`);
+  const { data } = await axiosInstance.get<IFeed>(`/events/${EVENT_SLUG}/feeds`);
   return data;
 };
 
 export const getEventSchedule = async () => {
-  const { data } = await axiosInstance.get(`/events/${EVENT_SLUG}/schedule`, { params: { grouped: true } });
+  const { data } = await axiosInstance.get<ISchedule>(`/events/${EVENT_SLUG}/schedule`, {
+    params: { grouped: true },
+  });
   return data;
 };
 
@@ -46,14 +61,20 @@ export const sendFeedback = async (feedback: string, rating: number) => {
   return res;
 };
 
+export const getSessionBySlug = async (slug: string | undefined) => {
+  if (typeof slug === 'undefined') return null;
+  const { data } = await axiosInstance.get<ScheduleSession>(`/events/${EVENT_SLUG}/sessions/${slug}`);
+  return data;
+};
+
 const _queries = [
   {
-    queryKey: ['sessions'],
-    queryFn: () => getSessions(15),
+    queryKey: ['sessions', 50],
+    queryFn: () => getSessions(50),
   },
   {
-    queryKey: ['speakers'],
-    queryFn: () => getSpeakers(15),
+    queryKey: ['speakers', 50],
+    queryFn: () => getSpeakers(50),
   },
   {
     queryKey: ['sponsors'],
@@ -67,11 +88,13 @@ const _queries = [
     queryKey: ['schedule'],
     queryFn: () => getEventSchedule(),
   },
-];
+] as const;
 
 export const prefetchEvent = async () => {
   _queries.forEach(async (query) => {
-    await queryClient.prefetchQuery(query as UseQueryOptions<ISessions | ISpeaker | ISponsors | IOrganizers>);
+    await queryClient.prefetchQuery(
+      query as UseQueryOptions<ISessions | ISpeaker | ISponsors | IOrganizers | ISchedule>,
+    );
   });
 };
 

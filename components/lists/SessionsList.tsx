@@ -42,7 +42,7 @@ const SessionsList = ({ sessions }: Props) => {
               handlePress={() => router.push({ pathname: `/session/${item.slug}`, params: { slug: item.slug } })}
               item={item}
               screen="home"
-              time={getSessionTimeAndLocation(item.slug, schedule)}
+              time={(schedule && getSessionTimeAndLocation(item.slug, schedule)) ?? ''}
             />
           )}
           keyExtractor={(item: Session, index: number) => index.toString()}

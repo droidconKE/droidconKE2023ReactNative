@@ -46,11 +46,11 @@ const Main = () => {
 
         <Space size={6} />
 
-        <SponsorsCard sponsors={sponsors} />
+        {sponsors && <SponsorsCard sponsors={sponsors} />}
 
         <Space size={16} />
 
-        <OrganizersCard organizers={organizers} />
+        {organizers && <OrganizersCard organizers={organizers} />}
 
         <Space size={16} />
       </View>

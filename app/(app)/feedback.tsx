@@ -39,6 +39,7 @@ const Feedback = () => {
     },
     onError: (error) => {
       console.error(error);
+      //TODO: implement UI to handle error
     },
   });
 
