@@ -94,8 +94,14 @@ export const getSessionTime = (startTime: string) => {
  * @example getTwitterHandle('https://twitter.com/kharioki')  // returns kharioki
  */
 export const getTwitterHandle = (url?: string) => {
-  const twitterHandle = url?.split('/').pop();
-  return twitterHandle;
+  const regex = /twitter\.com\/([A-Za-z0-9_]+)/;
+  const match = url?.match(regex);
+
+  if (match && match[1]) {
+    return match[1];
+  } else {
+    return 'N/A';
+  }
 };
 
 /**

@@ -73,8 +73,8 @@ const _queries = [
     queryFn: () => getSessions(50),
   },
   {
-    queryKey: ['speakers', 50],
-    queryFn: () => getSpeakers(50),
+    queryKey: ['speakers', 60],
+    queryFn: () => getSpeakers(60),
   },
   {
     queryKey: ['sponsors'],
