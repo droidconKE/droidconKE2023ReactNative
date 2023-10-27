@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 import * as Linking from 'expo-linking';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Dimensions, ImageBackground, Pressable, StyleSheet, View } from 'react-native';
+import { Dimensions, ImageBackground, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Row from '../../components/common/Row';
 import Space from '../../components/common/Space';
 import StyledText from '../../components/common/StyledText';
@@ -74,7 +74,7 @@ const Speaker = () => {
           ),
         }}
       />
-      <View style={styles.main}>
+      <ScrollView style={styles.main}>
         <ImageBackground
           source={
             dark ? require('../../assets/images/speaker-dark.png') : require('../../assets/images/speaker-light.png')
@@ -127,7 +127,7 @@ const Speaker = () => {
             {details?.bio}
           </StyledText>
         </View>
-      </View>
+      </ScrollView>
 
       <View style={[styles.socialLink, { borderTopColor: colors.accent }]}>
         <Row>
