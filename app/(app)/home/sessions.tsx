@@ -11,19 +11,23 @@ import MainContainer from '../../../components/container/MainContainer';
 import HeaderActionRight from '../../../components/headers/HeaderActionRight';
 import SessionsListVertical from '../../../components/lists/SessionsListVertical';
 import FilterModal from '../../../components/modals/FilterModal';
-import { Schedule } from '../../../mock/schedule';
+import type { IDateForDayButton, SessionForSchedule } from '../../../global';
+import { usePrefetchedEventData } from '../../../services/api';
 import { getDaysFromSchedule } from '../../../util/helpers';
 
 const Sessions = () => {
+  const { colors } = useTheme();
+
   const [showsBookmarked, setShowsBookmarked] = useState<boolean>(false);
   const [listVisible, setListVisible] = useState<boolean>(true);
 
-  const dates = getDaysFromSchedule(Schedule);
-  const [selectedDate, setSelectedDate] = useState<string>(dates[0]?.key ?? '');
+  const { schedule: scheduleData } = usePrefetchedEventData();
+
+  const dates = scheduleData && getDaysFromSchedule(scheduleData);
+  const [selectedDate, setSelectedDate] = useState<string>((dates && dates[0]?.key) ?? '');
 
   const toggleSwitch = () => setShowsBookmarked((previousState) => !previousState);
   const toggleView = () => setListVisible((previousState) => !previousState);
-  const { colors } = useTheme();
 
   const handleDayButtonPress = (dayButtonKey: string) => setSelectedDate(dayButtonKey);
 
@@ -56,7 +60,7 @@ const Sessions = () => {
         <Space size={16} />
         <Row style={[styles.row, styles.paddingMain]}>
           <Row>
-            {dates?.map((item) => (
+            {dates?.map((item: IDateForDayButton) => (
               <Row key={item.key}>
                 <DayButton
                   date={item.date}
@@ -100,8 +104,8 @@ const Sessions = () => {
           handleBookMark={handleBookMark}
           sessions={
             showsBookmarked === true
-              ? Schedule.data[selectedDate]?.filter((item) => item.is_bookmarked === true)
-              : Schedule.data[selectedDate]
+              ? scheduleData?.data[selectedDate]?.filter((item: SessionForSchedule) => item?.is_bookmarked === true)
+              : scheduleData?.data[selectedDate]
           }
         />
       </View>

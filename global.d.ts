@@ -62,6 +62,15 @@ export type Typography = {
   logo: Rubik;
 };
 
+export interface Feed {
+  title: string;
+  body: string;
+  topic: string;
+  url: string;
+  image: string;
+  created_at: string;
+}
+
 export interface IFeed {
   data: Array<Feed>;
   meta: Meta;
@@ -126,6 +135,10 @@ export interface SessionForSchedule extends Session {
 export interface ISessions {
   data: Array<Session>;
   meta: Meta;
+}
+
+export interface ScheduleSession {
+  data: SessionForSchedule;
 }
 
 export interface Speaker {

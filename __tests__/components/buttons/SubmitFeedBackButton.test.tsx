@@ -7,7 +7,7 @@ describe('<SubmitFeedbackButton/>', () => {
   it('Renders submit feedback button component', () => {
     render(
       <SubmitFeedbackButton
-        openModal={() => {
+        handlePress={() => {
           console.log('hello');
         }}
         text="SUBMIT FEEDBACK"
@@ -17,7 +17,7 @@ describe('<SubmitFeedbackButton/>', () => {
   });
   it('calls the function provided by onPress prop after pressing the button', () => {
     const onPress = jest.fn();
-    render(<SubmitFeedbackButton openModal={onPress} text="SUBMIT FEEDBACK" />);
+    render(<SubmitFeedbackButton handlePress={onPress} text="SUBMIT FEEDBACK" />);
     fireEvent.press(screen.getByText('SUBMIT FEEDBACK'));
 
     expect(onPress).toHaveBeenCalledTimes(1);

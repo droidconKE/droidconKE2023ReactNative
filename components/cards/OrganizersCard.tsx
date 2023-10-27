@@ -2,15 +2,19 @@ import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Organizers } from '../../mock/organizers';
+import type { IOrganizers } from '../../global';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
 
-const OrganizersCard = () => {
+type Props = {
+  organizers: IOrganizers;
+};
+
+const OrganizersCard = ({ organizers }: Props) => {
   const { colors } = useTheme();
 
   const renderOrganizers = () => {
-    return Organizers?.data.map((organizer, index) => (
+    return organizers?.data.map((organizer, index) => (
       <Image key={index} source={{ uri: organizer.logo }} style={styles.logo} transition={1000} contentFit="contain" />
     ));
   };

@@ -3,8 +3,7 @@ import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
-import type { Speaker } from '../../global';
-import { Speakers } from '../../mock/speakers';
+import type { ISpeaker, Speaker } from '../../global';
 import ViewAllButton from '../buttons/ViewAllButton';
 import OrganizerCard from '../cards/OrganizerCard';
 import Row from '../common/Row';
@@ -13,11 +12,15 @@ import StyledText from '../common/StyledText';
 
 const { width } = Dimensions.get('window');
 
-const SpeakersList = () => {
+type Props = {
+  speakers: ISpeaker;
+};
+
+const SpeakersList = ({ speakers }: Props) => {
   const { colors } = useTheme();
   const router = useRouter();
-  const speakers = Speakers.data.slice(0, 15); // filter speakers to 15
-  const speakersCount = (Speakers.data.length - 5).toString();
+  const data = speakers?.data.slice(0, 15); // filter speakers to 15
+  const speakersCount = (speakers?.meta.paginator.count - 5).toString();
 
   return (
     <View style={styles.list}>
@@ -32,7 +35,7 @@ const SpeakersList = () => {
 
       <View style={styles.listContainer}>
         <FlashList
-          data={speakers}
+          data={data}
           renderItem={({ item }) => (
             <OrganizerCard
               name={item.name}

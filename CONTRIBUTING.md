@@ -51,6 +51,7 @@ To install the project, navigate to the directory and run:
 ### Setup
 
 - Create `.env.development` file and copy the contents from `.env.example`
+- To run the app locally you need to fill in the actual values after copying the `.env.example` file to `.env.development`
 - Add Google Client ID to your `.env.development`. Follow [https://docs.expo.dev/guides/authentication/#google](https://docs.expo.dev/guides/authentication/#google) on how to get a Google Client ID
 
 ### Run

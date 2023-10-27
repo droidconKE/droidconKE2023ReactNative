@@ -1,24 +1,29 @@
 import { AntDesign, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
+import { useQuery } from '@tanstack/react-query';
 import { Image } from 'expo-image';
+import * as Linking from 'expo-linking';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, View, Alert, Share } from 'react-native';
+import { Alert, Pressable, Share, StyleSheet, View } from 'react-native';
 import Row from '../../../components/common/Row';
 import Space from '../../../components/common/Space';
 import StyledText from '../../../components/common/StyledText';
 import MainContainer from '../../../components/container/MainContainer';
-import { Sessions } from '../../../mock/sessions';
+import type { Speaker } from '../../../global';
+import { getSessionBySlug, usePrefetchedEventData } from '../../../services/api';
 import { getSessionTimesAndLocation, getTwitterHandle, truncate } from '../../../util/helpers';
-import * as Linking from 'expo-linking';
 
 const Session = () => {
   const { colors, dark } = useTheme();
-  const { slug } = useLocalSearchParams();
+  const { slug } = useLocalSearchParams<{ slug: string }>();
   const router = useRouter();
 
-  // filter session by slug
-  const session = Sessions.data.filter((_session) => _session.slug === slug)[0];
+  const { schedule } = usePrefetchedEventData();
+
+  const { data: _session } = useQuery({ queryKey: ['session', slug], queryFn: () => getSessionBySlug(slug) });
+
+  const session = _session?.data;
 
   const [showMoreBio, setShowMoreBio] = useState(false);
 
@@ -77,7 +82,7 @@ const Session = () => {
                   </StyledText>
                 </View>
                 <StyledText size="lg" font="bold" style={{ color: dark ? colors.text : colors.primary }}>
-                  {session?.speakers.map((speaker) => speaker.name).join(', ')}
+                  {session?.speakers && session?.speakers.map((speaker: Speaker) => speaker.name).join(', ')}
                 </StyledText>
               </View>
               <View>
@@ -95,7 +100,7 @@ const Session = () => {
             <Space size={16} />
 
             {session?.speakers && session?.speakers.length > 1 ? (
-              session?.speakers.map((speaker, index) => (
+              session?.speakers.map((speaker: Speaker, index: number) => (
                 <View key={index.toString()}>
                   <StyledText font="regular" style={{ color: colors.primary }}>
                     {speaker.name} - {''}
@@ -118,17 +123,21 @@ const Session = () => {
               ))
             ) : (
               <StyledText font="regular" style={{ color: dark ? colors.text : colors.textLight }}>
-                {!showMoreBio ? truncate(140, session?.speakers[0]?.biography) : session?.speakers[0]?.biography}
-                {session?.speakers[0]?.biography && session?.speakers[0]?.biography.length > 140 && (
-                  <StyledText
-                    size="sm"
-                    font="semiBold"
-                    style={{ color: colors.primary }}
-                    onPress={() => setShowMoreBio(!showMoreBio)}
-                  >
-                    {showMoreBio ? ' ...Show less' : ' Show more'}
-                  </StyledText>
-                )}
+                {session?.speakers &&
+                  (!showMoreBio ? truncate(140, session?.speakers[0]?.biography) : session?.speakers[0]?.biography)}
+
+                {session?.speakers &&
+                  session?.speakers[0]?.biography &&
+                  session?.speakers[0]?.biography.length > 140 && (
+                    <StyledText
+                      size="sm"
+                      font="semiBold"
+                      style={{ color: colors.primary }}
+                      onPress={() => setShowMoreBio(!showMoreBio)}
+                    >
+                      {showMoreBio ? ' ...Show less' : ' Show more'}
+                    </StyledText>
+                  )}
               </StyledText>
             )}
 
@@ -143,7 +152,9 @@ const Session = () => {
           </View>
 
           <View style={[styles.centered, { borderColor: dark ? colors.background : colors.border }]}>
-            <StyledText font="light">{getSessionTimesAndLocation(session?.slug || '')}</StyledText>
+            <StyledText font="light">
+              {(schedule && getSessionTimesAndLocation(session?.slug || '', schedule)) ?? ''}
+            </StyledText>
 
             <Space size={16} />
 
@@ -162,7 +173,7 @@ const Session = () => {
                 <Space size={16} />
 
                 <Row>
-                  {session?.speakers.map((speaker, index) => (
+                  {session?.speakers.map((speaker: Speaker, index: number) => (
                     <Pressable
                       key={index.toString()}
                       style={[styles.button, { borderColor: colors.primary, backgroundColor: colors.background }]}
@@ -185,12 +196,14 @@ const Session = () => {
                 <Pressable
                   style={[styles.button, { borderColor: colors.primary, backgroundColor: colors.background }]}
                   onPress={() => handleTwitterProfile(session?.speakers[0]?.twitter)}
-                  disabled={session?.speakers[0]?.twitter ? false : true}
+                  disabled={session?.speakers && session?.speakers[0]?.twitter ? false : true}
                 >
                   <FontAwesome5 name="twitter" size={20} color={colors.primary} />
                   <Space size={4} horizontal />
                   <StyledText font="medium" style={{ color: colors.primary }}>
-                    {session?.speakers[0]?.twitter ? getTwitterHandle(session?.speakers[0]?.twitter) : 'N/A'}
+                    {session?.speakers && session?.speakers[0]?.twitter
+                      ? getTwitterHandle(session?.speakers[0]?.twitter)
+                      : 'N/A'}
                   </StyledText>
                 </Pressable>
               </Row>
