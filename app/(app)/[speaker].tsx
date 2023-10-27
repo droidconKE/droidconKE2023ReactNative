@@ -124,7 +124,7 @@ const Speaker = () => {
 
         <Space size={16} />
 
-        <View style={[styles.socialLink, { borderTopColor: colors.border }]}>
+        <View style={[styles.socialLink, { borderTopColor: colors.borderColorSecondary }]}>
           <Row>
             <StyledText font="medium">Twitter Handle</StyledText>
 
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     lineHeight: 16,
   },
   socialLink: {
-    borderTopWidth: 0.5,
+    borderTopWidth: 2,
     padding: 20,
     //position: 'absolute',
     //bottom: 0,

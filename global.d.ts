@@ -27,6 +27,7 @@ declare module '@react-navigation/native' {
       placeHolder: string;
       borderColor: string;
       assetAccent: string;
+      borderColorSecondary: string;
     };
   };
 

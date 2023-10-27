@@ -20,6 +20,7 @@ export const theme_colors: ThemeColors = {
     iconSwitch: '#20201E',
     placeHolder: '#C3C3C3',
     borderColor: '#F5F5F5',
+    borderColorSecondary: '#F5F5F5',
     assetAccent: '#000CEB',
   },
   dark: {
@@ -41,6 +42,7 @@ export const theme_colors: ThemeColors = {
     iconSwitch: '#20201E',
     placeHolder: '#C3C3C3',
     borderColor: '#707070',
+    borderColorSecondary: '#000000',
     assetAccent: '#000000',
   },
 };
