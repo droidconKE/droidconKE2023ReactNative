@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react-native';
 import SessionsListVertical from '../../../components/lists/SessionsListVertical';
 import { Schedule } from '../../../mock/schedule';
+import { render, screen } from '../../../util/test-utils';
 
 jest.mock('expo-router');
 

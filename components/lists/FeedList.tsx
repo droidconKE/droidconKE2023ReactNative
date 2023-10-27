@@ -8,25 +8,19 @@ import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { blurhash } from '../../config/constants';
-import { Feed as FeedData } from '../../mock/feed';
+import type { Feed, IFeed } from '../../global';
 import Row from '../common/Row';
 import StyledText from '../common/StyledText';
-
-dayjs.extend(relativeTime);
 
 interface FeedListItemProps {
   item: Feed;
 }
 
-type Feed = {
-  title: string;
-  body: string;
-  topic: string;
-  url: string;
-  image: string;
-  created_at: string;
+type Props = {
+  feed: IFeed;
 };
 
+dayjs.extend(relativeTime);
 const { height } = Dimensions.get('screen');
 
 const FeedListItem = ({ item }: FeedListItemProps) => {
@@ -66,17 +60,17 @@ const FeedListItem = ({ item }: FeedListItemProps) => {
   );
 };
 
-const FeedList = () => {
+const FeedList = ({ feed }: Props) => {
   const recentFirst = (data: Array<Feed>) => {
-    return data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    return data?.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   };
 
   return (
     <View style={styles.main}>
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={recentFirst(FeedData.data)}
-        keyExtractor={(item) => item.title}
+        data={recentFirst(feed?.data)}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }: { item: Feed }) => {
           return <FeedListItem item={item} key={item.title} />;
         }}

@@ -1,24 +1,26 @@
-import { Stack } from 'expo-router';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import React, { useLayoutEffect } from 'react';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import OrganizersCard from '../../../components/cards/OrganizersCard';
 import SponsorsCard from '../../../components/cards/SponsorsCard';
 import Space from '../../../components/common/Space';
 import MainContainer from '../../../components/container/MainContainer';
-import HeaderRight from '../../../components/headers/HeaderRight';
 import SessionsList from '../../../components/lists/SessionsList';
 import SpeakersList from '../../../components/lists/SpeakersList';
 import VideoPlayer from '../../../components/player/VideoPlayer';
+import { prefetchEvent, usePrefetchedEventData } from '../../../services/api';
 
 const Main = () => {
+  const { colors } = useTheme();
+
+  useLayoutEffect(() => {
+    prefetchEvent();
+  }, []);
+
+  const { sessions, speakers, sponsors, organizers } = usePrefetchedEventData();
+
   return (
     <MainContainer preset="scroll">
-      <Stack.Screen
-        options={{
-          headerRight: () => <HeaderRight />,
-        }}
-      />
-
       <Space size={16} />
 
       <View style={styles.main}>
@@ -28,19 +30,27 @@ const Main = () => {
 
         <Space size={30} />
 
-        <SessionsList />
+        {sessions && sessions.data.length > 0 ? (
+          <SessionsList sessions={sessions} />
+        ) : (
+          <ActivityIndicator size="large" color={colors.tertiary} />
+        )}
 
         <Space size={30} />
 
-        <SpeakersList />
+        {speakers && speakers.data.length > 0 ? (
+          <SpeakersList speakers={speakers} />
+        ) : (
+          <ActivityIndicator size="large" color={colors.tertiary} />
+        )}
 
         <Space size={6} />
 
-        <SponsorsCard />
+        {sponsors && <SponsorsCard sponsors={sponsors} />}
 
         <Space size={16} />
 
-        <OrganizersCard />
+        {organizers && <OrganizersCard organizers={organizers} />}
 
         <Space size={16} />
       </View>

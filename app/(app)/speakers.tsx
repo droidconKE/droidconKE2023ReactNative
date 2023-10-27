@@ -7,19 +7,18 @@ import { StyleSheet, View } from 'react-native';
 import SpeakerCard from '../../components/cards/SpeakerCard';
 import Space from '../../components/common/Space';
 import MainContainer from '../../components/container/MainContainer';
-import type { Session, Speaker } from '../../global';
-import { Sessions } from '../../mock/sessions';
-import { Speakers } from '../../mock/speakers';
+import type { ISessions, ISpeaker, Session, Speaker } from '../../global';
+import { usePrefetchedEventData } from '../../services/api';
 
 interface SpeakerItem extends Speaker {
   sessions: Array<Session>;
 }
 
-const getSpeakerSessions = () => {
-  const speakerArray = [...Speakers.data] as Array<SpeakerItem>;
+const getSpeakerSessions = (sessions: ISessions, speakers: ISpeaker) => {
+  const speakerArray = [...speakers?.data] as Array<SpeakerItem>;
 
   speakerArray.map((speaker) => {
-    speaker.sessions = Sessions.data.filter((session) =>
+    speaker.sessions = sessions?.data.filter((session) =>
       session.speakers.some((_speaker) => _speaker.name === speaker.name),
     );
   });
@@ -29,7 +28,10 @@ const getSpeakerSessions = () => {
 const SpeakersPage = () => {
   const { colors } = useTheme();
   const router = useRouter();
-  const data = getSpeakerSessions();
+
+  const { sessions, speakers } = usePrefetchedEventData();
+
+  const data = (sessions && speakers && getSpeakerSessions(sessions, speakers)) ?? [];
 
   return (
     <MainContainer>
@@ -52,7 +54,6 @@ const SpeakersPage = () => {
             estimatedItemSize={100}
           />
         </View>
-
         <Space size={16} />
       </View>
     </MainContainer>

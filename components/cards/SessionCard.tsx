@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { Dimensions, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import type { Session, SessionForSchedule } from '../../global';
-import { getScheduleTimeAndLocation, getSessionTime, getSessionTimeAndLocation, truncate } from '../../util/helpers';
+import { getScheduleTimeAndLocation, getSessionTime, truncate } from '../../util/helpers';
 import Row from '../common/Row';
 import Space from '../common/Space';
 import StyledText from '../common/StyledText';
@@ -13,6 +13,7 @@ type SessionCardHome = {
   screen: 'home';
   item: Session;
   handlePress: () => void;
+  time: string;
 };
 
 type SessionCardSessions = {
@@ -21,6 +22,7 @@ type SessionCardSessions = {
   variant?: 'card' | 'list';
   handlePress: () => void;
   handleBookMark: () => void;
+  time: string;
 };
 
 type SessionCardProps = SessionCardHome | SessionCardSessions;
@@ -38,7 +40,7 @@ const { width } = Dimensions.get('window');
  */
 
 const SessionCardOnHome = (props: Omit<SessionCardHome, 'screen'>) => {
-  const { handlePress, item } = props;
+  const { handlePress, item, time } = props;
   const { colors } = useTheme();
 
   return (
@@ -61,7 +63,7 @@ const SessionCardOnHome = (props: Omit<SessionCardHome, 'screen'>) => {
           <Space size={12} />
 
           <StyledText size="sm" font="light">
-            {getSessionTimeAndLocation(item.slug)}
+            {time}
           </StyledText>
         </View>
       </View>
@@ -192,14 +194,14 @@ const SessionCardList = (props: Omit<SessionCardSessions, 'screen'>) => {
 
 const SessionCard = (props: SessionCardProps) => {
   if (props.screen === 'sessions') {
-    const { handlePress, handleBookMark, item, variant = 'card' } = props;
+    const { handlePress, handleBookMark, item, variant = 'card', time } = props;
     if (variant === 'list') {
-      return <SessionCardList item={item} handleBookMark={handleBookMark} handlePress={handlePress} />;
+      return <SessionCardList item={item} handleBookMark={handleBookMark} handlePress={handlePress} time={time} />;
     }
-    return <SessionCardOnSessions item={item} handleBookMark={handleBookMark} handlePress={handlePress} />;
+    return <SessionCardOnSessions item={item} handleBookMark={handleBookMark} handlePress={handlePress} time={time} />;
   }
   const { handlePress, item } = props;
-  return <SessionCardOnHome item={item} handlePress={handlePress} />;
+  return <SessionCardOnHome item={item} handlePress={handlePress} time={props.time} />;
 };
 
 export default SessionCard;

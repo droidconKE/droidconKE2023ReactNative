@@ -1,5 +1,4 @@
 import type { IDateForDayButton, ISchedule, Room, SessionForSchedule } from '../global';
-import { Schedule } from '../mock/schedule';
 
 /**
  *  a function to truncate text and add ellipsis
@@ -21,9 +20,9 @@ export const truncate = (limit: number, text?: string) => {
  * @returns  start time and room.title
  * @example  getSessionTimeAndLocation('session-1')  // returns @ 9:00  |  Room 1
  */
-export const getSessionTimeAndLocation = (slug: string) => {
-  for (const key in Schedule.data) {
-    const sessionData = Schedule.data[key];
+export const getSessionTimeAndLocation = (slug: string, schedule: ISchedule) => {
+  for (const key in schedule?.data) {
+    const sessionData = schedule?.data[key];
     const session = sessionData?.find((item: SessionForSchedule) => item.slug === slug);
     if (session) {
       const startTime = session.start_time.split(':').slice(0, 2).join(':');
@@ -39,9 +38,9 @@ export const getSessionTimeAndLocation = (slug: string) => {
  * @returns start time, end time, and room.title
  * @example getSessionTimesAndLocation('session-1')  // returns 9:00 AM - 10:00 AM  |  Room 1
  */
-export const getSessionTimesAndLocation = (_slug: string) => {
-  for (const key in Schedule.data) {
-    const sessionData = Schedule.data[key];
+export const getSessionTimesAndLocation = (_slug: string, schedule: ISchedule) => {
+  for (const key in schedule?.data) {
+    const sessionData = schedule?.data[key];
     const sessionItem = sessionData?.find((item: SessionForSchedule) => item.slug === _slug);
 
     if (sessionItem) {
@@ -106,7 +105,7 @@ export const getTwitterHandle = (url?: string) => {
  * @example
  */
 export const getDaysFromSchedule = (schedule: ISchedule): Array<IDateForDayButton> => {
-  const keys = Object.keys(schedule.data);
+  const keys = Object.keys(schedule?.data);
   const datesToSave = keys.map((key, index) => {
     const date = new Date(key).getDate();
     const dateWithSuffix = getSuffixForDate(date);

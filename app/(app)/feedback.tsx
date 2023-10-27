@@ -1,4 +1,5 @@
 import { useTheme } from '@react-navigation/native';
+import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
@@ -9,6 +10,7 @@ import StyledText from '../../components/common/StyledText';
 import MainContainer from '../../components/container/MainContainer';
 import FeedbackSentModal from '../../components/modals/FeedbackSentModal';
 import { typography } from '../../config/typography';
+import { sendFeedback } from '../../services/api';
 
 export type TypeRatingStates = {
   icon: string;
@@ -20,7 +22,7 @@ const Feedback = () => {
   const { colors, dark } = useTheme();
   const [showModal, setShowModal] = useState(false);
   const [selectedRating, setSelectedRating] = useState(2);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState<string>('');
   const ratingStates: Array<TypeRatingStates> = [
     { icon: '😔', text: 'Bad', value: 0 },
     { icon: '😐', text: 'Okay', value: 1 },
@@ -29,6 +31,17 @@ const Feedback = () => {
   const openModal = () => {
     setShowModal(true);
   };
+
+  const { mutate } = useMutation({
+    mutationFn: () => sendFeedback(description, selectedRating),
+    onSuccess: () => {
+      openModal();
+    },
+    onError: (error) => {
+      console.error(error);
+      //TODO: implement UI to handle error
+    },
+  });
 
   return (
     <MainContainer preset="scroll">
@@ -78,7 +91,7 @@ const Feedback = () => {
             onChangeText={setDescription}
           />
           <Space size={26} />
-          <SubmitFeedbackButton openModal={openModal} text="SUBMIT FEEDBACK" />
+          <SubmitFeedbackButton handlePress={mutate} text="SUBMIT FEEDBACK" />
         </View>
 
         <FeedbackSentModal showModal={showModal} />
