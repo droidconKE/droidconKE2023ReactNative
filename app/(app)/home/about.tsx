@@ -80,7 +80,9 @@ const About = () => {
                 name={item.name}
                 photo={item.photo}
                 tagline={item.tagline}
-                handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
+                handlePress={() =>
+                  router.push({ pathname: `/${item.name}`, params: { name: item.name, type: 'organizer' } })
+                }
               />
             )}
             keyExtractor={(item: OrganizingTeamMember, index: number) => index.toString()}

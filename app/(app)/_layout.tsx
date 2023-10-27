@@ -24,9 +24,10 @@ export default () => {
       <Stack.Screen
         name="[speaker]"
         options={{
-          headerTintColor: colors.text,
-          headerStyle: {
-            backgroundColor: colors.background,
+          headerTintColor: colors.whiteConstant,
+          headerTransparent: true,
+          headerTitleStyle: {
+            fontWeight: 'normal',
           },
         }}
       />

@@ -37,7 +37,9 @@ const SpeakersList = () => {
             <OrganizerCard
               name={item.name}
               photo={item.avatar}
-              handlePress={() => router.push({ pathname: `/${item.name}`, params: { name: item.name } })}
+              handlePress={() =>
+                router.push({ pathname: `/${item.name}`, params: { name: item.name, type: 'speaker' } })
+              }
             />
           )}
           keyExtractor={(item: Speaker, index: number) => index.toString()}
