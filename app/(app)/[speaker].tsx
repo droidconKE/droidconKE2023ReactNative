@@ -83,7 +83,12 @@ const Speaker = () => {
 
         <View style={styles.centered}>
           <View style={styles.avatar}>
-            <Image source={details?.image} style={styles.image} contentFit="contain" transition={1000} />
+            <Image
+              source={details?.image}
+              style={[styles.image, { borderColor: colors.tint }]}
+              contentFit="contain"
+              transition={1000}
+            />
           </View>
           <View style={styles.info}>
             <View style={styles.row}>
@@ -112,7 +117,7 @@ const Speaker = () => {
 
           <Space size={8} />
 
-          <StyledText size="base" font="regular" style={styles.contentText}>
+          <StyledText size="base" font="light" style={styles.contentText}>
             {details?.bio}
           </StyledText>
         </View>
@@ -171,6 +176,7 @@ const styles = StyleSheet.create({
   image: {
     height: 100,
     width: 100,
+    borderWidth: 2,
     borderRadius: 60,
   },
   info: {
@@ -187,6 +193,8 @@ const styles = StyleSheet.create({
   socialLink: {
     borderTopWidth: 0.5,
     padding: 20,
+    //position: 'absolute',
+    //bottom: 0,
   },
   button: {
     flexDirection: 'row',
