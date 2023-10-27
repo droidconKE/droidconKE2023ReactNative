@@ -65,7 +65,7 @@ const Speaker = () => {
     <MainContainer preset="scroll">
       <Stack.Screen
         options={{
-          title: 'Speaker',
+          title: type === 'speaker' ? 'Speaker' : 'Organizer',
           headerTitleAlign: 'left',
           headerLeft: () => (
             <AntDesign name="arrowleft" size={24} color={colors.whiteConstant} onPress={() => router.back()} />
