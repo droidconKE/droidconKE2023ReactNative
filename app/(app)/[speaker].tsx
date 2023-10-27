@@ -103,10 +103,11 @@ const Speaker = () => {
             </StyledText>
 
             <Space size={10} />
-
-            <StyledText size="base" font="regular" style={[styles.text, { color: colors.textLight }]}>
-              {details?.tagline}
-            </StyledText>
+            <View style={styles.taglineContainer}>
+              <StyledText size="base" font="regular" style={[styles.text, { color: colors.textLight }]}>
+                {details?.tagline}
+              </StyledText>
+            </View>
           </View>
         </View>
 
@@ -174,8 +175,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 103,
+    width: 103,
     borderWidth: 2,
     borderRadius: 60,
   },
@@ -193,8 +194,6 @@ const styles = StyleSheet.create({
   socialLink: {
     borderTopWidth: 2,
     padding: 20,
-    //position: 'absolute',
-    //bottom: 0,
   },
   button: {
     flexDirection: 'row',
@@ -204,6 +203,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 8,
     borderWidth: 1,
+  },
+  taglineContainer: {
+    width: '70%',
   },
 });
 
