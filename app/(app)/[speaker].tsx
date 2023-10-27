@@ -4,13 +4,12 @@ import { Image } from 'expo-image';
 import * as Linking from 'expo-linking';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, Pressable, StyleSheet, View } from 'react-native';
+import { Dimensions, ImageBackground, Pressable, StyleSheet, View } from 'react-native';
 import Row from '../../components/common/Row';
 import Space from '../../components/common/Space';
 import StyledText from '../../components/common/StyledText';
 import MainContainer from '../../components/container/MainContainer';
-import { OrganizingTeam } from '../../mock/organizingTeam';
-import { Speakers } from '../../mock/speakers';
+import { usePrefetchedEventData } from '../../services/api';
 import { getTwitterHandle } from '../../util/helpers';
 
 type Profile = {
@@ -21,16 +20,19 @@ type Profile = {
   name?: string;
 };
 
+const { height } = Dimensions.get('window');
+
 const Speaker = () => {
   const { colors, dark } = useTheme();
   const router = useRouter();
   const { name, type } = useLocalSearchParams();
-
   const [details, setDetails] = useState<Profile>({});
+
+  const { speakers, organizingTeam } = usePrefetchedEventData();
 
   const getProfile = () => {
     if (type === 'speaker') {
-      const speaker = Speakers.data.filter((x) => x.name === name)[0];
+      const speaker = speakers?.data.filter((x) => x.name === name)[0];
       setDetails({
         image: speaker?.avatar,
         bio: speaker?.biography,
@@ -39,7 +41,7 @@ const Speaker = () => {
         name: speaker?.name,
       });
     } else if (type === 'organizer') {
-      const organizer = OrganizingTeam.data.filter((x) => x.name === name)[0];
+      const organizer = organizingTeam?.data.filter((x) => x.name === name)[0];
       setDetails({
         image: organizer?.photo,
         bio: organizer?.bio,
@@ -62,7 +64,7 @@ const Speaker = () => {
   };
 
   return (
-    <MainContainer preset="scroll">
+    <MainContainer preset="fixed">
       <Stack.Screen
         options={{
           title: type === 'speaker' ? 'Speaker' : 'Organizer',
@@ -103,6 +105,7 @@ const Speaker = () => {
             </StyledText>
 
             <Space size={10} />
+
             <View style={styles.taglineContainer}>
               <StyledText size="base" font="regular" style={[styles.text, { color: colors.textLight }]}>
                 {details?.tagline}
@@ -111,36 +114,36 @@ const Speaker = () => {
           </View>
         </View>
 
-        <View style={styles.content}>
+        <Space size={10} />
+
+        <View style={styles.wrapper}>
           <StyledText size="lg" font="bold" variant="link">
             Bio
           </StyledText>
 
-          <Space size={8} />
+          <Space size={10} />
 
           <StyledText size="base" font="light" style={styles.contentText}>
             {details?.bio}
           </StyledText>
         </View>
+      </View>
 
-        <Space size={16} />
+      <View style={[styles.socialLink, { borderTopColor: colors.accent }]}>
+        <Row>
+          <StyledText font="medium">Twitter Handle</StyledText>
 
-        <View style={[styles.socialLink, { borderTopColor: colors.borderColorSecondary }]}>
-          <Row>
-            <StyledText font="medium">Twitter Handle</StyledText>
-
-            <Pressable
-              style={[styles.button, { borderColor: colors.primary, backgroundColor: colors.background }]}
-              onPress={() => handleTwitterProfile(details?.twitter_handle)}
-            >
-              <FontAwesome5 name="twitter" size={20} color={colors.primary} />
-              <Space size={4} horizontal />
-              <StyledText font="medium" style={{ color: colors.primary }}>
-                {details?.twitter_handle ? getTwitterHandle(details?.twitter_handle) : 'N/A'}
-              </StyledText>
-            </Pressable>
-          </Row>
-        </View>
+          <Pressable
+            style={[styles.button, { borderColor: colors.primary, backgroundColor: colors.background }]}
+            onPress={() => handleTwitterProfile(details?.twitter_handle)}
+          >
+            <FontAwesome5 name="twitter" size={20} color={colors.primary} />
+            <Space size={4} horizontal />
+            <StyledText font="medium" style={{ color: colors.primary }}>
+              {details?.twitter_handle ? getTwitterHandle(details?.twitter_handle) : 'N/A'}
+            </StyledText>
+          </Pressable>
+        </Row>
       </View>
     </MainContainer>
   );
@@ -152,13 +155,17 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   banner: {
-    height: 170,
-    flex: 1,
+    height: height / 5,
     width: '100%',
   },
   centered: {
     width: '100%',
     alignItems: 'center',
+  },
+  wrapper: {
+    width: '100%',
+    top: -40,
+    paddingHorizontal: 20,
   },
   avatar: {
     height: 100,
@@ -184,16 +191,14 @@ const styles = StyleSheet.create({
     top: -40,
     alignItems: 'center',
   },
-  content: {
-    top: -20,
-    paddingHorizontal: 20,
-  },
   contentText: {
-    lineHeight: 16,
+    lineHeight: 18,
   },
   socialLink: {
-    borderTopWidth: 2,
+    width: '100%',
+    borderTopWidth: 1,
     padding: 20,
+    marginBottom: 20,
   },
   button: {
     flexDirection: 'row',

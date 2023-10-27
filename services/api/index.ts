@@ -88,12 +88,16 @@ const _queries = [
     queryKey: ['schedule'],
     queryFn: () => getEventSchedule(),
   },
+  {
+    queryKey: ['organizingTeam'],
+    queryFn: () => getOrganizingTeam(),
+  },
 ] as const;
 
 export const prefetchEvent = async () => {
   _queries.forEach(async (query) => {
     await queryClient.prefetchQuery(
-      query as UseQueryOptions<ISessions | ISpeaker | ISponsors | IOrganizers | ISchedule>,
+      query as UseQueryOptions<ISessions | ISpeaker | ISponsors | IOrganizers | ISchedule | IOrganizingTeam>,
     );
   });
 };
@@ -113,6 +117,7 @@ export const usePrefetchedEventData = () => {
   const sponsors = queries[2]?.data;
   const organizers = queries[3]?.data;
   const schedule = queries[4]?.data;
+  const organizingTeam = queries[5]?.data;
 
   return {
     sessions,
@@ -120,6 +125,7 @@ export const usePrefetchedEventData = () => {
     sponsors,
     organizers,
     schedule,
+    organizingTeam,
     isLoading: _isLoading,
     isRefetching: _isRefetching,
     refetch,
