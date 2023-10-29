@@ -30,7 +30,7 @@ const Speaker = () => {
 
   const { speakers, organizingTeam } = usePrefetchedEventData();
 
-  const getProfile = () => {
+  useEffect(() => {
     if (type === 'speaker') {
       const speaker = speakers?.data.filter((x) => x.name === name)[0];
       setDetails({
@@ -50,12 +50,7 @@ const Speaker = () => {
         name: organizer?.name,
       });
     }
-  };
-
-  useEffect(() => {
-    getProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [name, organizingTeam?.data, speakers?.data, type]);
 
   const handleTwitterProfile = (link: string | null | undefined) => {
     if (link) {
@@ -94,8 +89,7 @@ const Speaker = () => {
           </View>
           <View style={styles.info}>
             <View style={styles.row}>
-              <FontAwesome5 name="android" size={18} color={colors.tertiary} />
-              <Space size={5} horizontal />
+              {type === 'speaker' && <FontAwesome5 name="android" size={18} color={colors.tertiary} />}
               <StyledText size="sm" font="regular" style={{ color: colors.tertiary }}>
                 {type === 'speaker' ? 'Speaker' : 'Organizer'}
               </StyledText>
@@ -180,6 +174,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 5,
   },
   image: {
     height: 103,

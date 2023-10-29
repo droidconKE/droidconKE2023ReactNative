@@ -22,7 +22,7 @@ export default () => {
         }}
       />
       <Stack.Screen
-        name="[speaker]"
+        name="[profile]"
         options={{
           headerTintColor: colors.whiteConstant,
           headerTransparent: true,
