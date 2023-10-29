@@ -48,10 +48,9 @@ const Main = () => {
           <>
             <Space size={6} />
             <SponsorsCard sponsors={sponsors} />
+            <Space size={16} />
           </>
         )}
-
-        <Space size={16} />
 
         {organizers && <OrganizersCard organizers={organizers} />}
 
