@@ -6,11 +6,12 @@ import StyledText from '../common/StyledText';
 
 type Props = {
   onPress: () => void;
+  testID?: string;
 };
 
-const FeedbackButton = ({ onPress }: Props) => {
+const FeedbackButton = ({ onPress, testID }: Props) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity style={styles.button} onPress={onPress} testID={testID}>
       <Feather name="smile" size={16} color="black" />
       <View style={styles.spacer} />
       <StyledText>Feedback</StyledText>

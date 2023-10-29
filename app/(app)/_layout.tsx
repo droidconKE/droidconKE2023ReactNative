@@ -22,21 +22,30 @@ export default () => {
         }}
       />
       <Stack.Screen
-        name="[speaker]"
+        name="[profile]"
         options={{
-          headerTintColor: colors.text,
-          headerStyle: {
-            backgroundColor: colors.background,
+          headerTintColor: colors.whiteConstant,
+          headerTransparent: true,
+          headerTitleStyle: {
+            fontWeight: 'normal',
           },
         }}
       />
       <Stack.Screen
         name="feedback"
         options={{
-          headerTintColor: colors.text,
-          headerStyle: {
-            backgroundColor: colors.background,
+          headerTintColor: colors.whiteConstant,
+          title: 'Feedback',
+          headerTransparent: true,
+          headerTitleStyle: {
+            fontWeight: 'normal',
           },
+        }}
+      />
+      <Stack.Screen
+        name="session"
+        options={{
+          headerShown: false,
         }}
       />
     </Stack>

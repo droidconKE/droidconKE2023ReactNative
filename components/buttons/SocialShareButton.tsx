@@ -7,17 +7,19 @@ import StyledText from '../common/StyledText';
 type ButtonProps = {
   handlePress: () => void;
   title: string;
-  iconName: string;
+  iconName: keyof typeof FontAwesome.glyphMap;
 };
 
 const SocialShareButton = ({ handlePress, title, iconName }: ButtonProps) => {
   const { colors } = useTheme();
 
   return (
-    <TouchableOpacity onPress={handlePress} style={[styles.button, { backgroundColor: colors.bg }]}>
+    <TouchableOpacity onPress={handlePress} style={[styles.button, { backgroundColor: colors.background }]}>
       <FontAwesome name={iconName} size={20} color={colors.text} />
       <View style={styles.gap} />
-      <StyledText subtitle>{title}</StyledText>
+      <StyledText size="md" testID="socialShareButtonText">
+        {title}
+      </StyledText>
     </TouchableOpacity>
   );
 };

@@ -7,14 +7,14 @@ import StyledText from '../common/StyledText';
 type Props = {
   onPress: () => void;
   label: string;
-  iconName: string;
+  iconName: keyof typeof AntDesign.glyphMap;
 };
 
 const ClearButton = ({ onPress, label, iconName }: Props) => {
   const { colors } = useTheme();
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <StyledText subtitle style={{ color: colors.primary }}>
+    <TouchableOpacity style={styles.button} onPress={onPress} testID="clearButton">
+      <StyledText size="md" style={{ color: colors.primary }}>
         {label}
       </StyledText>
       <View style={styles.spacer} />
@@ -27,7 +27,6 @@ export default ClearButton;
 
 const styles = StyleSheet.create({
   button: {
-    // backgroundColor: '#00e2c350',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

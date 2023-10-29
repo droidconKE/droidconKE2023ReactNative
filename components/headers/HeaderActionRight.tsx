@@ -1,25 +1,26 @@
-import { useRouter } from 'expo-router';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import ClearButton from '../buttons/ClearButton';
 import IconButton from '../buttons/IconButton';
 import Row from '../common/Row';
 
-const HeaderActionRight = () => {
-  const router = useRouter();
+type HeaderActionRightProps = {
+  handlePress: () => void;
+  toggleView: () => void;
+  listVisible: boolean;
+};
 
-  const openFilterModal = () => {
-    // TODO: open filter modal
-  };
+const HeaderActionRight = ({ toggleView, listVisible, handlePress }: HeaderActionRightProps) => {
+  // TODO: open filter modal functionality
 
   return (
-    <Row>
+    <Row style={styles.row} testID="headerActionRight">
       <Row>
-        <IconButton name="list-alt" isActive={false} onPress={() => router.push('/feedback')} />
-        <IconButton name="view-agenda" isActive onPress={() => router.push('/feedback')} />
+        <IconButton name="list-alt" isActive={listVisible} onPress={toggleView} />
+        <IconButton name="view-agenda" isActive={!listVisible} onPress={toggleView} />
       </Row>
       <View style={styles.gap} />
-      <ClearButton label="Filter" iconName="filter" onPress={() => openFilterModal()} />
+      <ClearButton label="Filter" iconName="filter" onPress={handlePress} />
     </Row>
   );
 };
@@ -27,6 +28,9 @@ const HeaderActionRight = () => {
 export default HeaderActionRight;
 
 const styles = StyleSheet.create({
+  row: {
+    marginHorizontal: 16,
+  },
   gap: {
     width: 8,
   },

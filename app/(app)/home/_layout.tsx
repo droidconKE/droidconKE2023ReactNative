@@ -1,8 +1,8 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import React from 'react';
+import CogIcon from '../../../assets/artworks/CogIcon';
 import HeaderRight from '../../../components/headers/HeaderRight';
 import MainHeader from '../../../components/headers/MainHeader';
 
@@ -41,7 +41,6 @@ export default () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerShadowVisible: false,
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
           headerRight: () => <HeaderRight />,
@@ -58,7 +57,6 @@ export default () => {
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerShadowVisible: false,
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
           headerRight: () => <HeaderRight />,
@@ -71,24 +69,27 @@ export default () => {
             <AntDesign name="clockcircle" size={24} color={focused ? colors.primary : color} />
           ),
           tabBarLabel: 'Sessions',
-          headerShown: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTitleAlign: 'left',
+          headerTitle: () => <MainHeader />,
         }}
       />
       <Tabs.Screen
         name="about"
         options={{
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="settings" size={24} color={focused ? colors.primary : color} />
+            <CogIcon width={24} height={24} color={focused ? colors.primary : color} />
           ),
           tabBarLabel: 'About',
           headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerShadowVisible: false,
           headerTitleAlign: 'left',
           headerTitle: () => <MainHeader />,
-          headerRight: () => <HeaderRight />,
         }}
       />
     </Tabs>

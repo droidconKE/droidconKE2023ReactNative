@@ -1,4 +1,6 @@
-export const theme_colors = {
+import type { ThemeColors } from '@react-navigation/native';
+
+export const theme_colors: ThemeColors = {
   light: {
     primary: '#000CEB',
     secondary: '#707070',
@@ -6,7 +8,20 @@ export const theme_colors = {
     accent: '#7070702C',
     textLight: '#707070',
     tint: '#00E2C3',
+    secondaryTint: 'rgba(0, 12, 235, 0.11)',
+    tertiaryTint: 'rgba(125, 225, 195, 0.11)',
+    modalTint: 'hsla(60, 3%, 12%, 0.52)',
+    link: '#000CEB',
     bg: '#F5F5F5',
+    background: '#FFFFFF',
+    card: '#F5F5F5',
+    bgInverse: '#20201E',
+    whiteConstant: '#FFFFFF',
+    iconSwitch: '#20201E',
+    placeHolder: '#C3C3C3',
+    borderColor: '#F5F5F5',
+    borderColorSecondary: '#F5F5F5',
+    assetAccent: '#000CEB',
   },
   dark: {
     primary: '#00E2C3',
@@ -15,6 +30,19 @@ export const theme_colors = {
     accent: '#7070702C',
     textLight: '#707070',
     tint: '#00E2C3',
+    secondaryTint: '#f5f5f51c',
+    tertiaryTint: 'rgba(125, 225, 195, 0.11)',
+    modalTint: 'hsla(60, 3%, 12%, 0.52)',
+    link: '#F5F5F5',
     bg: '#20201E',
+    background: '#000000',
+    card: '#000000',
+    bgInverse: '#F5F5F5',
+    whiteConstant: '#FFFFFF',
+    iconSwitch: '#20201E',
+    placeHolder: '#C3C3C3',
+    borderColor: '#707070',
+    borderColorSecondary: '#000000',
+    assetAccent: '#000000',
   },
 };

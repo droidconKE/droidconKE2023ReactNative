@@ -1,14 +1,9 @@
-import * as React from "react";
-import Svg, { SvgProps, G, Path } from "react-native-svg";
+import * as React from 'react';
+import Svg, { G, Path } from 'react-native-svg';
+import type { ISvgProps } from '../../global';
 
-const Arrow = (props: SvgProps) => (
-  <Svg
-    data-name="Layer 2"
-    xmlns="http://www.w3.org/2000/svg"
-    width={12}
-    height={12.317}
-    {...props}
-  >
+const Arrow = (props: ISvgProps) => (
+  <Svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width={12} height={12.317} {...props}>
     <G data-name="Layer 1">
       <Path data-name="Rectangle 559" fill="none" d="M0 .277h12v12H0z" />
       <Path

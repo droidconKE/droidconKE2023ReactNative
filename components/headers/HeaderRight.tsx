@@ -1,16 +1,15 @@
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Avatar from '../buttons/Avatar';
 import FeedbackButton from '../buttons/FeedbackButton';
 import Row from '../common/Row';
 
 const HeaderRight = () => {
   const router = useRouter();
+
   return (
-    <Row style={styles.row}>
-      <FeedbackButton onPress={() => router.push('/feedback')} />
-      <Avatar />
+    <Row style={styles.row} testID="headerRight">
+      <FeedbackButton testID="feedbackButton" onPress={() => router.push('/feedback')} />
     </Row>
   );
 };

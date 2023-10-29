@@ -1,10 +1,54 @@
 {
   "expo": {
+    "userInterfaceStyle": "automatic",
     "scheme": "acme",
     "web": {
       "bundler": "metro"
     },
     "name": "ke.droidcon.reactnative",
-    "slug": "ke.droidcon.reactnative"
+    "slug": "ke.droidcon.reactnative",
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "android": {
+      "splash": {
+        "image": "./assets/images/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff",
+        "dark": {
+          "image": "./assets/images/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#000000"
+        }
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "*.ke.droidcon.reactnative.io",
+              "pathPrefix": "/records"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
+      "package": "com.anonymous.ke.droidcon.reactnative"
+    },
+    "ios": {
+      "splash": {
+        "image": "./assets/images/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff",
+        "dark": {
+          "image": "./assets/images/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#000000"
+        }
+      }
+    }
   }
 }
