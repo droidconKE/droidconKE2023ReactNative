@@ -27,7 +27,7 @@ const SpeakerCard = (props: SpeakerCardProps) => {
       <Space size={16} />
 
       <View style={styles.details}>
-        <Link href={{ pathname: `/${name}`, params: { name: name } }}>
+        <Link href={{ pathname: `/${name}`, params: { name: name, type: 'speaker' } }}>
           <StyledText font="bold" size="base" variant="primary">
             {name}
           </StyledText>

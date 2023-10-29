@@ -50,7 +50,7 @@ const Session = () => {
   };
 
   return (
-    <View style={styles.main}>
+    <View style={styles.page}>
       <MainContainer preset="scroll">
         <Stack.Screen
           options={{
@@ -69,7 +69,6 @@ const Session = () => {
             ),
           }}
         />
-
         <View style={styles.main}>
           <View style={[styles.centered, { borderColor: dark ? colors.background : colors.border }]}>
             <Row>
@@ -212,7 +211,6 @@ const Session = () => {
           <Space size={30} />
         </View>
       </MainContainer>
-
       <Pressable style={[styles.fab, { backgroundColor: colors.tertiary }]} onPress={onShare}>
         <MaterialCommunityIcons name="share" size={30} color="white" />
       </Pressable>
@@ -223,6 +221,9 @@ const Session = () => {
 export default Session;
 
 const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+  },
   main: {
     flex: 1,
     width: '100%',

@@ -27,6 +27,7 @@ declare module '@react-navigation/native' {
       placeHolder: string;
       borderColor: string;
       assetAccent: string;
+      borderColorSecondary: string;
     };
   };
 
@@ -146,12 +147,12 @@ export interface Speaker {
   tagline: string;
   biography: string;
   avatar: string;
-  twitter: null | string;
-  facebook: null | string;
-  linkedin: null | string;
-  instagram: null | string;
-  blog: null | string;
-  company_website: null | string;
+  twitter?: string | null;
+  facebook?: string | null;
+  linkedin?: string | null;
+  instagram?: string | null;
+  blog?: string | null;
+  company_website?: string | null;
 }
 
 export interface ISpeaker {
@@ -212,3 +213,5 @@ export type OrganizingTeamMember = {
 export interface IOrganizingTeam {
   data: Array<OrganizingTeamMember>;
 }
+
+export interface IProfile extends OrganizingTeamMember, Speaker {}

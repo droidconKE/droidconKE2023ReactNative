@@ -44,11 +44,13 @@ const Main = () => {
           <ActivityIndicator size="large" color={colors.tertiary} />
         )}
 
-        <Space size={6} />
-
-        {sponsors && <SponsorsCard sponsors={sponsors} />}
-
-        <Space size={16} />
+        {sponsors && sponsors.data.length > 1 && (
+          <>
+            <Space size={6} />
+            <SponsorsCard sponsors={sponsors} />
+            <Space size={16} />
+          </>
+        )}
 
         {organizers && <OrganizersCard organizers={organizers} />}
 
