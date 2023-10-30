@@ -31,7 +31,8 @@
       "distribution": "internal",
       "channel": "preview",
       "ios": { "simulator": true },
-      "android": { "buildType": "apk" }
+      "android": { "buildType": "apk" },
+      "env": {}
     },
     "preview:device": {
       "extends": "preview",
@@ -39,7 +40,8 @@
       "ios": { "simulator": false }
     },
     "production": {
-      "channel": "production"
+      "channel": "production",
+      "env": {}
     }
   },
   "submit": {

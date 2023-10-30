@@ -64,6 +64,12 @@
         "projectId": "6ad9531f-f082-4bfb-9213-272fdc94f01e"
       }
     },
-    "owner": "reactdevske-reactnative"
+    "owner": "reactdevske-reactnative",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/6ad9531f-f082-4bfb-9213-272fdc94f01e"
+    }
   }
 }
