@@ -5,9 +5,11 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "ke.droidcon.reactnative",
-    "slug": "ke.droidcon.reactnative",
-    "plugins": ["expo-router"],
+    "name": "DroidconKe ReactNative",
+    "slug": "droidconke-reactnative",
+    "plugins": [
+      "expo-router"
+    ],
     "experiments": {
       "typedRoutes": true
     },
@@ -33,10 +35,13 @@
               "pathPrefix": "/records"
             }
           ],
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
       ],
-      "package": "com.anonymous.ke.droidcon.reactnative"
+      "package": "com.ke.droidcon.reactnative"
     },
     "ios": {
       "splash": {
@@ -48,7 +53,17 @@
           "resizeMode": "contain",
           "backgroundColor": "#000000"
         }
+      },
+      "bundleIdentifier": "com.ke.droidcon.reactnative"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "6ad9531f-f082-4bfb-9213-272fdc94f01e"
       }
-    }
+    },
+    "owner": "reactdevske-reactnative"
   }
 }

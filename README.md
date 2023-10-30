@@ -8,11 +8,11 @@ Download the [Expo Go](https://expo.dev/client) Android / iOS app and scan this 
 
 ### Production app
 
-<a href="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2023ReactNative"><img src="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2023ReactNative" height="200px" width="200px"></a>
+<a href="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=roidconke-reactnative?release-channel=production"><img src="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconke-reactnative" height="200px" width="200px"></a>
 
 ### Development app
 
-<a href="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2023ReactNative?release-channel=develop"><img src="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconKE2023ReactNative?release-channel=develop" height="200px" width="200px"></a>
+<a href="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconke-reactnative?release-channel=preview"><img src="https://qr.expo.dev/expo-go?owner=reactdevske-reactnative&slug=droidconke-reactnative" height="200px" width="200px"></a>
 
 # Tech Stack
 
