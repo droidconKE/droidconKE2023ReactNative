@@ -7,13 +7,12 @@
     },
     "name": "DroidconKe ReactNative",
     "slug": "droidconke-reactnative",
-    "plugins": [
-      "expo-router"
-    ],
+    "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true
     },
     "android": {
+      "icon": "./assets/images/icon.png",
       "splash": {
         "image": "./assets/images/splash.png",
         "resizeMode": "cover",
@@ -35,15 +34,13 @@
               "pathPrefix": "/records"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ],
       "package": "com.ke.droidcon.reactnative"
     },
     "ios": {
+      "icon": "./assets/images/icon.png",
       "splash": {
         "image": "./assets/images/splash.png",
         "resizeMode": "cover",
