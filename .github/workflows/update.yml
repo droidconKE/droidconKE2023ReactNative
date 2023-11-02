@@ -17,13 +17,13 @@ jobs:
           fi
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
-          cache: npm
+          node-version-file: '.nvmrc'
+          cache: yarn
 
       - name: Setup EAS
         uses: expo/expo-github-action@v8
@@ -32,7 +32,7 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install --frozen-lockfile
 
       - name: Publish update
         run: eas update --auto

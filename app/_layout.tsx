@@ -8,7 +8,6 @@ import type { ColorSchemeName } from 'react-native';
 import { Appearance } from 'react-native';
 import { theme_colors } from '../config/theme';
 import { customFontsToLoad } from '../config/typography';
-import { AuthProvider } from '../context/auth';
 import { queryClient } from '../services/api/react-query';
 
 type Theme = {
@@ -20,7 +19,6 @@ SplashScreen.preventAutoHideAsync();
 
 export default () => {
   const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
-  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const updateTheme = (newTheme: Theme) => {
@@ -46,7 +44,7 @@ export default () => {
     });
   }, [theme.mode]);
 
-  const [fontsLoaded] = useFonts(customFontsToLoad);
+  const [fontsLoaded, error] = useFonts(customFontsToLoad);
 
   const _lightTheme = {
     ...DefaultTheme,
@@ -64,22 +62,25 @@ export default () => {
     },
   };
 
-  useLayoutEffect(() => {
-    setTimeout(() => {
-      setIsReady(true);
-      SplashScreen.hideAsync();
-    }, 500);
-  }, []);
+  useEffect(() => {
+    if (error) throw error;
+  }, [error]);
 
-  if (!fontsLoaded || !isReady) return;
+  useLayoutEffect(() => {
+    if (fontsLoaded) {
+      setTimeout(() => {
+        SplashScreen.hideAsync();
+      }, 1500);
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return;
 
   return (
     <ThemeProvider value={theme.mode === 'light' ? _lightTheme : _darkTheme}>
-      <AuthProvider>
-        <QueryClientProvider client={queryClient}>
-          <Slot />
-        </QueryClientProvider>
-      </AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <Slot />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };
