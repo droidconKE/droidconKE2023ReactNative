@@ -1,8 +1,7 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { useFonts } from 'expo-font';
-import { Slot } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
+import * as Font from 'expo-font';
+import { Slot, SplashScreen } from 'expo-router';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import type { ColorSchemeName } from 'react-native';
 import { Appearance } from 'react-native';
@@ -18,6 +17,7 @@ type Theme = {
 SplashScreen.preventAutoHideAsync();
 
 export default () => {
+  const [isReady, setIsReady] = useState(false);
   const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
 
   useEffect(() => {
@@ -44,8 +44,6 @@ export default () => {
     });
   }, [theme.mode]);
 
-  const [fontsLoaded, error] = useFonts(customFontsToLoad);
-
   const _lightTheme = {
     ...DefaultTheme,
     colors: {
@@ -63,18 +61,28 @@ export default () => {
   };
 
   useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+    async function prepare() {
+      try {
+        await Font.loadAsync(customFontsToLoad);
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
 
   useLayoutEffect(() => {
-    if (fontsLoaded) {
+    if (isReady) {
       setTimeout(() => {
         SplashScreen.hideAsync();
-      }, 1500);
+      }, 3000);
     }
-  }, [fontsLoaded]);
+  }, [isReady]);
 
-  if (!fontsLoaded) return;
+  if (!isReady) return null;
 
   return (
     <ThemeProvider value={theme.mode === 'light' ? _lightTheme : _darkTheme}>
