@@ -1,0 +1,33 @@
+name: production build
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  production:
+    name: EAS Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: yarn
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build on EAS
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: eas build --platform all --profile production --non-interactive --clear-cache

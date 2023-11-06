@@ -33,9 +33,12 @@ const SponsorsCard = ({ sponsors }: Props) => {
         Sponsors
       </StyledText>
       <Space size={8} />
+      <View style={styles.sponsorRow}>{renderSponsors('platinum')}</View>
       <View style={styles.sponsorRow}>{renderSponsors('gold')}</View>
       <View style={styles.sponsorRow}>{renderSponsors('silver')}</View>
       <View style={styles.sponsorRow}>{renderSponsors('bronze')}</View>
+      <View style={styles.sponsorRow}>{renderSponsors('startup')}</View>
+      <View style={styles.sponsorRow}>{renderSponsors('swag')}</View>
     </View>
   );
 };
@@ -51,26 +54,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 16,
     borderRadius: 16,
+    gap: 4,
   },
   sponsorRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
-    marginVertical: 4,
   },
   goldLogo: {
     width: '50%',
     height: 60,
     marginHorizontal: 4,
-    marginVertical: 4,
     borderRadius: 8,
   },
   logo: {
     width: '30%',
     height: 60,
     marginHorizontal: 4,
-    marginVertical: 4,
     borderRadius: 8,
   },
 });

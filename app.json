@@ -1,17 +1,29 @@
 {
   "expo": {
     "userInterfaceStyle": "automatic",
-    "scheme": "acme",
     "web": {
       "bundler": "metro"
     },
-    "name": "ke.droidcon.reactnative",
-    "slug": "ke.droidcon.reactnative",
-    "plugins": ["expo-router"],
+    "name": "DroidconKe ReactNative",
+    "slug": "droidconke-reactnative",
+    "scheme": "droidconreactnative",
+    "plugins": [
+      "expo-router",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true
+          }
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     },
     "android": {
+      "icon": "./assets/images/icon.png",
       "splash": {
         "image": "./assets/images/splash.png",
         "resizeMode": "cover",
@@ -36,9 +48,10 @@
           "category": ["BROWSABLE", "DEFAULT"]
         }
       ],
-      "package": "com.anonymous.ke.droidcon.reactnative"
+      "package": "com.ke.droidcon.reactnative"
     },
     "ios": {
+      "icon": "./assets/images/icon.png",
       "splash": {
         "image": "./assets/images/splash.png",
         "resizeMode": "cover",
@@ -48,7 +61,23 @@
           "resizeMode": "contain",
           "backgroundColor": "#000000"
         }
+      },
+      "bundleIdentifier": "com.ke.droidcon.reactnative"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "6ad9531f-f082-4bfb-9213-272fdc94f01e"
       }
+    },
+    "owner": "reactdevske-reactnative",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/6ad9531f-f082-4bfb-9213-272fdc94f01e"
     }
   }
 }

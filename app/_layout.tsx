@@ -1,14 +1,12 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { useFonts } from 'expo-font';
-import { Slot } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
+import * as Font from 'expo-font';
+import { Slot, SplashScreen } from 'expo-router';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import type { ColorSchemeName } from 'react-native';
 import { Appearance } from 'react-native';
 import { theme_colors } from '../config/theme';
 import { customFontsToLoad } from '../config/typography';
-import { AuthProvider } from '../context/auth';
 import { queryClient } from '../services/api/react-query';
 
 type Theme = {
@@ -19,8 +17,8 @@ type Theme = {
 SplashScreen.preventAutoHideAsync();
 
 export default () => {
-  const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
   const [isReady, setIsReady] = useState(false);
+  const [theme, setTheme] = useState({ mode: Appearance.getColorScheme() });
 
   useEffect(() => {
     const updateTheme = (newTheme: Theme) => {
@@ -46,8 +44,6 @@ export default () => {
     });
   }, [theme.mode]);
 
-  const [fontsLoaded] = useFonts(customFontsToLoad);
-
   const _lightTheme = {
     ...DefaultTheme,
     colors: {
@@ -64,22 +60,35 @@ export default () => {
     },
   };
 
-  useLayoutEffect(() => {
-    setTimeout(() => {
-      setIsReady(true);
-      SplashScreen.hideAsync();
-    }, 500);
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await Font.loadAsync(customFontsToLoad);
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setIsReady(true);
+      }
+    }
+
+    prepare();
   }, []);
 
-  if (!fontsLoaded || !isReady) return;
+  useLayoutEffect(() => {
+    if (isReady) {
+      setTimeout(() => {
+        SplashScreen.hideAsync();
+      }, 3000);
+    }
+  }, [isReady]);
+
+  if (!isReady) return null;
 
   return (
     <ThemeProvider value={theme.mode === 'light' ? _lightTheme : _darkTheme}>
-      <AuthProvider>
-        <QueryClientProvider client={queryClient}>
-          <Slot />
-        </QueryClientProvider>
-      </AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <Slot />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };
